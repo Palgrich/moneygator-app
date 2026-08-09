@@ -318,6 +318,49 @@ footer { border-top: 1px solid var(--border); padding: 28px 40px; display: flex;
 .foot-logo { display:flex; align-items:center; gap:8px; font-size:15px; font-weight:700; color:var(--white); text-decoration:none; }
 .foot-right { font-size:13px; color:var(--muted); }
 
+  /* ── NAV LINKS ───────────────────────────────────────────── */
+  .nav-links { display:flex; align-items:center; gap:4px; }
+  .nav-link { color:var(--muted); text-decoration:none; font-size:14px; font-weight:500; padding:8px 14px; border-radius:8px; transition:color .2s, background .2s; }
+  .nav-link:hover { color:var(--white); background:rgba(255,255,255,.06); }
+
+  /* ── FAQ ─────────────────────────────────────────────────── */
+  .faq-list { display:flex; flex-direction:column; gap:2px; }
+  .faq-item { border-radius:14px; overflow:hidden; border:1px solid var(--border); margin-bottom:4px; }
+  .faq-q { padding:18px 22px; font-size:15px; font-weight:600; color:var(--white); cursor:pointer; display:flex; justify-content:space-between; align-items:center; background:var(--card); transition:background .2s; }
+  .faq-q:hover { background:#253047; }
+  .faq-q.open { background:#1a2540; color:var(--cyan); }
+  .faq-arrow { font-size:18px; transition:transform .3s; flex-shrink:0; margin-left:12px; }
+  .faq-q.open .faq-arrow { transform:rotate(180deg); }
+  .faq-a { display:none; padding:0 22px 18px; font-size:14px; color:var(--muted); line-height:1.7; background:var(--card); }
+  .faq-a.open { display:block; }
+
+  /* ── BLOG ────────────────────────────────────────────────── */
+  .blog-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
+  .blog-card { background:var(--card); border:1px solid var(--border); border-radius:20px; padding:28px; display:flex; flex-direction:column; gap:12px; transition:border-color .2s; }
+  .blog-card:hover { border-color:rgba(91,79,232,.4); }
+  .blog-tag { font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:1px; color:var(--violet); background:rgba(91,79,232,.1); padding:4px 10px; border-radius:100px; align-self:flex-start; }
+  .blog-title { font-size:17px; font-weight:800; color:var(--white); line-height:1.3; letter-spacing:-.2px; }
+  .blog-excerpt { font-size:13px; color:var(--muted); line-height:1.65; }
+  .blog-body { font-size:13px; color:var(--muted); line-height:1.7; display:flex; flex-direction:column; gap:12px; }
+  .blog-body h4 { font-size:14px; font-weight:700; color:var(--white); margin-top:4px; }
+  .blog-body.hidden { display:none; }
+  .blog-read-more { background:none; border:1px solid var(--border); border-radius:10px; padding:10px 16px; font-size:13px; font-weight:600; color:var(--muted); cursor:pointer; font-family:inherit; transition:all .2s; align-self:flex-start; margin-top:auto; }
+  .blog-read-more:hover { color:var(--white); border-color:var(--violet); }
+
+  /* ── CONTACT ─────────────────────────────────────────────── */
+  .contact-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-bottom:28px; }
+  .contact-card { background:var(--card); border:1px solid var(--border); border-radius:20px; padding:28px; display:flex; flex-direction:column; gap:6px; }
+  .contact-icon { font-size:28px; margin-bottom:4px; }
+  .contact-label { font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:1px; color:var(--muted); }
+  .contact-name { font-size:17px; font-weight:800; color:var(--white); }
+  .contact-role { font-size:13px; color:var(--muted); line-height:1.5; }
+  .contact-link { font-size:13px; font-weight:600; color:var(--cyan); text-decoration:none; margin-top:6px; }
+  .contact-link:hover { text-decoration:underline; }
+  .contact-book { text-align:center; padding:28px; background:rgba(91,79,232,.07); border:1px solid rgba(91,79,232,.15); border-radius:16px; }
+  .contact-book p { font-size:14px; color:var(--muted); margin-bottom:14px; }
+  .contact-cal-btn { display:inline-block; background:var(--violet); color:#fff; text-decoration:none; border-radius:12px; padding:12px 28px; font-size:15px; font-weight:700; font-family:inherit; transition:opacity .2s; }
+  .contact-cal-btn:hover { opacity:.85; }
+
 /* ── RESPONSIVE ──────────────────────────────── */
 @media (max-width: 700px) {
   nav { padding: 14px 20px; }
@@ -327,7 +370,9 @@ footer { border-top: 1px solid var(--border); padding: 28px 40px; display: flex;
   .lessons-section { grid-template-columns: 1fr; padding: 60px 20px 80px; }
   .lessons-sticky { position: static; margin-bottom: 32px; }
   .lcard { opacity: 1; transform: none; }
-  .cta-block { padding: 48px 24px; margin: 0 16px 60px; }
+  .blog-grid { grid-template-columns: 1fr; }
+  .contact-grid { grid-template-columns: 1fr; }
+  .nav-links { display: none; }
   .cta-row { flex-direction: column; }
   .email-row { flex-direction: column; }
   footer { flex-direction: column; gap: 10px; text-align: center; }
@@ -342,6 +387,12 @@ footer { border-top: 1px solid var(--border); padding: 28px 40px; display: flex;
     <svg viewBox="0 0 36 36" fill="none"><rect width="36" height="36" rx="10" fill="#1E293B"/><ellipse cx="18" cy="22" rx="11" ry="7" fill="#22C55E"/><ellipse cx="27" cy="19" rx="5" ry="4" fill="#22C55E"/><circle cx="29" cy="17" r="1.5" fill="white"/><circle cx="29.5" cy="16.5" r=".6" fill="#0F172A"/><circle cx="15" cy="15" r="6" fill="#F59E0B"/><circle cx="15" cy="15" r="4.5" fill="#FCD34D"/><text x="15" y="18" font-size="6" font-weight="bold" fill="#92400E" text-anchor="middle">$</text><path d="M7 24 Q3 22 4 18 Q5 15 7 17" stroke="#22C55E" stroke-width="3" stroke-linecap="round" fill="none"/></svg>
     MoneyGator
   </a>
+  <div class="nav-links">
+    <a href="#how-it-works" class="nav-link">How it works</a>
+    <a href="#faq" class="nav-link">FAQ</a>
+    <a href="#blog" class="nav-link">Blog</a>
+    <a href="#contact" class="nav-link">Contact</a>
+  </div>
   <button class="nav-btn" onclick="document.querySelector('.cta-block').scrollIntoView({behavior:'smooth',block:'center'})">Join waitlist</button>
 </nav>
 
@@ -396,7 +447,7 @@ footer { border-top: 1px solid var(--border); padding: 28px 40px; display: flex;
 <hr class="divider">
 
 <!-- HOW IT WORKS -->
-<div class="wrap section">
+<div id="how-it-works" class="wrap section">
   <div class="section-label">How it works</div>
   <h2 class="section-title">Data in. Understanding out.</h2>
   <p class="section-sub">Other apps stop at showing you numbers. MoneyGator turns those numbers into things you actually learn and do.</p>
@@ -653,6 +704,142 @@ footer { border-top: 1px solid var(--border); padding: 28px 40px; display: flex;
   </div>
 </div>
 
+<!-- FAQ -->
+<hr class="divider">
+<div id="faq" class="wrap section">
+  <div class="section-label">FAQ</div>
+  <h2 class="section-title">Common questions.</h2>
+  <div class="faq-list">
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">Is MoneyGator free? <span class="faq-arrow">↓</span></div>
+      <div class="faq-a">Yes — the core experience is free. You get 3 lessons per week, one connected account, and basic goal tracking. A Premium plan at $9/month unlocks unlimited daily lessons, all accounts, and subscription detection. Early waitlist users get extended free access.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">How does MoneyGator access my bank data? <span class="faq-arrow">↓</span></div>
+      <div class="faq-a">We connect through Plaid, the same technology used by Venmo, Robinhood, and thousands of other apps. MoneyGator has read-only access — we see your transactions and balances. We never move, store passwords, or touch your money.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">What makes MoneyGator different from Credit Karma or Rocket Money? <span class="faq-arrow">↓</span></div>
+      <div class="faq-a">Those apps show you your data and stop there. MoneyGator uses your data as a starting point for education. When we detect a subscription you forgot, you get a lesson on why subscriptions are designed to be invisible — and exactly what to do about it today. We don't just report. We teach.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">When is the iOS app launching? <span class="faq-arrow">↓</span></div>
+      <div class="faq-a">We are in active development. The app is built and running on a physical iPhone — Plaid integration is our final milestone before public launch. Join the waitlist to be first in line and get free access for early users.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">Is my financial data safe? <span class="faq-arrow">↓</span></div>
+      <div class="faq-a">Yes. We use bank-level 256-bit encryption. Your login credentials go directly to your bank through Plaid — MoneyGator never sees your username or password. We do not sell your data to third parties, ever.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">I have no idea about finance. Is MoneyGator for me? <span class="faq-arrow">↓</span></div>
+      <div class="faq-a">Especially for you. MoneyGator is built for people who feel anxious about money but don't know where to start. Every lesson is designed to be understood in 60 seconds, without any prior financial knowledge. No jargon. No math. Just one clear thing to do today.</div>
+    </div>
+  </div>
+</div>
+
+<!-- BLOG -->
+<hr class="divider">
+<div id="blog" class="wrap section">
+  <div class="section-label">Blog</div>
+  <h2 class="section-title">Learn more about your money.</h2>
+  <p class="section-sub">Practical insights on personal finance — no jargon, no overwhelm.</p>
+  <div class="blog-grid">
+
+    <article class="blog-card">
+      <div class="blog-tag">Financial Literacy</div>
+      <h3 class="blog-title">Why America Has a Financial Literacy Crisis — And What It's Costing Us</h3>
+      <p class="blog-excerpt">1 in 3 Americans can't cover a $400 emergency. 44% carry credit card debt month to month. These aren't personal failures — they're symptoms of a system that never taught people how money actually works.</p>
+      <div class="blog-body hidden" id="blog-1">
+        <p>Financial literacy in the United States is at a critical low. According to the FINRA Foundation, only 34% of Americans can correctly answer basic questions about interest rates, inflation, and risk diversification. That number has been declining for over a decade.</p>
+        <p>The consequences are real. The average American household carries $6,500 in credit card debt. Nearly half of workers say financial stress affects their productivity at work. And 56% of Americans have less than $1,000 in savings — meaning one medical bill, one car repair, or one layoff can send them into a financial spiral.</p>
+        <p>The problem isn't willpower or discipline. It's education. Most Americans were never taught how compound interest works against you when you carry a balance. Nobody explained what a minimum payment really means. Schools cover algebra but not how to read a credit card statement.</p>
+        <h4>Why this is getting worse, not better</h4>
+        <p>Financial products have gotten more complex while financial education has stayed the same. Subscription services are designed to be forgotten. Credit card rewards programs are engineered to maximize spending. Buy-now-pay-later apps make debt feel painless until it isn't.</p>
+        <p>The average American now makes dozens of financial micro-decisions every day — and most are made on autopilot, without the knowledge to make them well.</p>
+        <h4>What actually works</h4>
+        <p>Research consistently shows that financial education works best when it is specific, timely, and actionable. Generic courses about budgeting don't change behavior. But a lesson that arrives the day before your credit card payment is due — and tells you exactly what to do — does.</p>
+        <p>That's the gap MoneyGator is built to fill. Not another course. Not another dashboard. A daily lesson triggered by what's actually happening in your financial life, right now.</p>
+      </div>
+      <button class="blog-read-more" onclick="toggleBlog('blog-1', this)">Read more ↓</button>
+    </article>
+
+    <article class="blog-card">
+      <div class="blog-tag">Personal Finance</div>
+      <h3 class="blog-title">The Real Benefit of Tracking Your Finances — It's Not What You Think</h3>
+      <p class="blog-excerpt">Most people track their spending hoping to feel more in control. What actually changes behavior is something different: awareness of the gap between what you think you spend and what you actually spend.</p>
+      <div class="blog-body hidden" id="blog-2">
+        <p>Budgeting apps have been around for decades. Yet the average American's financial health hasn't improved. If tracking worked the way we think it does, we'd have seen results by now.</p>
+        <p>The research tells a more nuanced story. Tracking alone doesn't change behavior. What changes behavior is the moment of surprise — the moment you see that you spent $286 on subscriptions you barely remember signing up for, or that your daily spending is 49% higher than last month.</p>
+        <h4>The awareness gap is the real problem</h4>
+        <p>Studies show that people underestimate their discretionary spending by 40% on average. This isn't dishonesty — it's just how memory works. We remember the big purchases and forget the small ones. We remember when we said no to something and forget the dozen times we said yes without thinking.</p>
+        <p>The benefit of tracking isn't the spreadsheet. It's the moment you close the gap between your mental model of your finances and reality.</p>
+        <h4>Tracking without understanding is just noise</h4>
+        <p>Here's what most budgeting apps get wrong: they show you data and assume you'll know what to do with it. But a pie chart showing you spent $400 on food last month doesn't tell you what to change. It doesn't tell you which food purchases were worth it, which were impulse buys, or what a more realistic target would be.</p>
+        <p>The most valuable financial habit isn't tracking. It's understanding. Tracking is the input. Understanding is the output — and it's what actually changes how you make decisions.</p>
+        <p>That's why MoneyGator doesn't stop at showing your data. Every insight becomes a lesson. Every lesson becomes an action. And every action builds the financial intuition you need to make better decisions automatically — without thinking about it.</p>
+      </div>
+      <button class="blog-read-more" onclick="toggleBlog('blog-2', this)">Read more ↓</button>
+    </article>
+
+    <article class="blog-card">
+      <div class="blog-tag">MoneyGator</div>
+      <h3 class="blog-title">Why MoneyGator Is the Best Starting Point If You Want to Actually Understand Your Finances</h3>
+      <p class="blog-excerpt">There are hundreds of finance apps. Most show you what's happening. Very few explain why it matters or what to do about it. Here's why that distinction is everything.</p>
+      <div class="blog-body hidden" id="blog-3">
+        <p>If you've ever opened a budgeting app, felt briefly motivated, and then quietly stopped using it after two weeks — you're not alone. The dropout rate for personal finance apps is enormous, because most of them make the same mistake: they treat you like a data analyst instead of a person who just wants to feel less anxious about money.</p>
+        <h4>What most apps get right — and what they get wrong</h4>
+        <p>Apps like Credit Karma and Rocket Money are genuinely useful. They connect to your bank, they show you your transactions, and they alert you when something unusual happens. That's valuable.</p>
+        <p>But they stop there. They show you the number. They don't explain what it means. They don't teach you what to do differently. And they definitely don't follow up tomorrow to make sure you actually did it.</p>
+        <p>That gap between data and understanding is exactly where MoneyGator lives.</p>
+        <h4>One lesson a day, built from your real life</h4>
+        <p>MoneyGator doesn't give you a dashboard to stare at. It gives you one lesson per day — 60 seconds, built from what's actually happening in your accounts, ending with one specific thing to do today.</p>
+        <p>Chase Sapphire payment due in 2 days? You get a lesson on why the minimum payment trap works, and exactly what to pay to avoid it. Spending up 49% this month? You get a lesson on how overspending is always made of small decisions, and how the 10-minute rule can stop impulse purchases before they happen.</p>
+        <p>This is how learning actually works. Not abstract courses. Not generic tips. Specific knowledge, applied to your specific situation, at the exact moment it's relevant.</p>
+        <h4>Built for people who don't think of themselves as "finance people"</h4>
+        <p>MoneyGator is built for Aisha — 22, working her first real job, paying off a student loan, trying to figure out why she always seems to run out of money before payday. It's not built for someone who already reads personal finance blogs and knows what an expense ratio is.</p>
+        <p>If you feel anxious about money, if you're not sure where it all goes, if you've tried budgeting apps and given up — MoneyGator is designed for exactly that situation. Join the waitlist and be first to try it when we launch.</p>
+      </div>
+      <button class="blog-read-more" onclick="toggleBlog('blog-3', this)">Read more ↓</button>
+    </article>
+
+  </div>
+</div>
+
+<!-- CONTACT -->
+<hr class="divider">
+<div id="contact" class="wrap section">
+  <div class="section-label">Contact</div>
+  <h2 class="section-title">Get in touch.</h2>
+  <p class="section-sub">Questions, press, investor inquiries, or just want to say hello.</p>
+  <div class="contact-grid">
+    <div class="contact-card">
+      <div class="contact-icon">👤</div>
+      <div class="contact-label">Founder</div>
+      <div class="contact-name">Pavel Volkov</div>
+      <div class="contact-role">Founder & CEO, MoneyGator</div>
+      <a href="mailto:pavel.volkov@moneygator.app" class="contact-link">pavel.volkov@moneygator.app</a>
+    </div>
+    <div class="contact-card">
+      <div class="contact-icon">📰</div>
+      <div class="contact-label">Press & Media</div>
+      <div class="contact-name">Media Inquiries</div>
+      <div class="contact-role">Interviews, coverage, and press kit requests</div>
+      <a href="mailto:pavel.volkov@moneygator.app" class="contact-link">pavel.volkov@moneygator.app</a>
+    </div>
+    <div class="contact-card">
+      <div class="contact-icon">💼</div>
+      <div class="contact-label">Investors</div>
+      <div class="contact-name">Investment Inquiries</div>
+      <div class="contact-role">We are raising a $200K pre-seed round on a SAFE note</div>
+      <a href="mailto:pavel.volkov@moneygator.app" class="contact-link">pavel.volkov@moneygator.app</a>
+    </div>
+  </div>
+  <div class="contact-book">
+    <p>Prefer to talk directly?</p>
+    <a href="https://calendly.com/palgrich/30min" target="_blank" class="contact-cal-btn">Book a 30-min call →</a>
+  </div>
+</div>
+
 <!-- FOOTER -->
 <footer>
   <a href="#" class="foot-logo">
@@ -663,6 +850,21 @@ footer { border-top: 1px solid var(--border); padding: 28px 40px; display: flex;
 </footer>
 
 <script>
+// ── FAQ ──────────────────────────────────────────
+function toggleFaq(el) {
+  const isOpen = el.classList.contains('open');
+  document.querySelectorAll('.faq-q').forEach(q => { q.classList.remove('open'); if(q.nextElementSibling) q.nextElementSibling.classList.remove('open'); });
+  if (!isOpen) { el.classList.add('open'); el.nextElementSibling.classList.add('open'); }
+}
+
+// ── BLOG ─────────────────────────────────────────
+function toggleBlog(id, btn) {
+  const body = document.getElementById(id);
+  const isHidden = body.classList.contains('hidden');
+  body.classList.toggle('hidden');
+  btn.textContent = isHidden ? 'Read less ↑' : 'Read more ↓';
+}
+
 // ── QUIZ ────────────────────────────────────────
 const quizMsgs = [
   'MoneyGator will show you exactly where it went — and why.',
