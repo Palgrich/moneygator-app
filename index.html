@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MoneyGator — Know Your Money</title>
+<meta name="description" content="MoneyGator connects your real bank data with personalized financial education. Learn what to do with your money, not just where it went.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --navy:   #0F172A;
+    --card:   #1E293B;
+    --purple: #3730A3;
+    --violet: #5B4FE8;
+    --cyan:   #A5F3FC;
+    --white:  #F8FAFC;
+    --muted:  #64748B;
+    --border: rgba(255,255,255,0.08);
+    --green:  #22C55E;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--navy);
+    color: var(--white);
+    font-family: 'Inter', -apple-system, sans-serif;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ───────────────────────────────────────────────────────── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 20px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(15,23,42,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 20px;
+    font-weight: 800;
+    color: var(--white);
+    text-decoration: none;
+    letter-spacing: -0.3px;
+  }
+
+  .logo-gator {
+    width: 36px;
+    height: 36px;
+  }
+
+  .nav-cta {
+    background: var(--violet);
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 22px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: inherit;
+    transition: opacity 0.2s;
+  }
+  .nav-cta:hover { opacity: 0.85; }
+
+  /* ── HERO ──────────────────────────────────────────────────────── */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 120px 40px 80px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Gradient blobs */
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -200px; right: -200px;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(91,79,232,0.25) 0%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -200px; left: -100px;
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(165,243,252,0.08) 0%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+  }
+
+  .hero-inner {
+    max-width: 900px;
+    width: 100%;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* The gator illustration */
+  .gator-wrap {
+    margin-bottom: 32px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .gator-main {
+    width: 120px;
+    height: 120px;
+    animation: float 3s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(91,79,232,0.15);
+    border: 1px solid rgba(91,79,232,0.3);
+    border-radius: 100px;
+    padding: 6px 16px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--cyan);
+    margin-bottom: 28px;
+    letter-spacing: 0.3px;
+  }
+
+  .eyebrow-dot {
+    width: 6px;
+    height: 6px;
+    background: var(--cyan);
+    border-radius: 50%;
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+
+  h1 {
+    font-size: clamp(42px, 7vw, 76px);
+    font-weight: 900;
+    line-height: 1.05;
+    letter-spacing: -2px;
+    margin-bottom: 24px;
+    color: var(--white);
+  }
+
+  h1 span {
+    background: linear-gradient(135deg, var(--violet) 0%, var(--cyan) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero-sub {
+    font-size: clamp(17px, 2.5vw, 21px);
+    color: var(--muted);
+    max-width: 560px;
+    margin: 0 auto 48px;
+    line-height: 1.6;
+    font-weight: 400;
+  }
+
+  /* Waitlist form */
+  .waitlist-form {
+    display: flex;
+    gap: 10px;
+    max-width: 460px;
+    margin: 0 auto 20px;
+  }
+
+  .waitlist-input {
+    flex: 1;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 14px 18px;
+    font-size: 15px;
+    color: var(--white);
+    font-family: inherit;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .waitlist-input::placeholder { color: var(--muted); }
+  .waitlist-input:focus { border-color: var(--violet); }
+
+  .waitlist-btn {
+    background: linear-gradient(135deg, #3730A3, var(--violet));
+    color: #fff;
+    border: none;
+    border-radius: 12px;
+    padding: 14px 24px;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    font-family: inherit;
+    white-space: nowrap;
+    transition: opacity 0.2s, transform 0.1s;
+  }
+  .waitlist-btn:hover { opacity: 0.9; transform: translateY(-1px); }
+  .waitlist-btn:active { transform: translateY(0); }
+
+  .waitlist-note {
+    font-size: 13px;
+    color: var(--muted);
+  }
+
+  .waitlist-note span { color: var(--green); font-weight: 600; }
+
+  /* ── STATS ROW ──────────────────────────────────────────────────── */
+  .stats {
+    padding: 0 40px 100px;
+    max-width: 900px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+
+  .stat-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 28px 24px;
+    text-align: center;
+  }
+
+  .stat-value {
+    font-size: 36px;
+    font-weight: 900;
+    color: var(--white);
+    letter-spacing: -1px;
+    margin-bottom: 6px;
+  }
+
+  .stat-value.purple { color: var(--violet); }
+  .stat-value.cyan { color: var(--cyan); }
+  .stat-value.green { color: var(--green); }
+
+  .stat-label {
+    font-size: 13px;
+    color: var(--muted);
+    font-weight: 500;
+    line-height: 1.4;
+  }
+
+  /* ── HOW IT WORKS ───────────────────────────────────────────────── */
+  .section {
+    padding: 80px 40px;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--violet);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 16px;
+  }
+
+  .section-title {
+    font-size: clamp(28px, 4vw, 40px);
+    font-weight: 800;
+    letter-spacing: -1px;
+    margin-bottom: 16px;
+    line-height: 1.1;
+  }
+
+  .section-sub {
+    font-size: 17px;
+    color: var(--muted);
+    max-width: 520px;
+    margin-bottom: 56px;
+    line-height: 1.6;
+  }
+
+  .steps {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+
+  .step-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 28px 24px;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.2s;
+  }
+  .step-card:hover { border-color: rgba(91,79,232,0.4); }
+
+  .step-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--purple), var(--violet));
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+  .step-card:hover::before { opacity: 1; }
+
+  .step-emoji {
+    font-size: 32px;
+    margin-bottom: 16px;
+    display: block;
+  }
+
+  .step-title {
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: var(--white);
+  }
+
+  .step-desc {
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  /* ── DIFFERENCE ─────────────────────────────────────────────────── */
+  .diff-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .diff-card {
+    background: var(--card);
+    border-radius: 20px;
+    padding: 32px;
+    border: 1px solid var(--border);
+  }
+
+  .diff-card.highlight {
+    background: linear-gradient(135deg, #1E1B4B 0%, #2D2A6E 100%);
+    border-color: rgba(91,79,232,0.4);
+  }
+
+  .diff-tag {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 20px;
+    padding: 5px 12px;
+    border-radius: 100px;
+    display: inline-block;
+  }
+
+  .diff-tag.others {
+    color: var(--muted);
+    background: rgba(255,255,255,0.05);
+  }
+
+  .diff-tag.us {
+    color: var(--cyan);
+    background: rgba(165,243,252,0.1);
+  }
+
+  .diff-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+
+  .diff-icon {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .diff-icon.no { background: rgba(239,68,68,0.15); color: #EF4444; }
+  .diff-icon.yes { background: rgba(34,197,94,0.15); color: var(--green); }
+
+  .diff-text {
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  .diff-card.highlight .diff-text { color: rgba(255,255,255,0.8); }
+
+  /* ── QUOTE ──────────────────────────────────────────────────────── */
+  .quote-section {
+    padding: 80px 40px;
+    max-width: 720px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .quote-text {
+    font-size: clamp(20px, 3vw, 28px);
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    line-height: 1.4;
+    margin-bottom: 24px;
+    color: var(--white);
+  }
+
+  .quote-author {
+    font-size: 14px;
+    color: var(--muted);
+  }
+
+  .quote-author strong { color: var(--white); }
+
+  /* ── BOTTOM CTA ─────────────────────────────────────────────────── */
+  .bottom-cta {
+    margin: 0 40px 80px;
+    background: linear-gradient(135deg, #1E1B4B 0%, #3730A3 60%, #5B4FE8 100%);
+    border-radius: 28px;
+    padding: 72px 48px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .bottom-cta::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 200px; height: 200px;
+    background: rgba(255,255,255,0.05);
+    border-radius: 50%;
+  }
+
+  .bottom-cta::after {
+    content: '';
+    position: absolute;
+    bottom: -80px; left: -40px;
+    width: 240px; height: 240px;
+    background: rgba(255,255,255,0.03);
+    border-radius: 50%;
+  }
+
+  .bottom-cta h2 {
+    font-size: clamp(28px, 4vw, 44px);
+    font-weight: 900;
+    letter-spacing: -1.5px;
+    margin-bottom: 16px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .bottom-cta p {
+    font-size: 17px;
+    color: rgba(255,255,255,0.65);
+    margin-bottom: 40px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .bottom-form {
+    display: flex;
+    gap: 10px;
+    max-width: 440px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+
+  .bottom-input {
+    flex: 1;
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 12px;
+    padding: 14px 18px;
+    font-size: 15px;
+    color: #fff;
+    font-family: inherit;
+    outline: none;
+  }
+  .bottom-input::placeholder { color: rgba(255,255,255,0.45); }
+  .bottom-input:focus { border-color: rgba(255,255,255,0.5); }
+
+  .bottom-btn {
+    background: #fff;
+    color: var(--purple);
+    border: none;
+    border-radius: 12px;
+    padding: 14px 24px;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    font-family: inherit;
+    transition: opacity 0.2s;
+  }
+  .bottom-btn:hover { opacity: 0.9; }
+
+  /* ── FOOTER ─────────────────────────────────────────────────────── */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 32px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .footer-logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--white);
+    text-decoration: none;
+  }
+
+  .footer-right {
+    font-size: 13px;
+    color: var(--muted);
+  }
+
+  /* ── SUCCESS STATE ───────────────────────────────────────────────── */
+  .success-msg {
+    display: none;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    color: var(--green);
+    font-weight: 600;
+    justify-content: center;
+    margin-top: 12px;
+  }
+
+  /* ── RESPONSIVE ──────────────────────────────────────────────────── */
+  @media (max-width: 640px) {
+    nav { padding: 16px 20px; }
+    .hero { padding: 100px 20px 60px; }
+    .waitlist-form { flex-direction: column; }
+    .stats { grid-template-columns: 1fr; padding: 0 20px 60px; }
+    .section { padding: 60px 20px; }
+    .steps { grid-template-columns: 1fr; }
+    .diff-grid { grid-template-columns: 1fr; }
+    .bottom-cta { margin: 0 20px 60px; padding: 48px 24px; }
+    .bottom-form { flex-direction: column; }
+    footer { flex-direction: column; gap: 12px; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="logo">
+    <svg class="logo-gator" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect width="36" height="36" rx="10" fill="#1E293B"/>
+      <!-- Gator body -->
+      <ellipse cx="18" cy="22" rx="11" ry="7" fill="#22C55E"/>
+      <!-- Gator head -->
+      <ellipse cx="27" cy="19" rx="5" ry="4" fill="#22C55E"/>
+      <!-- Eye -->
+      <circle cx="29" cy="17" r="1.5" fill="white"/>
+      <circle cx="29.5" cy="16.5" r="0.6" fill="#0F172A"/>
+      <!-- Teeth -->
+      <rect x="25" y="22" width="2" height="2" rx="0.5" fill="white"/>
+      <rect x="28" y="22" width="2" height="2" rx="0.5" fill="white"/>
+      <!-- Coin -->
+      <circle cx="15" cy="15" r="6" fill="#F59E0B"/>
+      <circle cx="15" cy="15" r="4.5" fill="#FCD34D"/>
+      <text x="15" y="18" font-size="6" font-weight="bold" fill="#92400E" text-anchor="middle">$</text>
+      <!-- Tail -->
+      <path d="M7 24 Q3 22 4 18 Q5 15 7 17" stroke="#22C55E" stroke-width="3" stroke-linecap="round" fill="none"/>
+    </svg>
+    MoneyGator
+  </a>
+  <button class="nav-cta" onclick="document.getElementById('email-top').focus()">Join waitlist</button>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="gator-wrap">
+      <svg class="gator-main" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Glow -->
+        <circle cx="60" cy="70" r="40" fill="rgba(91,79,232,0.12)"/>
+        <!-- Body -->
+        <ellipse cx="58" cy="80" rx="34" ry="22" fill="#16A34A"/>
+        <ellipse cx="58" cy="80" rx="30" ry="18" fill="#22C55E"/>
+        <!-- Head -->
+        <ellipse cx="90" cy="70" rx="18" ry="14" fill="#22C55E"/>
+        <!-- Mouth line -->
+        <path d="M76 73 Q90 78 104 73" stroke="#16A34A" stroke-width="1.5" fill="none"/>
+        <!-- Teeth top -->
+        <rect x="80" y="74" width="3.5" height="4" rx="1" fill="white"/>
+        <rect x="87" y="74" width="3.5" height="4" rx="1" fill="white"/>
+        <rect x="94" y="74" width="3.5" height="4" rx="1" fill="white"/>
+        <!-- Eye -->
+        <circle cx="96" cy="62" r="6" fill="white"/>
+        <circle cx="97" cy="61" r="2.5" fill="#0F172A"/>
+        <circle cx="98" cy="60" r="0.8" fill="white"/>
+        <!-- Nostril -->
+        <circle cx="100" cy="67" r="1.2" fill="#16A34A"/>
+        <!-- Tail -->
+        <path d="M24 82 Q8 78 10 64 Q12 54 22 60" stroke="#22C55E" stroke-width="7" stroke-linecap="round" fill="none"/>
+        <path d="M10 64 Q6 56 14 52" stroke="#16A34A" stroke-width="4" stroke-linecap="round" fill="none"/>
+        <!-- Legs -->
+        <ellipse cx="42" cy="98" rx="8" ry="5" fill="#16A34A"/>
+        <ellipse cx="72" cy="98" rx="8" ry="5" fill="#16A34A"/>
+        <!-- Big coin -->
+        <circle cx="52" cy="55" r="22" fill="#F59E0B"/>
+        <circle cx="52" cy="55" r="18" fill="#FCD34D"/>
+        <circle cx="52" cy="55" r="14" fill="#FDE68A" opacity="0.5"/>
+        <text x="52" y="61" font-size="18" font-weight="900" fill="#92400E" text-anchor="middle" font-family="Inter, sans-serif">$</text>
+        <!-- Small coins -->
+        <circle cx="30" cy="42" r="8" fill="#F59E0B"/>
+        <circle cx="30" cy="42" r="6" fill="#FCD34D"/>
+        <text x="30" y="46" font-size="7" font-weight="900" fill="#92400E" text-anchor="middle" font-family="Inter, sans-serif">$</text>
+        <circle cx="73" cy="38" r="6" fill="#F59E0B"/>
+        <circle cx="73" cy="38" r="4.5" fill="#FCD34D"/>
+        <text x="73" y="41.5" font-size="5" font-weight="900" fill="#92400E" text-anchor="middle" font-family="Inter, sans-serif">$</text>
+        <!-- Sparkles -->
+        <path d="M20 30 L21.5 26 L23 30 L27 31.5 L23 33 L21.5 37 L20 33 L16 31.5 Z" fill="var(--cyan)" opacity="0.7"/>
+        <path d="M88 30 L89 27.5 L90 30 L92.5 31 L90 32 L89 34.5 L88 32 L85.5 31 Z" fill="var(--cyan)" opacity="0.5"/>
+      </svg>
+    </div>
+
+    <div class="eyebrow">
+      <span class="eyebrow-dot"></span>
+      Coming soon to iOS
+    </div>
+
+    <h1>Your bank data.<br><span>Your financial education.</span></h1>
+
+    <p class="hero-sub">MoneyGator connects your real transactions to lessons that actually make sense for your life. Not generic tips. Your money, explained.</p>
+
+    <div class="waitlist-form">
+      <input id="email-top" class="waitlist-input" type="email" placeholder="your@email.com">
+      <button class="waitlist-btn" onclick="handleWaitlist('top')">Get early access</button>
+    </div>
+    <p class="waitlist-note"><span>Free forever</span> for early users. No credit card.</p>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="stat-card">
+    <div class="stat-value purple">$286</div>
+    <div class="stat-label">Average monthly subscriptions users don't know they're paying</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-value cyan">1 in 3</div>
+    <div class="stat-label">Americans have no idea what they spent last month</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-value green">$200+</div>
+    <div class="stat-label">More saved per month by people who track their spending</div>
+  </div>
+</div>
+
+<!-- HOW IT WORKS -->
+<section class="section">
+  <div class="section-label">How it works</div>
+  <h2 class="section-title">Three steps to financial clarity</h2>
+  <p class="section-sub">Most apps show you data. MoneyGator shows you what to do with it.</p>
+
+  <div class="steps">
+    <div class="step-card">
+      <span class="step-emoji">🏦</span>
+      <div class="step-title">Connect your accounts</div>
+      <div class="step-desc">Securely link your bank accounts via Plaid. We read your transactions. We never move your money.</div>
+    </div>
+    <div class="step-card">
+      <span class="step-emoji">📊</span>
+      <div class="step-title">We analyze your patterns</div>
+      <div class="step-desc">MoneyGator detects your subscriptions, spending trends, and upcoming credit payments automatically.</div>
+    </div>
+    <div class="step-card">
+      <span class="step-emoji">🎓</span>
+      <div class="step-title">Learn what to do</div>
+      <div class="step-desc">Get a personalized lesson every day, triggered by your actual financial situation. Not a generic course. Your money.</div>
+    </div>
+  </div>
+</section>
+
+<!-- DIFFERENCE -->
+<section class="section" style="padding-top: 0;">
+  <div class="section-label">Why MoneyGator</div>
+  <h2 class="section-title">The gap nobody filled</h2>
+  <p class="section-sub">Budgeting apps track your money. Financial education sites teach in the abstract. MoneyGator is the first to connect both.</p>
+
+  <div class="diff-grid">
+    <div class="diff-card">
+      <span class="diff-tag others">Other apps</span>
+      <div class="diff-row">
+        <div class="diff-icon no">✕</div>
+        <div class="diff-text">Show you data, leave you to figure out what it means</div>
+      </div>
+      <div class="diff-row">
+        <div class="diff-icon no">✕</div>
+        <div class="diff-text">Generic financial tips unrelated to your situation</div>
+      </div>
+      <div class="diff-row">
+        <div class="diff-icon no">✕</div>
+        <div class="diff-text">Abstract credit scores without context or action</div>
+      </div>
+      <div class="diff-row">
+        <div class="diff-icon no">✕</div>
+        <div class="diff-text">Overwhelming dashboards that create anxiety, not clarity</div>
+      </div>
+    </div>
+    <div class="diff-card highlight">
+      <span class="diff-tag us">MoneyGator</span>
+      <div class="diff-row">
+        <div class="diff-icon yes">✓</div>
+        <div class="diff-text">Lessons triggered by your actual transactions, in real time</div>
+      </div>
+      <div class="diff-row">
+        <div class="diff-icon yes">✓</div>
+        <div class="diff-text">Credit payment due in 2 days? Learn exactly what to do about it</div>
+      </div>
+      <div class="diff-row">
+        <div class="diff-icon yes">✓</div>
+        <div class="diff-text">Spending up 49% this month? Here's why and how to fix it</div>
+      </div>
+      <div class="diff-row">
+        <div class="diff-icon yes">✓</div>
+        <div class="diff-text">One clear action per day. No overwhelm. Just progress.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- QUOTE -->
+<div class="quote-section">
+  <div class="quote-text">"People who track their spending save an average of $200 more per month. MoneyGator makes sure you actually understand what you're tracking."</div>
+  <div class="quote-author"><strong>Pavel Volkov</strong>, Founder of MoneyGator. Author of First Steps to Financial Independence.</div>
+</div>
+
+<!-- BOTTOM CTA -->
+<div class="bottom-cta">
+  <h2>Know your money.<br>Finally.</h2>
+  <p>Join the waitlist. Free for early users. iOS app launching soon.</p>
+  <div class="bottom-form">
+    <input id="email-bottom" class="bottom-input" type="email" placeholder="your@email.com">
+    <button class="bottom-btn" onclick="handleWaitlist('bottom')">Join waitlist</button>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <a href="#" class="footer-logo">
+    <svg width="24" height="24" viewBox="0 0 36 36" fill="none">
+      <rect width="36" height="36" rx="10" fill="#1E293B"/>
+      <ellipse cx="18" cy="22" rx="11" ry="7" fill="#22C55E"/>
+      <ellipse cx="27" cy="19" rx="5" ry="4" fill="#22C55E"/>
+      <circle cx="29" cy="17" r="1.5" fill="white"/>
+      <circle cx="29.5" cy="16.5" r="0.6" fill="#0F172A"/>
+      <circle cx="15" cy="15" r="6" fill="#F59E0B"/>
+      <circle cx="15" cy="15" r="4.5" fill="#FCD34D"/>
+      <text x="15" y="18" font-size="6" font-weight="bold" fill="#92400E" text-anchor="middle">$</text>
+    </svg>
+    MoneyGator
+  </a>
+  <div class="footer-right">moneygator.app &nbsp;·&nbsp; 2026 Artifiqa Inc. &nbsp;·&nbsp; All rights reserved.</div>
+</footer>
+
+<script>
+  function handleWaitlist(source) {
+    const input = document.getElementById('email-' + source);
+    const email = input.value.trim();
+    if (!email || !email.includes('@')) {
+      input.style.borderColor = '#EF4444';
+      setTimeout(() => input.style.borderColor = '', 1500);
+      return;
+    }
+    // In production: POST to your backend
+    input.value = '';
+    input.style.borderColor = '#22C55E';
+    input.placeholder = 'You are on the list!';
+    setTimeout(() => {
+      input.style.borderColor = '';
+      input.placeholder = source === 'top' ? 'your@email.com' : 'your@email.com';
+    }, 3000);
+    console.log('Waitlist signup:', email, 'from:', source);
+  }
+
+  // Enter key support
+  document.getElementById('email-top').addEventListener('keydown', e => {
+    if (e.key === 'Enter') handleWaitlist('top');
+  });
+  document.getElementById('email-bottom').addEventListener('keydown', e => {
+    if (e.key === 'Enter') handleWaitlist('bottom');
+  });
+
+  // Subtle parallax on hero blobs
+  document.addEventListener('mousemove', e => {
+    const x = (e.clientX / window.innerWidth - 0.5) * 20;
+    const y = (e.clientY / window.innerHeight - 0.5) * 20;
+    document.querySelector('.hero::before');
+  });
+</script>
+</body>
+</html>
