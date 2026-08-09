@@ -916,6 +916,35 @@
     margin-top: -1px;
   }
 
+  .lq-subs {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-top: 10px;
+  }
+
+  .lq-sub {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 10px;
+    padding: 10px 14px;
+    font-size: 13px;
+    color: var(--muted);
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .lq-sub:hover { border-color: rgba(255,255,255,0.2); color: var(--white); }
+
+  .lq-sub.selected {
+    background: rgba(34,197,94,0.1);
+    border-color: rgba(34,197,94,0.4);
+    color: var(--white);
+    font-weight: 600;
+  }
+
+  .lq-sub.selected::before { content: '✓ '; color: var(--green); }
+
   /* ── INTERACTIVE LESSONS ────────────────────────────────────────── */
   .lesson-steps {
     display: flex;
@@ -1624,35 +1653,37 @@
           <!-- STEP 1: Theory -->
           <div class="lesson-step-content" id="step-1-theory">
             <div class="slc-trigger"><span class="slc-dot"></span>16 recurring charges detected this month</div>
-            <div class="slc-title">MoneyGator found 16 subscriptions. You probably guessed 6.</div>
-            <p class="slc-explain">Research shows the average person underestimates their subscription spend by 2.5x. That's because subscriptions are designed to be forgettable — small, automatic, easy to miss.</p>
-            <div class="slc-rows">
-              <div class="slc-row neutral"><span class="slc-row-icon">🤔</span><div><div class="slc-row-title">What people guess</div><div class="slc-row-sub">~$100/mo on subscriptions</div></div><span class="slc-badge neutral">Guess</span></div>
-              <div class="slc-row bad"><span class="slc-row-icon">😱</span><div><div class="slc-row-title">What MoneyGator found</div><div class="slc-row-sub">$286/mo · $3,432/year</div></div><span class="slc-badge bad">Reality</span></div>
-            </div>
-            <button class="lesson-btn" style="background:linear-gradient(135deg,#D97706,#F59E0B)" onclick="showQuiz(1)">I got it — quiz me 🧠</button>
+            <div class="slc-title">Most people have no idea how many subscriptions they're actually paying for.</div>
+            <p class="slc-explain">Subscriptions are designed to be invisible. Small amount. Automatic charge. Random day of the month. Companies know that if you don't notice it — you won't cancel it. That's the business model.</p>
+            <p class="slc-explain" style="color:var(--cyan);font-weight:600">💡 The rule: if you can't remember signing up for it — you probably don't need it.</p>
+            <button class="lesson-btn" style="background:linear-gradient(135deg,#D97706,#F59E0B)" onclick="showQuiz(1)">Got it — now test me 🧠</button>
           </div>
 
           <!-- STEP 2: Quiz -->
           <div class="lesson-step-content hidden" id="step-1-quiz">
-            <div class="slc-title" style="font-size:16px">Why are subscription charges so easy to forget about?</div>
-            <div class="lq-options">
-              <div class="lq-opt" onclick="answerQuiz(1, this, false)">Because they're usually very large and we ignore big numbers</div>
-              <div class="lq-opt correct" onclick="answerQuiz(1, this, true)">Because they're small, automatic, and hit at random times of the month</div>
-              <div class="lq-opt" onclick="answerQuiz(1, this, false)">Because banks hide them in the fine print</div>
-              <div class="lq-opt" onclick="answerQuiz(1, this, false)">Because they only charge once a year</div>
+            <div class="slc-title" style="font-size:15px">These 8 subscriptions were found in your accounts. Tap the ones you actually knew about 👇</div>
+            <div class="lq-subs" id="subsList">
+              <div class="lq-sub" onclick="toggleSub(this)" data-known="true">🎬 Netflix — $15.99/mo</div>
+              <div class="lq-sub" onclick="toggleSub(this)" data-known="true">🎵 Spotify — $10.99/mo</div>
+              <div class="lq-sub" onclick="toggleSub(this)" data-known="false">💪 Planet Fitness — $24.99/mo</div>
+              <div class="lq-sub" onclick="toggleSub(this)" data-known="false">☁️ iCloud — $2.99/mo</div>
+              <div class="lq-sub" onclick="toggleSub(this)" data-known="false">📰 NY Times — $17.00/mo</div>
+              <div class="lq-sub" onclick="toggleSub(this)" data-known="false">🎮 Xbox Game Pass — $14.99/mo</div>
+              <div class="lq-sub" onclick="toggleSub(this)" data-known="false">🧘 Calm — $6.99/mo</div>
+              <div class="lq-sub" onclick="toggleSub(this)" data-known="false">📦 Amazon Prime — $14.99/mo</div>
             </div>
+            <button class="lesson-btn" style="background:linear-gradient(135deg,#D97706,#F59E0B);margin-top:14px" onclick="showSubResult()">That's all I recognize →</button>
           </div>
 
           <!-- STEP 3: Action -->
           <div class="lesson-step-content hidden" id="step-1-action">
             <div class="lesson-result correct-result">
-              <div class="result-icon">🎉</div>
-              <div class="result-title">Exactly right. Small + automatic = invisible.</div>
-              <div class="result-text">That's why MoneyGator surfaces every recurring charge automatically — so nothing stays invisible.</div>
+              <div class="result-icon">👻</div>
+              <div class="result-title">The ones you didn't tap — those are your ghost subscriptions.</div>
+              <div class="result-text">You're paying for them every single month. But they're not top of mind. That's money leaving silently.</div>
             </div>
             <div class="slc-action" style="margin-top:14px">
-              👀 <strong>Your action:</strong> Think of one subscription you haven't used in 3 months. Cancel it before you sleep tonight.
+              ✂️ <strong>Your action:</strong> Open your bank app right now. Find one charge you didn't recognize above. Cancel it today.
             </div>
             <div class="lesson-done-note">This is one of 365 lessons waiting for you in MoneyGator.</div>
           </div>
@@ -1777,6 +1808,20 @@
     const wrap = document.getElementById('quizEmailWrap');
     wrap.classList.add('visible');
     setTimeout(() => wrap.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 100);
+  }
+
+  function toggleSub(el) {
+    el.classList.toggle('selected');
+  }
+
+  function showSubResult() {
+    document.getElementById('step-1-quiz').classList.add('hidden');
+    document.getElementById('step-1-action').classList.remove('hidden');
+    document.getElementById('lstep-1-1').classList.remove('active');
+    document.getElementById('lstep-1-1').classList.add('done');
+    document.getElementById('lstep-1-2').classList.add('active');
+    const bar = document.getElementById('bar-1');
+    if (bar) bar.style.width = '100%';
   }
 
   // Interactive lessons
