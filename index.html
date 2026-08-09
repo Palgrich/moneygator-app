@@ -1568,17 +1568,19 @@
 
 <script>
   // Quiz
-  const quizMessages = {
-    '😰 I have no idea where my money goes':        'MoneyGator will show you exactly where it went — and why.',
-    '💳 Credit card debt is stressing me out':      'MoneyGator will teach you how to pay it off faster, step by step.',
-    '🔄 I'm paying too much for subscriptions':     'MoneyGator finds every recurring charge and helps you cut the ones you forgot.',
-    '😕 I want to save but don\'t know how to start': 'MoneyGator builds your savings habit one small lesson at a time.',
-  };
+  const quizMessages = [
+    'MoneyGator will show you exactly where it went — and why.',
+    'MoneyGator will teach you how to pay it off faster, step by step.',
+    'MoneyGator finds every recurring charge and helps you cut the ones you forgot.',
+    'MoneyGator builds your savings habit one small lesson at a time.',
+  ];
 
   function selectQuiz(el) {
-    document.querySelectorAll('.quiz-option').forEach(o => o.classList.remove('selected'));
+    const options = document.querySelectorAll('.quiz-option');
+    options.forEach(o => o.classList.remove('selected'));
     el.classList.add('selected');
-    const msg = quizMessages[el.textContent.trim()] || 'MoneyGator will help you take control, one lesson at a time.';
+    const idx = Array.from(options).indexOf(el);
+    const msg = quizMessages[idx] || 'MoneyGator will help you take control, one lesson at a time.';
     document.getElementById('quizResultLine').textContent = '👉 ' + msg;
     const wrap = document.getElementById('quizEmailWrap');
     wrap.classList.add('visible');
