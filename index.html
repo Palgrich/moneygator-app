@@ -682,13 +682,34 @@ function pickQuiz(el, idx) {
 }
 
 // ── SIGNUP ───────────────────────────────────────
-function signUp(src) {
+async function signUp(src) {
   const el = document.getElementById('email-' + src);
-  if (!el.value.includes('@')) { el.style.borderColor = '#EF4444'; setTimeout(()=>el.style.borderColor='',1500); return; }
-  el.style.borderColor = '#22C55E';
-  el.placeholder = 'You\'re on the list! 🎉';
-  el.value = '';
-  setTimeout(() => { el.style.borderColor = ''; el.placeholder = 'your@email.com'; }, 3500);
+  const email = el.value.trim();
+  if (!email.includes('@')) {
+    el.style.borderColor = '#EF4444';
+    setTimeout(() => el.style.borderColor = '', 1500);
+    return;
+  }
+  try {
+    const res = await fetch('https://formspree.io/f/xaewqkbg', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify({ email })
+    });
+    if (res.ok) {
+      el.style.borderColor = '#22C55E';
+      el.value = '';
+      el.placeholder = "You're on the list! 🎉";
+      setTimeout(() => { el.style.borderColor = ''; el.placeholder = 'your@email.com'; }, 3500);
+    } else {
+      el.style.borderColor = '#EF4444';
+      el.placeholder = 'Something went wrong, try again';
+      setTimeout(() => { el.style.borderColor = ''; el.placeholder = 'your@email.com'; }, 2500);
+    }
+  } catch {
+    el.style.borderColor = '#EF4444';
+    setTimeout(() => el.style.borderColor = '', 1500);
+  }
 }
 document.querySelectorAll('.email-input,.cta-input').forEach(i => i.addEventListener('keydown', e => { if (e.key==='Enter') signUp(i.id.replace('email-','')); }));
 
