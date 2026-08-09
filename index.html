@@ -562,6 +562,208 @@
     margin-top: 12px;
   }
 
+  /* ── LESSONS CAROUSEL ───────────────────────────────────────────── */
+  .lesson-carousel {
+    overflow: hidden;
+    position: relative;
+  }
+
+  .lesson-track {
+    display: flex;
+    transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+    gap: 24px;
+  }
+
+  .lesson-card {
+    min-width: 100%;
+    background: var(--card);
+    border-radius: 24px;
+    border: 1px solid var(--border);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .lesson-header {
+    background: linear-gradient(135deg, #1E1B4B 0%, #3730A3 60%, #5B4FE8 100%);
+    padding: 20px 24px 16px;
+  }
+
+  .lesson-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 14px;
+  }
+
+  .lesson-tag {
+    font-size: 12px;
+    font-weight: 700;
+    padding: 5px 12px;
+    border-radius: 100px;
+    border: 1px solid rgba(255,255,255,0.2);
+    color: #fff;
+  }
+
+  .lesson-tag.credit { background: rgba(239,68,68,0.2); }
+  .lesson-tag.subs { background: rgba(245,158,11,0.2); }
+  .lesson-tag.spending { background: rgba(91,79,232,0.3); }
+
+  .lesson-time {
+    font-size: 12px;
+    color: rgba(255,255,255,0.5);
+  }
+
+  .lesson-progress-bar {
+    height: 3px;
+    background: rgba(255,255,255,0.15);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  .lesson-progress-fill {
+    height: 100%;
+    background: var(--cyan);
+    border-radius: 2px;
+    transition: width 1.5s ease;
+  }
+
+  .lesson-body {
+    padding: 24px;
+    flex: 1;
+  }
+
+  .lesson-trigger {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    color: var(--muted);
+    margin-bottom: 16px;
+    font-style: italic;
+  }
+
+  .trigger-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--cyan);
+    flex-shrink: 0;
+    animation: pulse 2s infinite;
+  }
+
+  .lesson-title {
+    font-size: 20px;
+    font-weight: 800;
+    color: var(--white);
+    letter-spacing: -0.5px;
+    line-height: 1.2;
+    margin-bottom: 14px;
+  }
+
+  .lesson-text {
+    font-size: 14px;
+    color: #94A3B8;
+    line-height: 1.7;
+    margin-bottom: 16px;
+  }
+
+  .lesson-callout {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 14px;
+    padding: 16px;
+    margin-bottom: 16px;
+  }
+
+  .callout-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 6px 0;
+    gap: 12px;
+  }
+
+  .callout-row + .callout-row {
+    border-top: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .callout-label {
+    font-size: 13px;
+    color: var(--muted);
+  }
+
+  .callout-value {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--white);
+  }
+
+  .callout-value.red { color: #EF4444; }
+  .callout-value.green { color: var(--green); }
+
+  .lesson-action {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    background: rgba(34,197,94,0.08);
+    border: 1px solid rgba(34,197,94,0.2);
+    border-radius: 12px;
+    padding: 12px 16px;
+    font-size: 13px;
+    color: var(--green);
+    font-weight: 600;
+    line-height: 1.4;
+  }
+
+  .action-icon {
+    font-weight: 800;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .lesson-footer {
+    padding: 16px 24px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 1px solid var(--border);
+  }
+
+  .lesson-dots {
+    display: flex;
+    gap: 6px;
+  }
+
+  .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.15);
+    transition: all 0.3s;
+  }
+
+  .dot.active {
+    background: var(--violet);
+    width: 24px;
+    border-radius: 4px;
+  }
+
+  .lesson-next {
+    background: var(--violet);
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: inherit;
+    transition: opacity 0.2s, transform 0.1s;
+  }
+
+  .lesson-next:hover { opacity: 0.85; transform: translateX(2px); }
+
   /* ── RESPONSIVE ──────────────────────────────────────────────────── */
   @media (max-width: 640px) {
     nav { padding: 16px 20px; }
@@ -760,6 +962,145 @@
   </div>
 </section>
 
+<!-- LESSONS -->
+<section class="section" style="padding-top: 0;">
+  <div class="section-label">Sample lessons</div>
+  <h2 class="section-title">See what learning feels like</h2>
+  <p class="section-sub">Every lesson is triggered by your real financial data. Here are three examples.</p>
+
+  <div class="lesson-carousel">
+    <div class="lesson-track" id="lessonTrack">
+
+      <!-- Lesson 1 -->
+      <div class="lesson-card">
+        <div class="lesson-header">
+          <div class="lesson-meta">
+            <span class="lesson-tag credit">💳 Credit</span>
+            <span class="lesson-time">2 min</span>
+          </div>
+          <div class="lesson-progress-bar"><div class="lesson-progress-fill" style="width: 0%"></div></div>
+        </div>
+        <div class="lesson-body">
+          <div class="lesson-trigger">
+            <span class="trigger-dot"></span>
+            Triggered because: Chase Sapphire payment due in 2 days
+          </div>
+          <h3 class="lesson-title">Why paying only the minimum is a trap</h3>
+          <p class="lesson-text">Your Chase Sapphire shows a minimum payment of $47. It feels manageable. But here is what actually happens if you only pay the minimum on a $1,200 balance at 24% APR.</p>
+          <div class="lesson-callout">
+            <div class="callout-row">
+              <span class="callout-label">If you pay minimum only</span>
+              <span class="callout-value red">3.5 years to pay off · $612 in interest</span>
+            </div>
+            <div class="callout-row">
+              <span class="callout-label">If you pay full balance</span>
+              <span class="callout-value green">Done this month · $0 in interest</span>
+            </div>
+          </div>
+          <p class="lesson-text">The minimum exists to benefit the bank, not you. Even paying $200 instead of $47 cuts the interest in half.</p>
+          <div class="lesson-action">
+            <span class="action-icon">✓</span>
+            <span>Today: pay more than the minimum on your Chase card</span>
+          </div>
+        </div>
+        <div class="lesson-footer">
+          <div class="lesson-dots">
+            <div class="dot active"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+          </div>
+          <button class="lesson-next" onclick="nextLesson()">Next lesson →</button>
+        </div>
+      </div>
+
+      <!-- Lesson 2 -->
+      <div class="lesson-card">
+        <div class="lesson-header">
+          <div class="lesson-meta">
+            <span class="lesson-tag subs">🔄 Subscriptions</span>
+            <span class="lesson-time">2 min</span>
+          </div>
+          <div class="lesson-progress-bar"><div class="lesson-progress-fill" style="width: 0%"></div></div>
+        </div>
+        <div class="lesson-body">
+          <div class="lesson-trigger">
+            <span class="trigger-dot"></span>
+            Triggered because: 16 recurring charges detected this month
+          </div>
+          <h3 class="lesson-title">The subscription you forgot you're paying for</h3>
+          <p class="lesson-text">MoneyGator detected 16 recurring charges this month totaling $286. Research shows the average person underestimates their subscription spend by 2.5x.</p>
+          <div class="lesson-callout">
+            <div class="callout-row">
+              <span class="callout-label">What you think you spend</span>
+              <span class="callout-value">~$100/mo</span>
+            </div>
+            <div class="callout-row">
+              <span class="callout-label">What MoneyGator found</span>
+              <span class="callout-value red">$286/mo · $3,432/year</span>
+            </div>
+          </div>
+          <p class="lesson-text">One subscription you cancel saves $120+ per year on average. Most people have at least 2 they forgot about entirely.</p>
+          <div class="lesson-action">
+            <span class="action-icon">✓</span>
+            <span>Today: review your subscriptions tab and cancel one</span>
+          </div>
+        </div>
+        <div class="lesson-footer">
+          <div class="lesson-dots">
+            <div class="dot"></div>
+            <div class="dot active"></div>
+            <div class="dot"></div>
+          </div>
+          <button class="lesson-next" onclick="nextLesson()">Next lesson →</button>
+        </div>
+      </div>
+
+      <!-- Lesson 3 -->
+      <div class="lesson-card">
+        <div class="lesson-header">
+          <div class="lesson-meta">
+            <span class="lesson-tag spending">💰 Spending</span>
+            <span class="lesson-time">1 min</span>
+          </div>
+          <div class="lesson-progress-bar"><div class="lesson-progress-fill" style="width: 0%"></div></div>
+        </div>
+        <div class="lesson-body">
+          <div class="lesson-trigger">
+            <span class="trigger-dot"></span>
+            Triggered because: spending up 49% vs last month
+          </div>
+          <h3 class="lesson-title">Why your daily spend number matters more than monthly totals</h3>
+          <p class="lesson-text">You spent $961 this month. That number feels abstract. But broken down: $67 per day. Last month you averaged $45 per day. That is one extra coffee, one extra lunch, one extra impulse buy every single day.</p>
+          <div class="lesson-callout">
+            <div class="callout-row">
+              <span class="callout-label">Last month daily average</span>
+              <span class="callout-value green">$45/day</span>
+            </div>
+            <div class="callout-row">
+              <span class="callout-label">This month daily average</span>
+              <span class="callout-value red">$67/day · +$22/day</span>
+            </div>
+          </div>
+          <p class="lesson-text">Small daily numbers are easier to control than monthly totals. Cutting $15/day saves $450 per month without feeling it.</p>
+          <div class="lesson-action">
+            <span class="action-icon">✓</span>
+            <span>Today: check where yesterday's $67 actually went</span>
+          </div>
+        </div>
+        <div class="lesson-footer">
+          <div class="lesson-dots">
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot active"></div>
+          </div>
+          <button class="lesson-next" onclick="nextLesson()" style="opacity:0.4;pointer-events:none">That's a preview ✓</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
 <!-- QUOTE -->
 <div class="quote-section">
   <div class="quote-text">"People who track their spending save an average of $200 more per month. MoneyGator makes sure you actually understand what you're tracking."</div>
@@ -795,6 +1136,38 @@
 </footer>
 
 <script>
+  // Lesson carousel
+  let currentLesson = 0;
+  const totalLessons = 3;
+
+  function nextLesson() {
+    if (currentLesson >= totalLessons - 1) return;
+    currentLesson++;
+    updateCarousel();
+  }
+
+  function updateCarousel() {
+    const track = document.getElementById('lessonTrack');
+    track.style.transform = `translateX(calc(-${currentLesson * 100}% - ${currentLesson * 24}px))`;
+
+    // Animate progress bar on current card
+    const cards = track.querySelectorAll('.lesson-card');
+    cards.forEach((card, i) => {
+      const fill = card.querySelector('.lesson-progress-fill');
+      if (i === currentLesson) {
+        setTimeout(() => { fill.style.width = '100%'; }, 100);
+      }
+    });
+  }
+
+  // Animate first card's progress bar on load
+  window.addEventListener('load', () => {
+    setTimeout(() => {
+      const firstFill = document.querySelector('.lesson-progress-fill');
+      if (firstFill) firstFill.style.width = '100%';
+    }, 800);
+  });
+
   function handleWaitlist(source) {
     const input = document.getElementById('email-' + source);
     const email = input.value.trim();
