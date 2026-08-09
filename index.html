@@ -916,6 +916,142 @@
     margin-top: -1px;
   }
 
+  /* ── INTERACTIVE LESSONS ────────────────────────────────────────── */
+  .lesson-steps {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    margin-bottom: 18px;
+    padding: 10px 14px;
+    background: rgba(255,255,255,0.04);
+    border-radius: 12px;
+    border: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .lstep {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--muted);
+    padding: 4px 8px;
+    border-radius: 8px;
+    transition: all 0.3s;
+    white-space: nowrap;
+  }
+
+  .lstep.active {
+    color: var(--white);
+    background: rgba(91,79,232,0.25);
+  }
+
+  .lstep.done {
+    color: var(--green);
+  }
+
+  .lstep-line {
+    flex: 1;
+    height: 1px;
+    background: rgba(255,255,255,0.1);
+    margin: 0 4px;
+  }
+
+  .lesson-step-content { display: block; }
+  .lesson-step-content.hidden { display: none; }
+
+  .slc-explain {
+    font-size: 13px;
+    color: #94A3B8;
+    line-height: 1.6;
+    margin-bottom: 14px;
+  }
+
+  .lesson-btn {
+    width: 100%;
+    margin-top: 16px;
+    background: linear-gradient(135deg, #3730A3, #5B4FE8);
+    color: #fff;
+    border: none;
+    border-radius: 14px;
+    padding: 14px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    font-family: inherit;
+    transition: opacity 0.2s, transform 0.1s;
+  }
+  .lesson-btn:hover { opacity: 0.9; transform: translateY(-1px); }
+
+  .lq-options {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 14px;
+  }
+
+  .lq-opt {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 12px;
+    padding: 12px 16px;
+    font-size: 13px;
+    color: var(--white);
+    cursor: pointer;
+    transition: all 0.2s;
+    line-height: 1.4;
+  }
+
+  .lq-opt:hover { background: rgba(91,79,232,0.15); border-color: rgba(91,79,232,0.4); }
+
+  .lq-opt.correct-answer {
+    background: rgba(34,197,94,0.12);
+    border-color: rgba(34,197,94,0.5);
+    color: var(--green);
+    font-weight: 600;
+  }
+
+  .lq-opt.wrong-answer {
+    background: rgba(239,68,68,0.08);
+    border-color: rgba(239,68,68,0.3);
+    color: #EF4444;
+    text-decoration: line-through;
+    opacity: 0.6;
+  }
+
+  .lq-opt.disabled { pointer-events: none; }
+
+  .lesson-result {
+    border-radius: 16px;
+    padding: 18px;
+    text-align: center;
+  }
+
+  .correct-result {
+    background: rgba(34,197,94,0.08);
+    border: 1px solid rgba(34,197,94,0.2);
+  }
+
+  .result-icon { font-size: 32px; margin-bottom: 8px; }
+
+  .result-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 6px;
+  }
+
+  .result-text {
+    font-size: 13px;
+    color: #94A3B8;
+    line-height: 1.5;
+  }
+
+  .lesson-done-note {
+    text-align: center;
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 14px;
+    font-style: italic;
+  }
+
   /* ── STICKY SCROLL LESSONS ──────────────────────────────────────── */
   .lessons-scroll-section {
     display: grid;
@@ -1411,36 +1547,55 @@
             <span class="slc-tag">💳 Credit · 2 min</span>
             <span class="slc-streak">🔥 Day 3</span>
           </div>
-          <div class="slc-big-emoji">😬</div>
           <div class="slc-bar"><div class="slc-bar-fill" style="width:0%" id="bar-0"></div></div>
         </div>
         <div class="slc-body">
-          <div class="slc-trigger">
-            <span class="slc-dot"></span>
-            Chase Sapphire payment due in 2 days
+
+          <!-- Step indicator -->
+          <div class="lesson-steps" id="steps-0">
+            <div class="lstep active" id="lstep-0-0">📖 Learn</div>
+            <div class="lstep-line"></div>
+            <div class="lstep" id="lstep-0-1">🧠 Quiz</div>
+            <div class="lstep-line"></div>
+            <div class="lstep" id="lstep-0-2">✅ Act</div>
           </div>
-          <div class="slc-title">Paying the minimum is like running on a treadmill that keeps speeding up.</div>
-          <div class="slc-rows">
-            <div class="slc-row bad">
-              <span class="slc-row-icon">🐢</span>
-              <div>
-                <div class="slc-row-title">Pay $47/mo minimum</div>
-                <div class="slc-row-sub">3.5 years · $612 in interest</div>
-              </div>
-              <span class="slc-badge bad">Ouch</span>
+
+          <!-- STEP 1: Theory -->
+          <div class="lesson-step-content" id="step-0-theory">
+            <div class="slc-trigger"><span class="slc-dot"></span>Chase Sapphire payment due in 2 days</div>
+            <div class="slc-title">Your minimum payment is $47. But the bank hopes you only pay that.</div>
+            <p class="slc-explain">On a $1,200 balance at 24% interest, paying just the minimum means you're handing the bank an extra $612 — and it takes 3.5 years to pay off. Every month you pay only the minimum, the bank wins.</p>
+            <div class="slc-rows">
+              <div class="slc-row bad"><span class="slc-row-icon">🐢</span><div><div class="slc-row-title">Pay $47/mo minimum</div><div class="slc-row-sub">3.5 years · $612 in interest</div></div><span class="slc-badge bad">Bank wins</span></div>
+              <div class="slc-row good"><span class="slc-row-icon">🚀</span><div><div class="slc-row-title">Pay full balance</div><div class="slc-row-sub">Done this month · $0 interest</div></div><span class="slc-badge good">You win</span></div>
             </div>
-            <div class="slc-row good">
-              <span class="slc-row-icon">🚀</span>
-              <div>
-                <div class="slc-row-title">Pay full balance now</div>
-                <div class="slc-row-sub">Done this month · $0 interest</div>
-              </div>
-              <span class="slc-badge good">Yes!</span>
+            <button class="lesson-btn" onclick="showQuiz(0)">I got it — quiz me 🧠</button>
+          </div>
+
+          <!-- STEP 2: Quiz -->
+          <div class="lesson-step-content hidden" id="step-0-quiz">
+            <div class="slc-title" style="font-size:16px">Quick check: You have a $1,200 credit card balance. The minimum payment is $47/mo. What's the smartest move?</div>
+            <div class="lq-options">
+              <div class="lq-opt" onclick="answerQuiz(0, this, false)">Pay the $47 minimum so you have cash for other things</div>
+              <div class="lq-opt" onclick="answerQuiz(0, this, false)">Skip this month, pay double next month</div>
+              <div class="lq-opt correct" onclick="answerQuiz(0, this, true)">Pay as much above $47 as you can afford this month</div>
+              <div class="lq-opt" onclick="answerQuiz(0, this, false)">Wait until the full $1,200 is available before paying anything extra</div>
             </div>
           </div>
-          <div class="slc-action">
-            🎯 <strong>Today:</strong> Pay more than $47 on your Chase card. Any amount helps.
+
+          <!-- STEP 3: Action -->
+          <div class="lesson-step-content hidden" id="step-0-action">
+            <div class="lesson-result correct-result">
+              <div class="result-icon">🎉</div>
+              <div class="result-title">Correct! Every dollar above the minimum saves you real money.</div>
+              <div class="result-text">Even paying $150 instead of $47 this month saves you $200+ in interest over time.</div>
+            </div>
+            <div class="slc-action" style="margin-top:14px">
+              🎯 <strong>Your action:</strong> Open your Chase app right now. Pay more than $47. Even $80 makes a difference.
+            </div>
+            <div class="lesson-done-note">This is one of 365 lessons waiting for you in MoneyGator.</div>
           </div>
+
         </div>
       </div>
     </div>
@@ -1453,36 +1608,54 @@
             <span class="slc-tag">🔄 Subscriptions · 2 min</span>
             <span class="slc-streak">🔥 Day 3</span>
           </div>
-          <div class="slc-big-emoji">👻</div>
           <div class="slc-bar"><div class="slc-bar-fill" style="width:0%" id="bar-1"></div></div>
         </div>
         <div class="slc-body">
-          <div class="slc-trigger">
-            <span class="slc-dot"></span>
-            16 recurring charges found this month
+
+          <div class="lesson-steps">
+            <div class="lstep active" id="lstep-1-0">📖 Learn</div>
+            <div class="lstep-line"></div>
+            <div class="lstep" id="lstep-1-1">🧠 Quiz</div>
+            <div class="lstep-line"></div>
+            <div class="lstep" id="lstep-1-2">✅ Act</div>
           </div>
-          <div class="slc-title">You're probably paying for a ghost subscription right now. No, really.</div>
-          <div class="slc-rows">
-            <div class="slc-row neutral">
-              <span class="slc-row-icon">🤔</span>
-              <div>
-                <div class="slc-row-title">What people think they spend</div>
-                <div class="slc-row-sub">~$100/mo on subscriptions</div>
-              </div>
-              <span class="slc-badge neutral">Guess</span>
+
+          <!-- STEP 1: Theory -->
+          <div class="lesson-step-content" id="step-1-theory">
+            <div class="slc-trigger"><span class="slc-dot"></span>16 recurring charges detected this month</div>
+            <div class="slc-title">MoneyGator found 16 subscriptions. You probably guessed 6.</div>
+            <p class="slc-explain">Research shows the average person underestimates their subscription spend by 2.5x. That's because subscriptions are designed to be forgettable — small, automatic, easy to miss.</p>
+            <div class="slc-rows">
+              <div class="slc-row neutral"><span class="slc-row-icon">🤔</span><div><div class="slc-row-title">What people guess</div><div class="slc-row-sub">~$100/mo on subscriptions</div></div><span class="slc-badge neutral">Guess</span></div>
+              <div class="slc-row bad"><span class="slc-row-icon">😱</span><div><div class="slc-row-title">What MoneyGator found</div><div class="slc-row-sub">$286/mo · $3,432/year</div></div><span class="slc-badge bad">Reality</span></div>
             </div>
-            <div class="slc-row bad">
-              <span class="slc-row-icon">😱</span>
-              <div>
-                <div class="slc-row-title">What MoneyGator found</div>
-                <div class="slc-row-sub">$286/mo · $3,432/year</div>
-              </div>
-              <span class="slc-badge bad">Reality</span>
+            <button class="lesson-btn" style="background:linear-gradient(135deg,#D97706,#F59E0B)" onclick="showQuiz(1)">I got it — quiz me 🧠</button>
+          </div>
+
+          <!-- STEP 2: Quiz -->
+          <div class="lesson-step-content hidden" id="step-1-quiz">
+            <div class="slc-title" style="font-size:16px">Why are subscription charges so easy to forget about?</div>
+            <div class="lq-options">
+              <div class="lq-opt" onclick="answerQuiz(1, this, false)">Because they're usually very large and we ignore big numbers</div>
+              <div class="lq-opt correct" onclick="answerQuiz(1, this, true)">Because they're small, automatic, and hit at random times of the month</div>
+              <div class="lq-opt" onclick="answerQuiz(1, this, false)">Because banks hide them in the fine print</div>
+              <div class="lq-opt" onclick="answerQuiz(1, this, false)">Because they only charge once a year</div>
             </div>
           </div>
-          <div class="slc-action">
-            👀 <strong>Today:</strong> Find one subscription you forgot about. Cancel it.
+
+          <!-- STEP 3: Action -->
+          <div class="lesson-step-content hidden" id="step-1-action">
+            <div class="lesson-result correct-result">
+              <div class="result-icon">🎉</div>
+              <div class="result-title">Exactly right. Small + automatic = invisible.</div>
+              <div class="result-text">That's why MoneyGator surfaces every recurring charge automatically — so nothing stays invisible.</div>
+            </div>
+            <div class="slc-action" style="margin-top:14px">
+              👀 <strong>Your action:</strong> Think of one subscription you haven't used in 3 months. Cancel it before you sleep tonight.
+            </div>
+            <div class="lesson-done-note">This is one of 365 lessons waiting for you in MoneyGator.</div>
           </div>
+
         </div>
       </div>
     </div>
@@ -1495,36 +1668,54 @@
             <span class="slc-tag">💰 Spending · 1 min</span>
             <span class="slc-streak">🔥 Day 3</span>
           </div>
-          <div class="slc-big-emoji">📈</div>
           <div class="slc-bar"><div class="slc-bar-fill" style="width:0%" id="bar-2"></div></div>
         </div>
         <div class="slc-body">
-          <div class="slc-trigger">
-            <span class="slc-dot"></span>
-            Your spending is up 49% vs last month
+
+          <div class="lesson-steps">
+            <div class="lstep active" id="lstep-2-0">📖 Learn</div>
+            <div class="lstep-line"></div>
+            <div class="lstep" id="lstep-2-1">🧠 Quiz</div>
+            <div class="lstep-line"></div>
+            <div class="lstep" id="lstep-2-2">✅ Act</div>
           </div>
-          <div class="slc-title">$961 this month feels scary. $67/day feels manageable. Same number.</div>
-          <div class="slc-rows">
-            <div class="slc-row good">
-              <span class="slc-row-icon">😌</span>
-              <div>
-                <div class="slc-row-title">Last month</div>
-                <div class="slc-row-sub">$45/day · felt fine</div>
-              </div>
-              <span class="slc-badge good">Normal</span>
+
+          <!-- STEP 1: Theory -->
+          <div class="lesson-step-content" id="step-2-theory">
+            <div class="slc-trigger"><span class="slc-dot"></span>Your spending is up 49% vs last month</div>
+            <div class="slc-title">$961 this month. $67 yesterday. Same money — one number you can actually control.</div>
+            <p class="slc-explain">Big monthly totals feel overwhelming. Daily numbers feel real. You didn't spend $961 — you spent $67 yesterday, and the day before, and the day before that. Daily awareness is the first step to changing spending habits.</p>
+            <div class="slc-rows">
+              <div class="slc-row good"><span class="slc-row-icon">😌</span><div><div class="slc-row-title">Last month</div><div class="slc-row-sub">$45/day average · felt fine</div></div><span class="slc-badge good">Normal</span></div>
+              <div class="slc-row bad"><span class="slc-row-icon">😅</span><div><div class="slc-row-title">This month</div><div class="slc-row-sub">$67/day · +$22 every single day</div></div><span class="slc-badge bad">Creeping</span></div>
             </div>
-            <div class="slc-row bad">
-              <span class="slc-row-icon">😅</span>
-              <div>
-                <div class="slc-row-title">This month</div>
-                <div class="slc-row-sub">$67/day · +$22 every day</div>
-              </div>
-              <span class="slc-badge bad">Creeping</span>
+            <button class="lesson-btn" onclick="showQuiz(2)">I got it — quiz me 🧠</button>
+          </div>
+
+          <!-- STEP 2: Quiz -->
+          <div class="lesson-step-content hidden" id="step-2-quiz">
+            <div class="slc-title" style="font-size:16px">You want to cut $450/mo from your spending. What's the most effective approach?</div>
+            <div class="lq-options">
+              <div class="lq-opt" onclick="answerQuiz(2, this, false)">Review your full monthly statement at the end of the month</div>
+              <div class="lq-opt" onclick="answerQuiz(2, this, false)">Set a strict $0 budget for all non-essential spending</div>
+              <div class="lq-opt correct" onclick="answerQuiz(2, this, true)">Check what you spent each day and aim to cut $15/day</div>
+              <div class="lq-opt" onclick="answerQuiz(2, this, false)">Only spend cash so you feel the money leaving</div>
             </div>
           </div>
-          <div class="slc-action">
-            🕵️ <strong>Today:</strong> Check what you spent yesterday. Just look. Awareness is step one.
+
+          <!-- STEP 3: Action -->
+          <div class="lesson-step-content hidden" id="step-2-action">
+            <div class="lesson-result correct-result">
+              <div class="result-icon">🎉</div>
+              <div class="result-title">Yes! Small daily changes beat big monthly promises.</div>
+              <div class="result-text">$15/day less = $450/mo saved. That's a flight, a phone bill, or a month of groceries.</div>
+            </div>
+            <div class="slc-action" style="margin-top:14px">
+              🕵️ <strong>Your action:</strong> Check what you spent yesterday. Just the number. Write it down. That's it — awareness is step one.
+            </div>
+            <div class="lesson-done-note">This is one of 365 lessons waiting for you in MoneyGator.</div>
           </div>
+
         </div>
       </div>
     </div>
@@ -1585,6 +1776,41 @@
     const wrap = document.getElementById('quizEmailWrap');
     wrap.classList.add('visible');
     setTimeout(() => wrap.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 100);
+  }
+
+  // Interactive lessons
+  function showQuiz(lessonIdx) {
+    document.getElementById('step-' + lessonIdx + '-theory').classList.add('hidden');
+    document.getElementById('step-' + lessonIdx + '-quiz').classList.remove('hidden');
+    document.getElementById('lstep-' + lessonIdx + '-0').classList.remove('active');
+    document.getElementById('lstep-' + lessonIdx + '-0').classList.add('done');
+    document.getElementById('lstep-' + lessonIdx + '-1').classList.add('active');
+    // Animate bar to 50%
+    const bar = document.getElementById('bar-' + lessonIdx);
+    if (bar) bar.style.width = '50%';
+  }
+
+  function answerQuiz(lessonIdx, el, isCorrect) {
+    const opts = el.parentElement.querySelectorAll('.lq-opt');
+    opts.forEach(o => {
+      o.classList.add('disabled');
+      if (o === el) {
+        o.classList.add(isCorrect ? 'correct-answer' : 'wrong-answer');
+      } else if (o.classList.contains('correct')) {
+        o.classList.add('correct-answer');
+      } else {
+        o.classList.add('wrong-answer');
+      }
+    });
+    setTimeout(() => {
+      document.getElementById('step-' + lessonIdx + '-quiz').classList.add('hidden');
+      document.getElementById('step-' + lessonIdx + '-action').classList.remove('hidden');
+      document.getElementById('lstep-' + lessonIdx + '-1').classList.remove('active');
+      document.getElementById('lstep-' + lessonIdx + '-1').classList.add('done');
+      document.getElementById('lstep-' + lessonIdx + '-2').classList.add('active');
+      const bar = document.getElementById('bar-' + lessonIdx);
+      if (bar) bar.style.width = '100%';
+    }, 1200);
   }
 
   // Sticky scroll lessons
