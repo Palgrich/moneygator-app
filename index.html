@@ -764,6 +764,86 @@
 
   .lesson-next:hover { opacity: 0.85; transform: translateX(2px); }
 
+  .lesson-streak {
+    font-size: 13px;
+    font-weight: 700;
+    color: #FCD34D;
+  }
+
+  .lesson-big-emoji {
+    font-size: 52px;
+    text-align: center;
+    margin: 12px 0 16px;
+    display: block;
+    filter: drop-shadow(0 4px 12px rgba(0,0,0,0.3));
+  }
+
+  .lesson-visual {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+
+  .visual-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 14px;
+    border-radius: 14px;
+  }
+
+  .visual-row.bad { background: rgba(239,68,68,0.08); border: 1px solid rgba(239,68,68,0.15); }
+  .visual-row.good { background: rgba(34,197,94,0.08); border: 1px solid rgba(34,197,94,0.15); }
+
+  .visual-icon { font-size: 24px; flex-shrink: 0; }
+
+  .visual-info { flex: 1; }
+
+  .visual-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 2px;
+  }
+
+  .visual-detail {
+    font-size: 12px;
+    color: var(--muted);
+  }
+
+  .visual-badge {
+    font-size: 11px;
+    font-weight: 800;
+    padding: 4px 10px;
+    border-radius: 100px;
+    flex-shrink: 0;
+    letter-spacing: 0.3px;
+    text-transform: uppercase;
+  }
+
+  .bad-badge { background: rgba(239,68,68,0.15); color: #EF4444; }
+  .good-badge { background: rgba(34,197,94,0.15); color: var(--green); }
+
+  .lesson-action {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    background: rgba(91,79,232,0.1);
+    border: 1px solid rgba(91,79,232,0.25);
+    border-radius: 14px;
+    padding: 14px 16px;
+    font-size: 14px;
+    color: var(--white);
+    line-height: 1.5;
+  }
+
+  .action-emoji {
+    font-size: 20px;
+    flex-shrink: 0;
+    margin-top: -1px;
+  }
+
   /* ── RESPONSIVE ──────────────────────────────────────────────────── */
   @media (max-width: 640px) {
     nav { padding: 16px 20px; }
@@ -964,43 +1044,54 @@
 
 <!-- LESSONS -->
 <section class="section" style="padding-top: 0;">
-  <div class="section-label">Sample lessons</div>
-  <h2 class="section-title">See what learning feels like</h2>
-  <p class="section-sub">Every lesson is triggered by your real financial data. Here are three examples.</p>
+  <div class="section-label">Try a lesson</div>
+  <h2 class="section-title">60 seconds. Real insight. 🐊</h2>
+  <p class="section-sub">Swipe through 3 real MoneyGator lessons. Each one comes from your actual bank data.</p>
 
   <div class="lesson-carousel">
     <div class="lesson-track" id="lessonTrack">
 
       <!-- Lesson 1 -->
       <div class="lesson-card">
-        <div class="lesson-header">
+        <div class="lesson-header" style="background: linear-gradient(135deg, #7C1D1D, #DC2626, #F87171);">
           <div class="lesson-meta">
-            <span class="lesson-tag credit">💳 Credit</span>
-            <span class="lesson-time">2 min</span>
+            <span class="lesson-tag" style="background:rgba(255,255,255,0.15);">💳 Credit · 2 min</span>
+            <span class="lesson-streak">🔥 Day 3</span>
           </div>
-          <div class="lesson-progress-bar"><div class="lesson-progress-fill" style="width: 0%"></div></div>
+          <div class="lesson-big-emoji">😬</div>
+          <div class="lesson-progress-bar"><div class="lesson-progress-fill" style="width:0%"></div></div>
         </div>
         <div class="lesson-body">
           <div class="lesson-trigger">
             <span class="trigger-dot"></span>
-            Triggered because: Chase Sapphire payment due in 2 days
+            Your Chase Sapphire payment is due in 2 days
           </div>
-          <h3 class="lesson-title">Why paying only the minimum is a trap</h3>
-          <p class="lesson-text">Your Chase Sapphire shows a minimum payment of $47. It feels manageable. But here is what actually happens if you only pay the minimum on a $1,200 balance at 24% APR.</p>
-          <div class="lesson-callout">
-            <div class="callout-row">
-              <span class="callout-label">If you pay minimum only</span>
-              <span class="callout-value red">3.5 years to pay off · $612 in interest</span>
+          <h3 class="lesson-title">Paying the minimum is like running in place. On a treadmill. That's speeding up.</h3>
+          <p class="lesson-text">You owe $1,200. The minimum is $47. Paying just $47 feels fine! But the bank is quietly charging 24% interest on whatever's left.</p>
+
+          <div class="lesson-visual">
+            <div class="visual-row bad">
+              <div class="visual-icon">🐢</div>
+              <div class="visual-info">
+                <div class="visual-title">Pay $47/mo minimum</div>
+                <div class="visual-detail">3.5 years to clear · $612 in interest</div>
+              </div>
+              <div class="visual-badge bad-badge">Ouch</div>
             </div>
-            <div class="callout-row">
-              <span class="callout-label">If you pay full balance</span>
-              <span class="callout-value green">Done this month · $0 in interest</span>
+            <div class="visual-row good">
+              <div class="visual-icon">🚀</div>
+              <div class="visual-info">
+                <div class="visual-title">Pay full balance now</div>
+                <div class="visual-detail">Done this month · $0 in interest</div>
+              </div>
+              <div class="visual-badge good-badge">Yes!</div>
             </div>
           </div>
-          <p class="lesson-text">The minimum exists to benefit the bank, not you. Even paying $200 instead of $47 cuts the interest in half.</p>
+
+          <p class="lesson-text">Can't pay it all? Even $200 instead of $47 saves you over $300 in interest. Every extra dollar you pay beats 24% guaranteed returns.</p>
           <div class="lesson-action">
-            <span class="action-icon">✓</span>
-            <span>Today: pay more than the minimum on your Chase card</span>
+            <span class="action-emoji">🎯</span>
+            <span><strong>Your move:</strong> Pay more than $47 on your Chase card today. Any amount helps.</span>
           </div>
         </div>
         <div class="lesson-footer">
@@ -1009,40 +1100,51 @@
             <div class="dot"></div>
             <div class="dot"></div>
           </div>
-          <button class="lesson-next" onclick="nextLesson()">Next lesson →</button>
+          <button class="lesson-next" onclick="nextLesson()">Next lesson ✨</button>
         </div>
       </div>
 
       <!-- Lesson 2 -->
       <div class="lesson-card">
-        <div class="lesson-header">
+        <div class="lesson-header" style="background: linear-gradient(135deg, #78350F, #D97706, #FCD34D);">
           <div class="lesson-meta">
-            <span class="lesson-tag subs">🔄 Subscriptions</span>
-            <span class="lesson-time">2 min</span>
+            <span class="lesson-tag" style="background:rgba(255,255,255,0.15);">🔄 Subscriptions · 2 min</span>
+            <span class="lesson-streak">🔥 Day 3</span>
           </div>
-          <div class="lesson-progress-bar"><div class="lesson-progress-fill" style="width: 0%"></div></div>
+          <div class="lesson-big-emoji">👻</div>
+          <div class="lesson-progress-bar"><div class="lesson-progress-fill" style="width:0%"></div></div>
         </div>
         <div class="lesson-body">
           <div class="lesson-trigger">
             <span class="trigger-dot"></span>
-            Triggered because: 16 recurring charges detected this month
+            16 recurring charges found in your accounts this month
           </div>
-          <h3 class="lesson-title">The subscription you forgot you're paying for</h3>
-          <p class="lesson-text">MoneyGator detected 16 recurring charges this month totaling $286. Research shows the average person underestimates their subscription spend by 2.5x.</p>
-          <div class="lesson-callout">
-            <div class="callout-row">
-              <span class="callout-label">What you think you spend</span>
-              <span class="callout-value">~$100/mo</span>
+          <h3 class="lesson-title">You're probably paying for a ghost subscription right now. No, really.</h3>
+          <p class="lesson-text">MoneyGator found 16 recurring charges. That's $286 a month leaving your account on autopilot. Most people guess they spend about $100. The gap is where the ghosts live.</p>
+
+          <div class="lesson-visual">
+            <div class="visual-row bad">
+              <div class="visual-icon">🤔</div>
+              <div class="visual-info">
+                <div class="visual-title">What people think they spend</div>
+                <div class="visual-detail">Around $100/mo on subscriptions</div>
+              </div>
+              <div class="visual-badge" style="background:rgba(255,255,255,0.1);color:#fff;">Guess</div>
             </div>
-            <div class="callout-row">
-              <span class="callout-label">What MoneyGator found</span>
-              <span class="callout-value red">$286/mo · $3,432/year</span>
+            <div class="visual-row bad">
+              <div class="visual-icon">😱</div>
+              <div class="visual-info">
+                <div class="visual-title">What MoneyGator actually found</div>
+                <div class="visual-detail">$286/mo · that's $3,432 per year</div>
+              </div>
+              <div class="visual-badge bad-badge">Reality</div>
             </div>
           </div>
-          <p class="lesson-text">One subscription you cancel saves $120+ per year on average. Most people have at least 2 they forgot about entirely.</p>
+
+          <p class="lesson-text">On average people have 2 subscriptions they completely forgot about. Cancel just one and you keep $120+ this year. That's a free dinner every month.</p>
           <div class="lesson-action">
-            <span class="action-icon">✓</span>
-            <span>Today: review your subscriptions tab and cancel one</span>
+            <span class="action-emoji">👀</span>
+            <span><strong>Your move:</strong> Open Subscriptions tab. Find one you don't use. Cancel it today.</span>
           </div>
         </div>
         <div class="lesson-footer">
@@ -1051,40 +1153,51 @@
             <div class="dot active"></div>
             <div class="dot"></div>
           </div>
-          <button class="lesson-next" onclick="nextLesson()">Next lesson →</button>
+          <button class="lesson-next" onclick="nextLesson()">Next lesson ✨</button>
         </div>
       </div>
 
       <!-- Lesson 3 -->
       <div class="lesson-card">
-        <div class="lesson-header">
+        <div class="lesson-header" style="background: linear-gradient(135deg, #1E1B4B, #3730A3, #5B4FE8);">
           <div class="lesson-meta">
-            <span class="lesson-tag spending">💰 Spending</span>
-            <span class="lesson-time">1 min</span>
+            <span class="lesson-tag" style="background:rgba(255,255,255,0.15);">💰 Spending · 1 min</span>
+            <span class="lesson-streak">🔥 Day 3</span>
           </div>
-          <div class="lesson-progress-bar"><div class="lesson-progress-fill" style="width: 0%"></div></div>
+          <div class="lesson-big-emoji">📈</div>
+          <div class="lesson-progress-bar"><div class="lesson-progress-fill" style="width:0%"></div></div>
         </div>
         <div class="lesson-body">
           <div class="lesson-trigger">
             <span class="trigger-dot"></span>
-            Triggered because: spending up 49% vs last month
+            Your spending is up 49% compared to last month
           </div>
-          <h3 class="lesson-title">Why your daily spend number matters more than monthly totals</h3>
-          <p class="lesson-text">You spent $961 this month. That number feels abstract. But broken down: $67 per day. Last month you averaged $45 per day. That is one extra coffee, one extra lunch, one extra impulse buy every single day.</p>
-          <div class="lesson-callout">
-            <div class="callout-row">
-              <span class="callout-label">Last month daily average</span>
-              <span class="callout-value green">$45/day</span>
+          <h3 class="lesson-title">$961 this month sounds scary. $67/day sounds manageable. Same thing.</h3>
+          <p class="lesson-text">Big monthly numbers feel overwhelming. Daily numbers feel real. You didn't spend $961. You spent $67 yesterday. And $67 the day before. That's one extra meal out and an impulse Amazon order per day.</p>
+
+          <div class="lesson-visual">
+            <div class="visual-row good">
+              <div class="visual-icon">😌</div>
+              <div class="visual-info">
+                <div class="visual-title">Last month</div>
+                <div class="visual-detail">$45/day average · felt fine</div>
+              </div>
+              <div class="visual-badge good-badge">Normal</div>
             </div>
-            <div class="callout-row">
-              <span class="callout-label">This month daily average</span>
-              <span class="callout-value red">$67/day · +$22/day</span>
+            <div class="visual-row bad">
+              <div class="visual-icon">😅</div>
+              <div class="visual-info">
+                <div class="visual-title">This month</div>
+                <div class="visual-detail">$67/day average · +$22 every single day</div>
+              </div>
+              <div class="visual-badge bad-badge">Creeping</div>
             </div>
           </div>
-          <p class="lesson-text">Small daily numbers are easier to control than monthly totals. Cutting $15/day saves $450 per month without feeling it.</p>
+
+          <p class="lesson-text">Cutting $15/day off that feels like nothing. But it's $450 back in your pocket this month. Small daily wins beat big monthly plans every time.</p>
           <div class="lesson-action">
-            <span class="action-icon">✓</span>
-            <span>Today: check where yesterday's $67 actually went</span>
+            <span class="action-emoji">🕵️</span>
+            <span><strong>Your move:</strong> Check what you spent yesterday. Just look. Awareness is step one.</span>
           </div>
         </div>
         <div class="lesson-footer">
@@ -1093,7 +1206,7 @@
             <div class="dot"></div>
             <div class="dot active"></div>
           </div>
-          <button class="lesson-next" onclick="nextLesson()" style="opacity:0.4;pointer-events:none">That's a preview ✓</button>
+          <button class="lesson-next" style="background:var(--green);opacity:1;pointer-events:auto" onclick="document.getElementById('email-top').scrollIntoView({behavior:'smooth'})">I want this app 🐊</button>
         </div>
       </div>
 
