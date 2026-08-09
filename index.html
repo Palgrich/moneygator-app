@@ -562,6 +562,78 @@
     margin-top: 12px;
   }
 
+  /* ── QUIZ ────────────────────────────────────────────────────────── */
+  .quiz-wrap {
+    max-width: 460px;
+    margin: 0 auto;
+    text-align: left;
+  }
+
+  .quiz-question {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 12px;
+    text-align: center;
+  }
+
+  .quiz-options {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 0;
+  }
+
+  .quiz-option {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 14px;
+    padding: 14px 18px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--white);
+    cursor: pointer;
+    transition: all 0.2s;
+    text-align: left;
+  }
+
+  .quiz-option:hover {
+    background: rgba(91,79,232,0.15);
+    border-color: rgba(91,79,232,0.4);
+    transform: translateX(4px);
+  }
+
+  .quiz-option.selected {
+    background: rgba(91,79,232,0.2);
+    border-color: var(--violet);
+    color: var(--white);
+  }
+
+  .quiz-email-wrap {
+    display: none;
+    margin-top: 20px;
+    animation: fadeSlideUp 0.4s ease;
+  }
+
+  .quiz-email-wrap.visible { display: block; }
+
+  .quiz-result-line {
+    font-size: 14px;
+    color: var(--cyan);
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 4px;
+    padding: 10px;
+    background: rgba(165,243,252,0.08);
+    border-radius: 10px;
+    border: 1px solid rgba(165,243,252,0.15);
+  }
+
+  @keyframes fadeSlideUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
   /* ── LESSONS CAROUSEL ───────────────────────────────────────────── */
   .lesson-carousel {
     overflow: hidden;
@@ -1197,11 +1269,24 @@
 
     <p class="hero-sub">MoneyGator looks at your actual bank data and teaches you exactly what to do about it. No generic tips. No overwhelm. Just one clear lesson every day.</p>
 
-    <div class="waitlist-form">
-      <input id="email-top" class="waitlist-input" type="email" placeholder="your@email.com">
-      <button class="waitlist-btn" onclick="handleWaitlist('top')">Get early access</button>
+    <!-- QUIZ -->
+    <div class="quiz-wrap" id="quizWrap">
+      <div class="quiz-question">What's your biggest money problem right now?</div>
+      <div class="quiz-options">
+        <div class="quiz-option" onclick="selectQuiz(this)">😰 I have no idea where my money goes</div>
+        <div class="quiz-option" onclick="selectQuiz(this)">💳 Credit card debt is stressing me out</div>
+        <div class="quiz-option" onclick="selectQuiz(this)">🔄 I'm paying too much for subscriptions</div>
+        <div class="quiz-option" onclick="selectQuiz(this)">😕 I want to save but don't know how to start</div>
+      </div>
+      <div class="quiz-email-wrap" id="quizEmailWrap">
+        <div class="quiz-result-line" id="quizResultLine"></div>
+        <div class="waitlist-form" style="margin-top:16px">
+          <input id="email-top" class="waitlist-input" type="email" placeholder="your@email.com">
+          <button class="waitlist-btn" onclick="handleWaitlist('top')">Get early access</button>
+        </div>
+        <p class="waitlist-note" style="margin-top:10px"><span>Join 200+ people</span> already on the waitlist. Free forever for early users.</p>
+      </div>
     </div>
-    <p class="waitlist-note"><span>Join 200+ people</span> already on the waitlist. Free forever for early users.</p>
   </div>
 </section>
 
@@ -1482,6 +1567,24 @@
 </footer>
 
 <script>
+  // Quiz
+  const quizMessages = {
+    '😰 I have no idea where my money goes':        'MoneyGator will show you exactly where it went — and why.',
+    '💳 Credit card debt is stressing me out':      'MoneyGator will teach you how to pay it off faster, step by step.',
+    '🔄 I'm paying too much for subscriptions':     'MoneyGator finds every recurring charge and helps you cut the ones you forgot.',
+    '😕 I want to save but don\'t know how to start': 'MoneyGator builds your savings habit one small lesson at a time.',
+  };
+
+  function selectQuiz(el) {
+    document.querySelectorAll('.quiz-option').forEach(o => o.classList.remove('selected'));
+    el.classList.add('selected');
+    const msg = quizMessages[el.textContent.trim()] || 'MoneyGator will help you take control, one lesson at a time.';
+    document.getElementById('quizResultLine').textContent = '👉 ' + msg;
+    const wrap = document.getElementById('quizEmailWrap');
+    wrap.classList.add('visible');
+    setTimeout(() => wrap.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 100);
+  }
+
   // Sticky scroll lessons
   function scrollToLesson(i) {
     document.getElementById('scard-' + i).scrollIntoView({ behavior: 'smooth', block: 'center' });
