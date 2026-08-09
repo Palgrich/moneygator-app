@@ -562,6 +562,89 @@
     margin-top: 12px;
   }
 
+  /* ── GOALS ───────────────────────────────────────────────────────── */
+  .goals-section {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 40px 80px;
+  }
+
+  .goals-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 24px;
+  }
+
+  .goal-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 20px;
+  }
+
+  .goal-top {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 14px;
+  }
+
+  .goal-icon { font-size: 28px; flex-shrink: 0; }
+
+  .goal-info { flex: 1; }
+
+  .goal-name {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 3px;
+  }
+
+  .goal-meta { font-size: 12px; color: var(--muted); }
+
+  .goal-pct {
+    font-size: 22px;
+    font-weight: 900;
+    color: var(--white);
+    flex-shrink: 0;
+  }
+
+  .goal-bar-wrap {
+    height: 8px;
+    background: rgba(255,255,255,0.08);
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 10px;
+  }
+
+  .goal-bar-fill {
+    height: 100%;
+    border-radius: 4px;
+    transition: width 1.2s ease;
+  }
+
+  .goal-lesson-note {
+    font-size: 12px;
+    color: var(--muted);
+    font-style: italic;
+  }
+
+  .goals-note {
+    text-align: center;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--cyan);
+    padding: 14px;
+    background: rgba(165,243,252,0.06);
+    border: 1px solid rgba(165,243,252,0.12);
+    border-radius: 14px;
+  }
+
+  @media (max-width: 640px) {
+    .goals-section { padding: 0 20px 60px; }
+  }
+
   /* ── QUIZ ────────────────────────────────────────────────────────── */
   .quiz-wrap {
     max-width: 460px;
@@ -1715,35 +1798,35 @@
           <!-- STEP 1: Theory -->
           <div class="lesson-step-content" id="step-2-theory">
             <div class="slc-trigger"><span class="slc-dot"></span>Your spending is up 49% vs last month</div>
-            <div class="slc-title">$961 this month. $67 yesterday. Same money — one number you can actually control.</div>
-            <p class="slc-explain">Big monthly totals feel overwhelming. Daily numbers feel real. You didn't spend $961 — you spent $67 yesterday, and the day before, and the day before that. Daily awareness is the first step to changing spending habits.</p>
-            <div class="slc-rows">
-              <div class="slc-row good"><span class="slc-row-icon">😌</span><div><div class="slc-row-title">Last month</div><div class="slc-row-sub">$45/day average · felt fine</div></div><span class="slc-badge good">Normal</span></div>
-              <div class="slc-row bad"><span class="slc-row-icon">😅</span><div><div class="slc-row-title">This month</div><div class="slc-row-sub">$67/day · +$22 every single day</div></div><span class="slc-badge bad">Creeping</span></div>
-            </div>
-            <button class="lesson-btn" onclick="showQuiz(2)">I got it — quiz me 🧠</button>
+            <div class="slc-title">Overspending isn't laziness. It's a bunch of small decisions you made without thinking.</div>
+            <p class="slc-explain">That $961 didn't happen all at once. It was a coffee here, a delivery there, something from Amazon you don't remember ordering. Each felt fine in the moment. None of them felt like "overspending."</p>
+            <p class="slc-explain" style="color:var(--cyan);font-weight:600">💡 The trick: before any non-essential purchase, ask yourself — "Will I remember this in a week?" If the answer is no, wait 10 minutes. Most impulse buys disappear on their own.</p>
+            <button class="lesson-btn" onclick="showQuiz(2)">Got it — test me 🧠</button>
           </div>
 
           <!-- STEP 2: Quiz -->
           <div class="lesson-step-content hidden" id="step-2-quiz">
-            <div class="slc-title" style="font-size:16px">You want to cut $450/mo from your spending. What's the most effective approach?</div>
-            <div class="lq-options">
-              <div class="lq-opt" onclick="answerQuiz(2, this, false)">Review your full monthly statement at the end of the month</div>
-              <div class="lq-opt" onclick="answerQuiz(2, this, false)">Set a strict $0 budget for all non-essential spending</div>
-              <div class="lq-opt correct" onclick="answerQuiz(2, this, true)">Check what you spent each day and aim to cut $15/day</div>
-              <div class="lq-opt" onclick="answerQuiz(2, this, false)">Only spend cash so you feel the money leaving</div>
+            <div class="slc-title" style="font-size:15px">Here are 6 purchases from your account last week. Tap the ones you actually remember making 👇</div>
+            <div class="lq-subs">
+              <div class="lq-sub" onclick="toggleSub(this)">☕ Blue Bottle Coffee — $7.50</div>
+              <div class="lq-sub" onclick="toggleSub(this)">🛒 Whole Foods — $94.20</div>
+              <div class="lq-sub" onclick="toggleSub(this)">📦 Amazon — $23.99</div>
+              <div class="lq-sub" onclick="toggleSub(this)">🍕 DoorDash — $38.40</div>
+              <div class="lq-sub" onclick="toggleSub(this)">⛽ Shell Gas — $61.00</div>
+              <div class="lq-sub" onclick="toggleSub(this)">🛍️ Target — $47.80</div>
             </div>
+            <button class="lesson-btn" style="margin-top:14px" onclick="showSpendResult()">That's all I remember →</button>
           </div>
 
           <!-- STEP 3: Action -->
           <div class="lesson-step-content hidden" id="step-2-action">
             <div class="lesson-result correct-result">
-              <div class="result-icon">🎉</div>
-              <div class="result-title">Yes! Small daily changes beat big monthly promises.</div>
-              <div class="result-text">$15/day less = $450/mo saved. That's a flight, a phone bill, or a month of groceries.</div>
+              <div class="result-icon">🤯</div>
+              <div class="result-title">The ones you forgot — that's where the money goes.</div>
+              <div class="result-text">Not one big splurge. Lots of small things you didn't even register. That's completely normal — and completely fixable.</div>
             </div>
             <div class="slc-action" style="margin-top:14px">
-              🕵️ <strong>Your action:</strong> Check what you spent yesterday. Just the number. Write it down. That's it — awareness is step one.
+              ⏱️ <strong>Your rule starting now:</strong> Before any non-essential purchase — wait 10 minutes. If you still want it, buy it. Most of the time you won't.
             </div>
             <div class="lesson-done-note">This is one of 365 lessons waiting for you in MoneyGator.</div>
           </div>
@@ -1760,6 +1843,66 @@
   <div class="quote-text">"Most people know they should manage their money better. They just don't know how. MoneyGator is the first app that actually teaches you — using your own money as the classroom."</div>
   <div class="quote-author"><strong>Pavel Volkov</strong>, Founder of MoneyGator. Author of First Steps to Financial Independence.</div>
 </div>
+
+<!-- GOALS -->
+<section class="goals-section">
+  <div class="section-label">Your progress</div>
+  <h2 class="section-title">Every lesson moves you closer.</h2>
+  <p class="section-sub">Set your goals in MoneyGator. Each lesson you complete nudges the bar forward.</p>
+
+  <div class="goals-list">
+
+    <div class="goal-card">
+      <div class="goal-top">
+        <div class="goal-icon">💳</div>
+        <div class="goal-info">
+          <div class="goal-name">Pay off Chase Sapphire</div>
+          <div class="goal-meta">$1,200 remaining · started 3 weeks ago</div>
+        </div>
+        <div class="goal-pct">34%</div>
+      </div>
+      <div class="goal-bar-wrap">
+        <div class="goal-bar-fill" style="width:34%;background:linear-gradient(90deg,#DC2626,#EF4444)"></div>
+      </div>
+      <div class="goal-lesson-note">📖 Today's lesson contributed to this goal</div>
+    </div>
+
+    <div class="goal-card">
+      <div class="goal-top">
+        <div class="goal-icon">🏦</div>
+        <div class="goal-info">
+          <div class="goal-name">Build $1,000 emergency fund</div>
+          <div class="goal-meta">$340 saved so far · on track</div>
+        </div>
+        <div class="goal-pct">34%</div>
+      </div>
+      <div class="goal-bar-wrap">
+        <div class="goal-bar-fill" style="width:34%;background:linear-gradient(90deg,#0F766E,#14B8A6)"></div>
+      </div>
+      <div class="goal-lesson-note">🔒 Unlocks after Savings path lesson 2</div>
+    </div>
+
+    <div class="goal-card">
+      <div class="goal-top">
+        <div class="goal-icon">✂️</div>
+        <div class="goal-info">
+          <div class="goal-name">Cut subscriptions to under $100/mo</div>
+          <div class="goal-meta">Currently $286/mo · 3 cancelled so far</div>
+        </div>
+        <div class="goal-pct">12%</div>
+      </div>
+      <div class="goal-bar-wrap">
+        <div class="goal-bar-fill" style="width:12%;background:linear-gradient(90deg,#D97706,#F59E0B)"></div>
+      </div>
+      <div class="goal-lesson-note">🎯 Complete today's lesson to move this forward</div>
+    </div>
+
+  </div>
+
+  <div class="goals-note">
+    🔥 3 day streak · 3 lessons completed · your goals are moving
+  </div>
+</section>
 
 <!-- BOTTOM CTA -->
 <div class="bottom-cta">
@@ -1821,6 +1964,16 @@
     document.getElementById('lstep-1-1').classList.add('done');
     document.getElementById('lstep-1-2').classList.add('active');
     const bar = document.getElementById('bar-1');
+    if (bar) bar.style.width = '100%';
+  }
+
+  function showSpendResult() {
+    document.getElementById('step-2-quiz').classList.add('hidden');
+    document.getElementById('step-2-action').classList.remove('hidden');
+    document.getElementById('lstep-2-1').classList.remove('active');
+    document.getElementById('lstep-2-1').classList.add('done');
+    document.getElementById('lstep-2-2').classList.add('active');
+    const bar = document.getElementById('bar-2');
     if (bar) bar.style.width = '100%';
   }
 
