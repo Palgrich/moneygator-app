@@ -844,6 +844,258 @@
     margin-top: -1px;
   }
 
+  /* ── STICKY SCROLL LESSONS ──────────────────────────────────────── */
+  .lessons-scroll-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 80px 40px 120px;
+    align-items: start;
+  }
+
+  .lessons-sticky-label {
+    position: sticky;
+    top: 120px;
+    padding-right: 60px;
+  }
+
+  .lessons-big-title {
+    font-size: clamp(32px, 4vw, 48px);
+    font-weight: 900;
+    letter-spacing: -1.5px;
+    line-height: 1.1;
+    margin: 12px 0 16px;
+    color: var(--white);
+  }
+
+  .lessons-big-sub {
+    font-size: 15px;
+    color: var(--muted);
+    line-height: 1.7;
+    margin-bottom: 40px;
+  }
+
+  .lessons-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .lnav-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 14px;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 14px;
+    color: var(--muted);
+    transition: all 0.2s;
+  }
+
+  .lnav-item:hover { color: var(--white); background: rgba(255,255,255,0.04); }
+
+  .lnav-item.active {
+    color: var(--white);
+    background: rgba(91,79,232,0.12);
+    font-weight: 600;
+  }
+
+  .lnav-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--muted);
+    flex-shrink: 0;
+    transition: all 0.3s;
+  }
+
+  .lnav-item.active .lnav-dot {
+    background: var(--violet);
+    box-shadow: 0 0 8px var(--violet);
+  }
+
+  .lessons-cards-col {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  .scroll-lesson-card {
+    opacity: 0.35;
+    transform: scale(0.97) translateY(20px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+
+  .scroll-lesson-card.visible {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+
+  /* Phone mockup */
+  .slc-phone {
+    background: var(--card);
+    border-radius: 28px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    box-shadow: 0 24px 60px rgba(0,0,0,0.4);
+  }
+
+  .slc-phone-header {
+    padding: 20px 20px 16px;
+    position: relative;
+  }
+
+  .slc-top-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+  }
+
+  .slc-tag {
+    font-size: 12px;
+    font-weight: 700;
+    color: rgba(255,255,255,0.9);
+    background: rgba(255,255,255,0.15);
+    padding: 5px 12px;
+    border-radius: 100px;
+    border: 1px solid rgba(255,255,255,0.2);
+  }
+
+  .slc-streak {
+    font-size: 13px;
+    font-weight: 700;
+    color: #FCD34D;
+  }
+
+  .slc-big-emoji {
+    font-size: 56px;
+    text-align: center;
+    display: block;
+    margin: 8px 0 16px;
+    filter: drop-shadow(0 4px 16px rgba(0,0,0,0.3));
+  }
+
+  .slc-bar {
+    height: 3px;
+    background: rgba(255,255,255,0.15);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  .slc-bar-fill {
+    height: 100%;
+    background: rgba(255,255,255,0.8);
+    border-radius: 2px;
+    transition: width 2s ease;
+  }
+
+  .slc-body {
+    padding: 20px;
+  }
+
+  .slc-trigger {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    color: var(--muted);
+    font-style: italic;
+    margin-bottom: 14px;
+  }
+
+  .slc-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--cyan);
+    flex-shrink: 0;
+    animation: pulse 2s infinite;
+  }
+
+  .slc-title {
+    font-size: 18px;
+    font-weight: 800;
+    color: var(--white);
+    line-height: 1.3;
+    letter-spacing: -0.3px;
+    margin-bottom: 16px;
+  }
+
+  .slc-rows {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+
+  .slc-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 14px;
+    border-radius: 14px;
+  }
+
+  .slc-row.bad     { background: rgba(239,68,68,0.08);  border: 1px solid rgba(239,68,68,0.18); }
+  .slc-row.good    { background: rgba(34,197,94,0.08);  border: 1px solid rgba(34,197,94,0.18); }
+  .slc-row.neutral { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); }
+
+  .slc-row-icon { font-size: 22px; flex-shrink: 0; }
+
+  .slc-row div { flex: 1; }
+
+  .slc-row-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 2px;
+  }
+
+  .slc-row-sub {
+    font-size: 12px;
+    color: var(--muted);
+  }
+
+  .slc-badge {
+    font-size: 10px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 4px 10px;
+    border-radius: 100px;
+    flex-shrink: 0;
+  }
+
+  .slc-badge.bad     { background: rgba(239,68,68,0.15);  color: #EF4444; }
+  .slc-badge.good    { background: rgba(34,197,94,0.15);  color: var(--green); }
+  .slc-badge.neutral { background: rgba(255,255,255,0.1); color: var(--white); }
+
+  .slc-action {
+    background: rgba(91,79,232,0.1);
+    border: 1px solid rgba(91,79,232,0.25);
+    border-radius: 14px;
+    padding: 14px 16px;
+    font-size: 13.5px;
+    color: var(--white);
+    line-height: 1.5;
+  }
+
+  @media (max-width: 768px) {
+    .lessons-scroll-section {
+      grid-template-columns: 1fr;
+      padding: 60px 20px 80px;
+    }
+    .lessons-sticky-label {
+      position: static;
+      padding-right: 0;
+      margin-bottom: 40px;
+    }
+    .scroll-lesson-card { opacity: 1; transform: none; }
+  }
+
   /* ── RESPONSIVE ──────────────────────────────────────────────────── */
   @media (max-width: 640px) {
     nav { padding: 16px 20px; }
@@ -1043,174 +1295,155 @@
 </section>
 
 <!-- LESSONS -->
-<section class="section" style="padding-top: 0;">
-  <div class="section-label">Try a lesson</div>
-  <h2 class="section-title">60 seconds. Real insight. 🐊</h2>
-  <p class="section-sub">Swipe through 3 real MoneyGator lessons. Each one comes from your actual bank data.</p>
-
-  <div class="lesson-carousel">
-    <div class="lesson-track" id="lessonTrack">
-
-      <!-- Lesson 1 -->
-      <div class="lesson-card">
-        <div class="lesson-header" style="background: linear-gradient(135deg, #7C1D1D, #DC2626, #F87171);">
-          <div class="lesson-meta">
-            <span class="lesson-tag" style="background:rgba(255,255,255,0.15);">💳 Credit · 2 min</span>
-            <span class="lesson-streak">🔥 Day 3</span>
-          </div>
-          <div class="lesson-big-emoji">😬</div>
-          <div class="lesson-progress-bar"><div class="lesson-progress-fill" style="width:0%"></div></div>
-        </div>
-        <div class="lesson-body">
-          <div class="lesson-trigger">
-            <span class="trigger-dot"></span>
-            Your Chase Sapphire payment is due in 2 days
-          </div>
-          <h3 class="lesson-title">Paying the minimum is like running in place. On a treadmill. That's speeding up.</h3>
-          <p class="lesson-text">You owe $1,200. The minimum is $47. Paying just $47 feels fine! But the bank is quietly charging 24% interest on whatever's left.</p>
-
-          <div class="lesson-visual">
-            <div class="visual-row bad">
-              <div class="visual-icon">🐢</div>
-              <div class="visual-info">
-                <div class="visual-title">Pay $47/mo minimum</div>
-                <div class="visual-detail">3.5 years to clear · $612 in interest</div>
-              </div>
-              <div class="visual-badge bad-badge">Ouch</div>
-            </div>
-            <div class="visual-row good">
-              <div class="visual-icon">🚀</div>
-              <div class="visual-info">
-                <div class="visual-title">Pay full balance now</div>
-                <div class="visual-detail">Done this month · $0 in interest</div>
-              </div>
-              <div class="visual-badge good-badge">Yes!</div>
-            </div>
-          </div>
-
-          <p class="lesson-text">Can't pay it all? Even $200 instead of $47 saves you over $300 in interest. Every extra dollar you pay beats 24% guaranteed returns.</p>
-          <div class="lesson-action">
-            <span class="action-emoji">🎯</span>
-            <span><strong>Your move:</strong> Pay more than $47 on your Chase card today. Any amount helps.</span>
-          </div>
-        </div>
-        <div class="lesson-footer">
-          <div class="lesson-dots">
-            <div class="dot active"></div>
-            <div class="dot"></div>
-            <div class="dot"></div>
-          </div>
-          <button class="lesson-next" onclick="nextLesson()">Next lesson ✨</button>
-        </div>
+<section class="lessons-scroll-section">
+  <div class="lessons-sticky-label">
+    <div class="section-label">Try a lesson</div>
+    <h2 class="lessons-big-title">Learn by doing.<br>Not by reading.</h2>
+    <p class="lessons-big-sub">Every lesson is triggered by your real bank data. Here are 3 examples of what MoneyGator teaches you — and why.</p>
+    <div class="lessons-nav" id="lessonsNav">
+      <div class="lnav-item active" onclick="scrollToLesson(0)">
+        <span class="lnav-dot"></span>
+        <span>Credit card trap</span>
       </div>
-
-      <!-- Lesson 2 -->
-      <div class="lesson-card">
-        <div class="lesson-header" style="background: linear-gradient(135deg, #78350F, #D97706, #FCD34D);">
-          <div class="lesson-meta">
-            <span class="lesson-tag" style="background:rgba(255,255,255,0.15);">🔄 Subscriptions · 2 min</span>
-            <span class="lesson-streak">🔥 Day 3</span>
-          </div>
-          <div class="lesson-big-emoji">👻</div>
-          <div class="lesson-progress-bar"><div class="lesson-progress-fill" style="width:0%"></div></div>
-        </div>
-        <div class="lesson-body">
-          <div class="lesson-trigger">
-            <span class="trigger-dot"></span>
-            16 recurring charges found in your accounts this month
-          </div>
-          <h3 class="lesson-title">You're probably paying for a ghost subscription right now. No, really.</h3>
-          <p class="lesson-text">MoneyGator found 16 recurring charges. That's $286 a month leaving your account on autopilot. Most people guess they spend about $100. The gap is where the ghosts live.</p>
-
-          <div class="lesson-visual">
-            <div class="visual-row bad">
-              <div class="visual-icon">🤔</div>
-              <div class="visual-info">
-                <div class="visual-title">What people think they spend</div>
-                <div class="visual-detail">Around $100/mo on subscriptions</div>
-              </div>
-              <div class="visual-badge" style="background:rgba(255,255,255,0.1);color:#fff;">Guess</div>
-            </div>
-            <div class="visual-row bad">
-              <div class="visual-icon">😱</div>
-              <div class="visual-info">
-                <div class="visual-title">What MoneyGator actually found</div>
-                <div class="visual-detail">$286/mo · that's $3,432 per year</div>
-              </div>
-              <div class="visual-badge bad-badge">Reality</div>
-            </div>
-          </div>
-
-          <p class="lesson-text">On average people have 2 subscriptions they completely forgot about. Cancel just one and you keep $120+ this year. That's a free dinner every month.</p>
-          <div class="lesson-action">
-            <span class="action-emoji">👀</span>
-            <span><strong>Your move:</strong> Open Subscriptions tab. Find one you don't use. Cancel it today.</span>
-          </div>
-        </div>
-        <div class="lesson-footer">
-          <div class="lesson-dots">
-            <div class="dot"></div>
-            <div class="dot active"></div>
-            <div class="dot"></div>
-          </div>
-          <button class="lesson-next" onclick="nextLesson()">Next lesson ✨</button>
-        </div>
+      <div class="lnav-item" onclick="scrollToLesson(1)">
+        <span class="lnav-dot"></span>
+        <span>Ghost subscriptions</span>
       </div>
-
-      <!-- Lesson 3 -->
-      <div class="lesson-card">
-        <div class="lesson-header" style="background: linear-gradient(135deg, #1E1B4B, #3730A3, #5B4FE8);">
-          <div class="lesson-meta">
-            <span class="lesson-tag" style="background:rgba(255,255,255,0.15);">💰 Spending · 1 min</span>
-            <span class="lesson-streak">🔥 Day 3</span>
-          </div>
-          <div class="lesson-big-emoji">📈</div>
-          <div class="lesson-progress-bar"><div class="lesson-progress-fill" style="width:0%"></div></div>
-        </div>
-        <div class="lesson-body">
-          <div class="lesson-trigger">
-            <span class="trigger-dot"></span>
-            Your spending is up 49% compared to last month
-          </div>
-          <h3 class="lesson-title">$961 this month sounds scary. $67/day sounds manageable. Same thing.</h3>
-          <p class="lesson-text">Big monthly numbers feel overwhelming. Daily numbers feel real. You didn't spend $961. You spent $67 yesterday. And $67 the day before. That's one extra meal out and an impulse Amazon order per day.</p>
-
-          <div class="lesson-visual">
-            <div class="visual-row good">
-              <div class="visual-icon">😌</div>
-              <div class="visual-info">
-                <div class="visual-title">Last month</div>
-                <div class="visual-detail">$45/day average · felt fine</div>
-              </div>
-              <div class="visual-badge good-badge">Normal</div>
-            </div>
-            <div class="visual-row bad">
-              <div class="visual-icon">😅</div>
-              <div class="visual-info">
-                <div class="visual-title">This month</div>
-                <div class="visual-detail">$67/day average · +$22 every single day</div>
-              </div>
-              <div class="visual-badge bad-badge">Creeping</div>
-            </div>
-          </div>
-
-          <p class="lesson-text">Cutting $15/day off that feels like nothing. But it's $450 back in your pocket this month. Small daily wins beat big monthly plans every time.</p>
-          <div class="lesson-action">
-            <span class="action-emoji">🕵️</span>
-            <span><strong>Your move:</strong> Check what you spent yesterday. Just look. Awareness is step one.</span>
-          </div>
-        </div>
-        <div class="lesson-footer">
-          <div class="lesson-dots">
-            <div class="dot"></div>
-            <div class="dot"></div>
-            <div class="dot active"></div>
-          </div>
-          <button class="lesson-next" style="background:var(--green);opacity:1;pointer-events:auto" onclick="document.getElementById('email-top').scrollIntoView({behavior:'smooth'})">I want this app 🐊</button>
-        </div>
+      <div class="lnav-item" onclick="scrollToLesson(2)">
+        <span class="lnav-dot"></span>
+        <span>Daily spend trick</span>
       </div>
-
     </div>
+  </div>
+
+  <div class="lessons-cards-col">
+
+    <!-- Lesson 1 -->
+    <div class="scroll-lesson-card" id="scard-0">
+      <div class="slc-phone">
+        <div class="slc-phone-header" style="background:linear-gradient(135deg,#7C1D1D,#DC2626,#EF4444)">
+          <div class="slc-top-row">
+            <span class="slc-tag">💳 Credit · 2 min</span>
+            <span class="slc-streak">🔥 Day 3</span>
+          </div>
+          <div class="slc-big-emoji">😬</div>
+          <div class="slc-bar"><div class="slc-bar-fill" style="width:0%" id="bar-0"></div></div>
+        </div>
+        <div class="slc-body">
+          <div class="slc-trigger">
+            <span class="slc-dot"></span>
+            Chase Sapphire payment due in 2 days
+          </div>
+          <div class="slc-title">Paying the minimum is like running on a treadmill that keeps speeding up.</div>
+          <div class="slc-rows">
+            <div class="slc-row bad">
+              <span class="slc-row-icon">🐢</span>
+              <div>
+                <div class="slc-row-title">Pay $47/mo minimum</div>
+                <div class="slc-row-sub">3.5 years · $612 in interest</div>
+              </div>
+              <span class="slc-badge bad">Ouch</span>
+            </div>
+            <div class="slc-row good">
+              <span class="slc-row-icon">🚀</span>
+              <div>
+                <div class="slc-row-title">Pay full balance now</div>
+                <div class="slc-row-sub">Done this month · $0 interest</div>
+              </div>
+              <span class="slc-badge good">Yes!</span>
+            </div>
+          </div>
+          <div class="slc-action">
+            🎯 <strong>Today:</strong> Pay more than $47 on your Chase card. Any amount helps.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Lesson 2 -->
+    <div class="scroll-lesson-card" id="scard-1">
+      <div class="slc-phone">
+        <div class="slc-phone-header" style="background:linear-gradient(135deg,#78350F,#D97706,#FCD34D)">
+          <div class="slc-top-row">
+            <span class="slc-tag">🔄 Subscriptions · 2 min</span>
+            <span class="slc-streak">🔥 Day 3</span>
+          </div>
+          <div class="slc-big-emoji">👻</div>
+          <div class="slc-bar"><div class="slc-bar-fill" style="width:0%" id="bar-1"></div></div>
+        </div>
+        <div class="slc-body">
+          <div class="slc-trigger">
+            <span class="slc-dot"></span>
+            16 recurring charges found this month
+          </div>
+          <div class="slc-title">You're probably paying for a ghost subscription right now. No, really.</div>
+          <div class="slc-rows">
+            <div class="slc-row neutral">
+              <span class="slc-row-icon">🤔</span>
+              <div>
+                <div class="slc-row-title">What people think they spend</div>
+                <div class="slc-row-sub">~$100/mo on subscriptions</div>
+              </div>
+              <span class="slc-badge neutral">Guess</span>
+            </div>
+            <div class="slc-row bad">
+              <span class="slc-row-icon">😱</span>
+              <div>
+                <div class="slc-row-title">What MoneyGator found</div>
+                <div class="slc-row-sub">$286/mo · $3,432/year</div>
+              </div>
+              <span class="slc-badge bad">Reality</span>
+            </div>
+          </div>
+          <div class="slc-action">
+            👀 <strong>Today:</strong> Find one subscription you forgot about. Cancel it.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Lesson 3 -->
+    <div class="scroll-lesson-card" id="scard-2">
+      <div class="slc-phone">
+        <div class="slc-phone-header" style="background:linear-gradient(135deg,#1E1B4B,#3730A3,#5B4FE8)">
+          <div class="slc-top-row">
+            <span class="slc-tag">💰 Spending · 1 min</span>
+            <span class="slc-streak">🔥 Day 3</span>
+          </div>
+          <div class="slc-big-emoji">📈</div>
+          <div class="slc-bar"><div class="slc-bar-fill" style="width:0%" id="bar-2"></div></div>
+        </div>
+        <div class="slc-body">
+          <div class="slc-trigger">
+            <span class="slc-dot"></span>
+            Your spending is up 49% vs last month
+          </div>
+          <div class="slc-title">$961 this month feels scary. $67/day feels manageable. Same number.</div>
+          <div class="slc-rows">
+            <div class="slc-row good">
+              <span class="slc-row-icon">😌</span>
+              <div>
+                <div class="slc-row-title">Last month</div>
+                <div class="slc-row-sub">$45/day · felt fine</div>
+              </div>
+              <span class="slc-badge good">Normal</span>
+            </div>
+            <div class="slc-row bad">
+              <span class="slc-row-icon">😅</span>
+              <div>
+                <div class="slc-row-title">This month</div>
+                <div class="slc-row-sub">$67/day · +$22 every day</div>
+              </div>
+              <span class="slc-badge bad">Creeping</span>
+            </div>
+          </div>
+          <div class="slc-action">
+            🕵️ <strong>Today:</strong> Check what you spent yesterday. Just look. Awareness is step one.
+          </div>
+        </div>
+      </div>
+    </div>
+
   </div>
 </section>
 
@@ -1249,37 +1482,36 @@
 </footer>
 
 <script>
-  // Lesson carousel
-  let currentLesson = 0;
-  const totalLessons = 3;
-
-  function nextLesson() {
-    if (currentLesson >= totalLessons - 1) return;
-    currentLesson++;
-    updateCarousel();
+  // Sticky scroll lessons
+  function scrollToLesson(i) {
+    document.getElementById('scard-' + i).scrollIntoView({ behavior: 'smooth', block: 'center' });
   }
 
-  function updateCarousel() {
-    const track = document.getElementById('lessonTrack');
-    track.style.transform = `translateX(calc(-${currentLesson * 100}% - ${currentLesson * 24}px))`;
+  function initLessonsScroll() {
+    const cards = document.querySelectorAll('.scroll-lesson-card');
+    const navItems = document.querySelectorAll('.lnav-item');
 
-    // Animate progress bar on current card
-    const cards = track.querySelectorAll('.lesson-card');
-    cards.forEach((card, i) => {
-      const fill = card.querySelector('.lesson-progress-fill');
-      if (i === currentLesson) {
-        setTimeout(() => { fill.style.width = '100%'; }, 100);
-      }
-    });
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          const idx = entry.target.id.split('-')[1];
+          // Animate progress bar
+          setTimeout(() => {
+            const bar = document.getElementById('bar-' + idx);
+            if (bar) bar.style.width = '100%';
+          }, 200);
+          // Update nav
+          navItems.forEach(n => n.classList.remove('active'));
+          if (navItems[idx]) navItems[idx].classList.add('active');
+        }
+      });
+    }, { threshold: 0.4 });
+
+    cards.forEach(card => observer.observe(card));
   }
 
-  // Animate first card's progress bar on load
-  window.addEventListener('load', () => {
-    setTimeout(() => {
-      const firstFill = document.querySelector('.lesson-progress-fill');
-      if (firstFill) firstFill.style.width = '100%';
-    }, 800);
-  });
+  window.addEventListener('load', initLessonsScroll);
 
   function handleWaitlist(source) {
     const input = document.getElementById('email-' + source);
