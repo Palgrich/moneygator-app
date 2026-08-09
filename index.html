@@ -4,1431 +4,334 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>MoneyGator — Know Your Money</title>
-<meta name="description" content="MoneyGator connects your real bank data with personalized financial education. Learn what to do with your money, not just where it went.">
+<meta name="description" content="MoneyGator teaches you exactly what to do with your money. One personalized lesson every day, based on your real bank data.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
-  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-
-  :root {
-    --navy:   #0F172A;
-    --card:   #1E293B;
-    --purple: #3730A3;
-    --violet: #5B4FE8;
-    --cyan:   #A5F3FC;
-    --white:  #F8FAFC;
-    --muted:  #64748B;
-    --border: rgba(255,255,255,0.08);
-    --green:  #22C55E;
-  }
-
-  html { scroll-behavior: smooth; }
-
-  body {
-    background: var(--navy);
-    color: var(--white);
-    font-family: 'Inter', -apple-system, sans-serif;
-    line-height: 1.6;
-    overflow-x: hidden;
-  }
-
-  /* ── NAV ───────────────────────────────────────────────────────── */
-  nav {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    z-index: 100;
-    padding: 20px 40px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background: rgba(15,23,42,0.85);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--border);
-  }
-
-  .logo {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-size: 20px;
-    font-weight: 800;
-    color: var(--white);
-    text-decoration: none;
-    letter-spacing: -0.3px;
-  }
-
-  .logo-gator {
-    width: 36px;
-    height: 36px;
-  }
-
-  .nav-cta {
-    background: var(--violet);
-    color: #fff;
-    border: none;
-    border-radius: 10px;
-    padding: 10px 22px;
-    font-size: 14px;
-    font-weight: 600;
-    cursor: pointer;
-    font-family: inherit;
-    transition: opacity 0.2s;
-  }
-  .nav-cta:hover { opacity: 0.85; }
-
-  /* ── HERO ──────────────────────────────────────────────────────── */
-  .hero {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 120px 40px 80px;
-    position: relative;
-    overflow: hidden;
-  }
-
-  /* Gradient blobs */
-  .hero::before {
-    content: '';
-    position: absolute;
-    top: -200px; right: -200px;
-    width: 600px; height: 600px;
-    background: radial-gradient(circle, rgba(91,79,232,0.25) 0%, transparent 70%);
-    border-radius: 50%;
-    pointer-events: none;
-  }
-  .hero::after {
-    content: '';
-    position: absolute;
-    bottom: -200px; left: -100px;
-    width: 500px; height: 500px;
-    background: radial-gradient(circle, rgba(165,243,252,0.08) 0%, transparent 70%);
-    border-radius: 50%;
-    pointer-events: none;
-  }
-
-  .hero-inner {
-    max-width: 900px;
-    width: 100%;
-    text-align: center;
-    position: relative;
-    z-index: 1;
-  }
-
-  /* The gator illustration */
-  .gator-wrap {
-    margin-bottom: 32px;
-    display: flex;
-    justify-content: center;
-  }
-
-  .gator-main {
-    width: 120px;
-    height: 120px;
-    animation: float 3s ease-in-out infinite;
-  }
-
-  @keyframes float {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
-  }
-
-  .eyebrow {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    background: rgba(91,79,232,0.15);
-    border: 1px solid rgba(91,79,232,0.3);
-    border-radius: 100px;
-    padding: 6px 16px;
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--cyan);
-    margin-bottom: 28px;
-    letter-spacing: 0.3px;
-  }
-
-  .eyebrow-dot {
-    width: 6px;
-    height: 6px;
-    background: var(--cyan);
-    border-radius: 50%;
-    animation: pulse 2s ease-in-out infinite;
-  }
-
-  @keyframes pulse {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.3; }
-  }
-
-  h1 {
-    font-size: clamp(42px, 7vw, 76px);
-    font-weight: 900;
-    line-height: 1.05;
-    letter-spacing: -2px;
-    margin-bottom: 24px;
-    color: var(--white);
-  }
-
-  h1 span {
-    background: linear-gradient(135deg, var(--violet) 0%, var(--cyan) 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-
-  .hero-sub {
-    font-size: clamp(17px, 2.5vw, 21px);
-    color: var(--muted);
-    max-width: 560px;
-    margin: 0 auto 48px;
-    line-height: 1.6;
-    font-weight: 400;
-  }
-
-  /* Waitlist form */
-  .waitlist-form {
-    display: flex;
-    gap: 10px;
-    max-width: 460px;
-    margin: 0 auto 20px;
-  }
-
-  .waitlist-input {
-    flex: 1;
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 14px 18px;
-    font-size: 15px;
-    color: var(--white);
-    font-family: inherit;
-    outline: none;
-    transition: border-color 0.2s;
-  }
-  .waitlist-input::placeholder { color: var(--muted); }
-  .waitlist-input:focus { border-color: var(--violet); }
-
-  .waitlist-btn {
-    background: linear-gradient(135deg, #3730A3, var(--violet));
-    color: #fff;
-    border: none;
-    border-radius: 12px;
-    padding: 14px 24px;
-    font-size: 15px;
-    font-weight: 700;
-    cursor: pointer;
-    font-family: inherit;
-    white-space: nowrap;
-    transition: opacity 0.2s, transform 0.1s;
-  }
-  .waitlist-btn:hover { opacity: 0.9; transform: translateY(-1px); }
-  .waitlist-btn:active { transform: translateY(0); }
-
-  .waitlist-note {
-    font-size: 13px;
-    color: var(--muted);
-  }
-
-  .waitlist-note span { color: var(--green); font-weight: 600; }
-
-  /* ── STATS ROW ──────────────────────────────────────────────────── */
-  .stats {
-    padding: 0 40px 100px;
-    max-width: 900px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 16px;
-  }
-
-  .stat-card {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 20px;
-    padding: 28px 24px;
-    text-align: center;
-  }
-
-  .stat-value {
-    font-size: 36px;
-    font-weight: 900;
-    color: var(--white);
-    letter-spacing: -1px;
-    margin-bottom: 6px;
-  }
-
-  .stat-value.purple { color: var(--violet); }
-  .stat-value.cyan { color: var(--cyan); }
-  .stat-value.green { color: var(--green); }
-
-  .stat-label {
-    font-size: 13px;
-    color: var(--muted);
-    font-weight: 500;
-    line-height: 1.4;
-  }
-
-  /* ── HOW IT WORKS ───────────────────────────────────────────────── */
-  .section {
-    padding: 80px 40px;
-    max-width: 900px;
-    margin: 0 auto;
-  }
-
-  .section-label {
-    font-size: 11px;
-    font-weight: 700;
-    color: var(--violet);
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    margin-bottom: 16px;
-  }
-
-  .section-title {
-    font-size: clamp(28px, 4vw, 40px);
-    font-weight: 800;
-    letter-spacing: -1px;
-    margin-bottom: 16px;
-    line-height: 1.1;
-  }
-
-  .section-sub {
-    font-size: 17px;
-    color: var(--muted);
-    max-width: 520px;
-    margin-bottom: 56px;
-    line-height: 1.6;
-  }
-
-  .steps {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 16px;
-  }
-
-  .step-card {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 20px;
-    padding: 28px 24px;
-    position: relative;
-    overflow: hidden;
-    transition: border-color 0.2s;
-  }
-  .step-card:hover { border-color: rgba(91,79,232,0.4); }
-
-  .step-card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 3px;
-    background: linear-gradient(90deg, var(--purple), var(--violet));
-    opacity: 0;
-    transition: opacity 0.2s;
-  }
-  .step-card:hover::before { opacity: 1; }
-
-  .step-emoji {
-    font-size: 32px;
-    margin-bottom: 16px;
-    display: block;
-  }
-
-  .step-title {
-    font-size: 16px;
-    font-weight: 700;
-    margin-bottom: 8px;
-    color: var(--white);
-  }
-
-  .step-desc {
-    font-size: 14px;
-    color: var(--muted);
-    line-height: 1.6;
-  }
-
-  /* ── DIFFERENCE ─────────────────────────────────────────────────── */
-  .diff-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 16px;
-  }
-
-  .diff-card {
-    background: var(--card);
-    border-radius: 20px;
-    padding: 32px;
-    border: 1px solid var(--border);
-  }
-
-  .diff-card.highlight {
-    background: linear-gradient(135deg, #1E1B4B 0%, #2D2A6E 100%);
-    border-color: rgba(91,79,232,0.4);
-  }
-
-  .diff-tag {
-    font-size: 11px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    margin-bottom: 20px;
-    padding: 5px 12px;
-    border-radius: 100px;
-    display: inline-block;
-  }
-
-  .diff-tag.others {
-    color: var(--muted);
-    background: rgba(255,255,255,0.05);
-  }
-
-  .diff-tag.us {
-    color: var(--cyan);
-    background: rgba(165,243,252,0.1);
-  }
-
-  .diff-row {
-    display: flex;
-    align-items: flex-start;
-    gap: 12px;
-    margin-bottom: 16px;
-  }
-
-  .diff-icon {
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 11px;
-    flex-shrink: 0;
-    margin-top: 2px;
-  }
-
-  .diff-icon.no { background: rgba(239,68,68,0.15); color: #EF4444; }
-  .diff-icon.yes { background: rgba(34,197,94,0.15); color: var(--green); }
-
-  .diff-text {
-    font-size: 14px;
-    color: var(--muted);
-    line-height: 1.5;
-  }
-
-  .diff-card.highlight .diff-text { color: rgba(255,255,255,0.8); }
-
-  /* ── QUOTE ──────────────────────────────────────────────────────── */
-  .quote-section {
-    padding: 80px 40px;
-    max-width: 720px;
-    margin: 0 auto;
-    text-align: center;
-  }
-
-  .quote-text {
-    font-size: clamp(20px, 3vw, 28px);
-    font-weight: 700;
-    letter-spacing: -0.5px;
-    line-height: 1.4;
-    margin-bottom: 24px;
-    color: var(--white);
-  }
-
-  .quote-author {
-    font-size: 14px;
-    color: var(--muted);
-  }
-
-  .quote-author strong { color: var(--white); }
-
-  /* ── BOTTOM CTA ─────────────────────────────────────────────────── */
-  .bottom-cta {
-    margin: 0 40px 80px;
-    background: linear-gradient(135deg, #1E1B4B 0%, #3730A3 60%, #5B4FE8 100%);
-    border-radius: 28px;
-    padding: 72px 48px;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .bottom-cta::before {
-    content: '';
-    position: absolute;
-    top: -60px; right: -60px;
-    width: 200px; height: 200px;
-    background: rgba(255,255,255,0.05);
-    border-radius: 50%;
-  }
-
-  .bottom-cta::after {
-    content: '';
-    position: absolute;
-    bottom: -80px; left: -40px;
-    width: 240px; height: 240px;
-    background: rgba(255,255,255,0.03);
-    border-radius: 50%;
-  }
-
-  .bottom-cta h2 {
-    font-size: clamp(28px, 4vw, 44px);
-    font-weight: 900;
-    letter-spacing: -1.5px;
-    margin-bottom: 16px;
-    position: relative;
-    z-index: 1;
-  }
-
-  .bottom-cta p {
-    font-size: 17px;
-    color: rgba(255,255,255,0.65);
-    margin-bottom: 40px;
-    position: relative;
-    z-index: 1;
-  }
-
-  .bottom-form {
-    display: flex;
-    gap: 10px;
-    max-width: 440px;
-    margin: 0 auto;
-    position: relative;
-    z-index: 1;
-  }
-
-  .bottom-input {
-    flex: 1;
-    background: rgba(255,255,255,0.12);
-    border: 1px solid rgba(255,255,255,0.2);
-    border-radius: 12px;
-    padding: 14px 18px;
-    font-size: 15px;
-    color: #fff;
-    font-family: inherit;
-    outline: none;
-  }
-  .bottom-input::placeholder { color: rgba(255,255,255,0.45); }
-  .bottom-input:focus { border-color: rgba(255,255,255,0.5); }
-
-  .bottom-btn {
-    background: #fff;
-    color: var(--purple);
-    border: none;
-    border-radius: 12px;
-    padding: 14px 24px;
-    font-size: 15px;
-    font-weight: 700;
-    cursor: pointer;
-    font-family: inherit;
-    transition: opacity 0.2s;
-  }
-  .bottom-btn:hover { opacity: 0.9; }
-
-  /* ── FOOTER ─────────────────────────────────────────────────────── */
-  footer {
-    border-top: 1px solid var(--border);
-    padding: 32px 40px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-
-  .footer-logo {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 15px;
-    font-weight: 700;
-    color: var(--white);
-    text-decoration: none;
-  }
-
-  .footer-right {
-    font-size: 13px;
-    color: var(--muted);
-  }
-
-  /* ── SUCCESS STATE ───────────────────────────────────────────────── */
-  .success-msg {
-    display: none;
-    align-items: center;
-    gap: 8px;
-    font-size: 14px;
-    color: var(--green);
-    font-weight: 600;
-    justify-content: center;
-    margin-top: 12px;
-  }
-
-  /* ── GOALS ───────────────────────────────────────────────────────── */
-  .goals-section {
-    max-width: 720px;
-    margin: 0 auto;
-    padding: 0 40px 80px;
-  }
-
-  .goals-list {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    margin-bottom: 24px;
-  }
-
-  .goal-card {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 20px;
-    padding: 20px;
-  }
-
-  .goal-top {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    margin-bottom: 14px;
-  }
-
-  .goal-icon { font-size: 28px; flex-shrink: 0; }
-
-  .goal-info { flex: 1; }
-
-  .goal-name {
-    font-size: 15px;
-    font-weight: 700;
-    color: var(--white);
-    margin-bottom: 3px;
-  }
-
-  .goal-meta { font-size: 12px; color: var(--muted); }
-
-  .goal-pct {
-    font-size: 22px;
-    font-weight: 900;
-    color: var(--white);
-    flex-shrink: 0;
-  }
-
-  .goal-bar-wrap {
-    height: 8px;
-    background: rgba(255,255,255,0.08);
-    border-radius: 4px;
-    overflow: hidden;
-    margin-bottom: 10px;
-  }
-
-  .goal-bar-fill {
-    height: 100%;
-    border-radius: 4px;
-    transition: width 1.2s ease;
-  }
-
-  .goal-lesson-note {
-    font-size: 12px;
-    color: var(--muted);
-    font-style: italic;
-  }
-
-  .goals-note {
-    text-align: center;
-    font-size: 14px;
-    font-weight: 600;
-    color: var(--cyan);
-    padding: 14px;
-    background: rgba(165,243,252,0.06);
-    border: 1px solid rgba(165,243,252,0.12);
-    border-radius: 14px;
-  }
-
-  @media (max-width: 640px) {
-    .goals-section { padding: 0 20px 60px; }
-  }
-
-  /* ── QUIZ ────────────────────────────────────────────────────────── */
-  .quiz-wrap {
-    max-width: 460px;
-    margin: 0 auto;
-    text-align: left;
-  }
-
-  .quiz-question {
-    font-size: 15px;
-    font-weight: 700;
-    color: var(--white);
-    margin-bottom: 12px;
-    text-align: center;
-  }
-
-  .quiz-options {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    margin-bottom: 0;
-  }
-
-  .quiz-option {
-    background: rgba(255,255,255,0.05);
-    border: 1px solid rgba(255,255,255,0.1);
-    border-radius: 14px;
-    padding: 14px 18px;
-    font-size: 14px;
-    font-weight: 500;
-    color: var(--white);
-    cursor: pointer;
-    transition: all 0.2s;
-    text-align: left;
-  }
-
-  .quiz-option:hover {
-    background: rgba(91,79,232,0.15);
-    border-color: rgba(91,79,232,0.4);
-    transform: translateX(4px);
-  }
-
-  .quiz-option.selected {
-    background: rgba(91,79,232,0.2);
-    border-color: var(--violet);
-    color: var(--white);
-  }
-
-  .quiz-email-wrap {
-    display: none;
-    margin-top: 20px;
-    animation: fadeSlideUp 0.4s ease;
-  }
-
-  .quiz-email-wrap.visible { display: block; }
-
-  .quiz-result-line {
-    font-size: 14px;
-    color: var(--cyan);
-    font-weight: 600;
-    text-align: center;
-    margin-bottom: 4px;
-    padding: 10px;
-    background: rgba(165,243,252,0.08);
-    border-radius: 10px;
-    border: 1px solid rgba(165,243,252,0.15);
-  }
-
-  @keyframes fadeSlideUp {
-    from { opacity: 0; transform: translateY(12px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-
-  /* ── LESSONS CAROUSEL ───────────────────────────────────────────── */
-  .lesson-carousel {
-    overflow: hidden;
-    position: relative;
-  }
-
-  .lesson-track {
-    display: flex;
-    transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1);
-    gap: 24px;
-  }
-
-  .lesson-card {
-    min-width: 100%;
-    background: var(--card);
-    border-radius: 24px;
-    border: 1px solid var(--border);
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-  }
-
-  .lesson-header {
-    background: linear-gradient(135deg, #1E1B4B 0%, #3730A3 60%, #5B4FE8 100%);
-    padding: 20px 24px 16px;
-  }
-
-  .lesson-meta {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 14px;
-  }
-
-  .lesson-tag {
-    font-size: 12px;
-    font-weight: 700;
-    padding: 5px 12px;
-    border-radius: 100px;
-    border: 1px solid rgba(255,255,255,0.2);
-    color: #fff;
-  }
-
-  .lesson-tag.credit { background: rgba(239,68,68,0.2); }
-  .lesson-tag.subs { background: rgba(245,158,11,0.2); }
-  .lesson-tag.spending { background: rgba(91,79,232,0.3); }
-
-  .lesson-time {
-    font-size: 12px;
-    color: rgba(255,255,255,0.5);
-  }
-
-  .lesson-progress-bar {
-    height: 3px;
-    background: rgba(255,255,255,0.15);
-    border-radius: 2px;
-    overflow: hidden;
-  }
-
-  .lesson-progress-fill {
-    height: 100%;
-    background: var(--cyan);
-    border-radius: 2px;
-    transition: width 1.5s ease;
-  }
-
-  .lesson-body {
-    padding: 24px;
-    flex: 1;
-  }
-
-  .lesson-trigger {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 12px;
-    color: var(--muted);
-    margin-bottom: 16px;
-    font-style: italic;
-  }
-
-  .trigger-dot {
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: var(--cyan);
-    flex-shrink: 0;
-    animation: pulse 2s infinite;
-  }
-
-  .lesson-title {
-    font-size: 20px;
-    font-weight: 800;
-    color: var(--white);
-    letter-spacing: -0.5px;
-    line-height: 1.2;
-    margin-bottom: 14px;
-  }
-
-  .lesson-text {
-    font-size: 14px;
-    color: #94A3B8;
-    line-height: 1.7;
-    margin-bottom: 16px;
-  }
-
-  .lesson-callout {
-    background: rgba(255,255,255,0.04);
-    border: 1px solid rgba(255,255,255,0.08);
-    border-radius: 14px;
-    padding: 16px;
-    margin-bottom: 16px;
-  }
-
-  .callout-row {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 6px 0;
-    gap: 12px;
-  }
-
-  .callout-row + .callout-row {
-    border-top: 1px solid rgba(255,255,255,0.06);
-  }
-
-  .callout-label {
-    font-size: 13px;
-    color: var(--muted);
-  }
-
-  .callout-value {
-    font-size: 13px;
-    font-weight: 700;
-    color: var(--white);
-  }
-
-  .callout-value.red { color: #EF4444; }
-  .callout-value.green { color: var(--green); }
-
-  .lesson-action {
-    display: flex;
-    align-items: flex-start;
-    gap: 10px;
-    background: rgba(34,197,94,0.08);
-    border: 1px solid rgba(34,197,94,0.2);
-    border-radius: 12px;
-    padding: 12px 16px;
-    font-size: 13px;
-    color: var(--green);
-    font-weight: 600;
-    line-height: 1.4;
-  }
-
-  .action-icon {
-    font-weight: 800;
-    flex-shrink: 0;
-    margin-top: 1px;
-  }
-
-  .lesson-footer {
-    padding: 16px 24px 20px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    border-top: 1px solid var(--border);
-  }
-
-  .lesson-dots {
-    display: flex;
-    gap: 6px;
-  }
-
-  .dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: rgba(255,255,255,0.15);
-    transition: all 0.3s;
-  }
-
-  .dot.active {
-    background: var(--violet);
-    width: 24px;
-    border-radius: 4px;
-  }
-
-  .lesson-next {
-    background: var(--violet);
-    color: #fff;
-    border: none;
-    border-radius: 10px;
-    padding: 10px 20px;
-    font-size: 14px;
-    font-weight: 600;
-    cursor: pointer;
-    font-family: inherit;
-    transition: opacity 0.2s, transform 0.1s;
-  }
-
-  .lesson-next:hover { opacity: 0.85; transform: translateX(2px); }
-
-  .lesson-streak {
-    font-size: 13px;
-    font-weight: 700;
-    color: #FCD34D;
-  }
-
-  .lesson-big-emoji {
-    font-size: 52px;
-    text-align: center;
-    margin: 12px 0 16px;
-    display: block;
-    filter: drop-shadow(0 4px 12px rgba(0,0,0,0.3));
-  }
-
-  .lesson-visual {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    margin-bottom: 16px;
-  }
-
-  .visual-row {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 12px 14px;
-    border-radius: 14px;
-  }
-
-  .visual-row.bad { background: rgba(239,68,68,0.08); border: 1px solid rgba(239,68,68,0.15); }
-  .visual-row.good { background: rgba(34,197,94,0.08); border: 1px solid rgba(34,197,94,0.15); }
-
-  .visual-icon { font-size: 24px; flex-shrink: 0; }
-
-  .visual-info { flex: 1; }
-
-  .visual-title {
-    font-size: 13px;
-    font-weight: 700;
-    color: var(--white);
-    margin-bottom: 2px;
-  }
-
-  .visual-detail {
-    font-size: 12px;
-    color: var(--muted);
-  }
-
-  .visual-badge {
-    font-size: 11px;
-    font-weight: 800;
-    padding: 4px 10px;
-    border-radius: 100px;
-    flex-shrink: 0;
-    letter-spacing: 0.3px;
-    text-transform: uppercase;
-  }
-
-  .bad-badge { background: rgba(239,68,68,0.15); color: #EF4444; }
-  .good-badge { background: rgba(34,197,94,0.15); color: var(--green); }
-
-  .lesson-action {
-    display: flex;
-    align-items: flex-start;
-    gap: 10px;
-    background: rgba(91,79,232,0.1);
-    border: 1px solid rgba(91,79,232,0.25);
-    border-radius: 14px;
-    padding: 14px 16px;
-    font-size: 14px;
-    color: var(--white);
-    line-height: 1.5;
-  }
-
-  .action-emoji {
-    font-size: 20px;
-    flex-shrink: 0;
-    margin-top: -1px;
-  }
-
-  .lq-subs {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-    margin-top: 10px;
-  }
-
-  .lq-sub {
-    background: rgba(255,255,255,0.05);
-    border: 1px solid rgba(255,255,255,0.08);
-    border-radius: 10px;
-    padding: 10px 14px;
-    font-size: 13px;
-    color: var(--muted);
-    cursor: pointer;
-    transition: all 0.2s;
-  }
-
-  .lq-sub:hover { border-color: rgba(255,255,255,0.2); color: var(--white); }
-
-  .lq-sub.selected {
-    background: rgba(34,197,94,0.1);
-    border-color: rgba(34,197,94,0.4);
-    color: var(--white);
-    font-weight: 600;
-  }
-
-  .lq-sub.selected::before { content: '✓ '; color: var(--green); }
-
-  /* ── INTERACTIVE LESSONS ────────────────────────────────────────── */
-  .lesson-steps {
-    display: flex;
-    align-items: center;
-    gap: 0;
-    margin-bottom: 18px;
-    padding: 10px 14px;
-    background: rgba(255,255,255,0.04);
-    border-radius: 12px;
-    border: 1px solid rgba(255,255,255,0.06);
-  }
-
-  .lstep {
-    font-size: 12px;
-    font-weight: 600;
-    color: var(--muted);
-    padding: 4px 8px;
-    border-radius: 8px;
-    transition: all 0.3s;
-    white-space: nowrap;
-  }
-
-  .lstep.active {
-    color: var(--white);
-    background: rgba(91,79,232,0.25);
-  }
-
-  .lstep.done {
-    color: var(--green);
-  }
-
-  .lstep-line {
-    flex: 1;
-    height: 1px;
-    background: rgba(255,255,255,0.1);
-    margin: 0 4px;
-  }
-
-  .lesson-step-content { display: block; }
-  .lesson-step-content.hidden { display: none; }
-
-  .slc-explain {
-    font-size: 13px;
-    color: #94A3B8;
-    line-height: 1.6;
-    margin-bottom: 14px;
-  }
-
-  .lesson-btn {
-    width: 100%;
-    margin-top: 16px;
-    background: linear-gradient(135deg, #3730A3, #5B4FE8);
-    color: #fff;
-    border: none;
-    border-radius: 14px;
-    padding: 14px;
-    font-size: 14px;
-    font-weight: 700;
-    cursor: pointer;
-    font-family: inherit;
-    transition: opacity 0.2s, transform 0.1s;
-  }
-  .lesson-btn:hover { opacity: 0.9; transform: translateY(-1px); }
-
-  .lq-options {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    margin-top: 14px;
-  }
-
-  .lq-opt {
-    background: rgba(255,255,255,0.05);
-    border: 1px solid rgba(255,255,255,0.1);
-    border-radius: 12px;
-    padding: 12px 16px;
-    font-size: 13px;
-    color: var(--white);
-    cursor: pointer;
-    transition: all 0.2s;
-    line-height: 1.4;
-  }
-
-  .lq-opt:hover { background: rgba(91,79,232,0.15); border-color: rgba(91,79,232,0.4); }
-
-  .lq-opt.correct-answer {
-    background: rgba(34,197,94,0.12);
-    border-color: rgba(34,197,94,0.5);
-    color: var(--green);
-    font-weight: 600;
-  }
-
-  .lq-opt.wrong-answer {
-    background: rgba(239,68,68,0.08);
-    border-color: rgba(239,68,68,0.3);
-    color: #EF4444;
-    text-decoration: line-through;
-    opacity: 0.6;
-  }
-
-  .lq-opt.disabled { pointer-events: none; }
-
-  .lesson-result {
-    border-radius: 16px;
-    padding: 18px;
-    text-align: center;
-  }
-
-  .correct-result {
-    background: rgba(34,197,94,0.08);
-    border: 1px solid rgba(34,197,94,0.2);
-  }
-
-  .result-icon { font-size: 32px; margin-bottom: 8px; }
-
-  .result-title {
-    font-size: 15px;
-    font-weight: 700;
-    color: var(--white);
-    margin-bottom: 6px;
-  }
-
-  .result-text {
-    font-size: 13px;
-    color: #94A3B8;
-    line-height: 1.5;
-  }
-
-  .lesson-done-note {
-    text-align: center;
-    font-size: 12px;
-    color: var(--muted);
-    margin-top: 14px;
-    font-style: italic;
-  }
-
-  /* ── STICKY SCROLL LESSONS ──────────────────────────────────────── */
-  .lessons-scroll-section {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 0;
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 80px 40px 120px;
-    align-items: start;
-  }
-
-  .lessons-sticky-label {
-    position: sticky;
-    top: 120px;
-    padding-right: 60px;
-  }
-
-  .lessons-big-title {
-    font-size: clamp(32px, 4vw, 48px);
-    font-weight: 900;
-    letter-spacing: -1.5px;
-    line-height: 1.1;
-    margin: 12px 0 16px;
-    color: var(--white);
-  }
-
-  .lessons-big-sub {
-    font-size: 15px;
-    color: var(--muted);
-    line-height: 1.7;
-    margin-bottom: 40px;
-  }
-
-  .lessons-nav {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-  }
-
-  .lnav-item {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 10px 14px;
-    border-radius: 12px;
-    cursor: pointer;
-    font-size: 14px;
-    color: var(--muted);
-    transition: all 0.2s;
-  }
-
-  .lnav-item:hover { color: var(--white); background: rgba(255,255,255,0.04); }
-
-  .lnav-item.active {
-    color: var(--white);
-    background: rgba(91,79,232,0.12);
-    font-weight: 600;
-  }
-
-  .lnav-dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: var(--muted);
-    flex-shrink: 0;
-    transition: all 0.3s;
-  }
-
-  .lnav-item.active .lnav-dot {
-    background: var(--violet);
-    box-shadow: 0 0 8px var(--violet);
-  }
-
-  .lessons-cards-col {
-    display: flex;
-    flex-direction: column;
-    gap: 32px;
-  }
-
-  .scroll-lesson-card {
-    opacity: 0.35;
-    transform: scale(0.97) translateY(20px);
-    transition: opacity 0.5s ease, transform 0.5s ease;
-  }
-
-  .scroll-lesson-card.visible {
-    opacity: 1;
-    transform: scale(1) translateY(0);
-  }
-
-  /* Phone mockup */
-  .slc-phone {
-    background: var(--card);
-    border-radius: 28px;
-    overflow: hidden;
-    border: 1px solid var(--border);
-    box-shadow: 0 24px 60px rgba(0,0,0,0.4);
-  }
-
-  .slc-phone-header {
-    padding: 20px 20px 16px;
-    position: relative;
-  }
-
-  .slc-top-row {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 16px;
-  }
-
-  .slc-tag {
-    font-size: 12px;
-    font-weight: 700;
-    color: rgba(255,255,255,0.9);
-    background: rgba(255,255,255,0.15);
-    padding: 5px 12px;
-    border-radius: 100px;
-    border: 1px solid rgba(255,255,255,0.2);
-  }
-
-  .slc-streak {
-    font-size: 13px;
-    font-weight: 700;
-    color: #FCD34D;
-  }
-
-  .slc-big-emoji {
-    font-size: 56px;
-    text-align: center;
-    display: block;
-    margin: 8px 0 16px;
-    filter: drop-shadow(0 4px 16px rgba(0,0,0,0.3));
-  }
-
-  .slc-bar {
-    height: 3px;
-    background: rgba(255,255,255,0.15);
-    border-radius: 2px;
-    overflow: hidden;
-  }
-
-  .slc-bar-fill {
-    height: 100%;
-    background: rgba(255,255,255,0.8);
-    border-radius: 2px;
-    transition: width 2s ease;
-  }
-
-  .slc-body {
-    padding: 20px;
-  }
-
-  .slc-trigger {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 12px;
-    color: var(--muted);
-    font-style: italic;
-    margin-bottom: 14px;
-  }
-
-  .slc-dot {
-    width: 6px; height: 6px;
-    border-radius: 50%;
-    background: var(--cyan);
-    flex-shrink: 0;
-    animation: pulse 2s infinite;
-  }
-
-  .slc-title {
-    font-size: 18px;
-    font-weight: 800;
-    color: var(--white);
-    line-height: 1.3;
-    letter-spacing: -0.3px;
-    margin-bottom: 16px;
-  }
-
-  .slc-rows {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    margin-bottom: 16px;
-  }
-
-  .slc-row {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 12px 14px;
-    border-radius: 14px;
-  }
-
-  .slc-row.bad     { background: rgba(239,68,68,0.08);  border: 1px solid rgba(239,68,68,0.18); }
-  .slc-row.good    { background: rgba(34,197,94,0.08);  border: 1px solid rgba(34,197,94,0.18); }
-  .slc-row.neutral { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); }
-
-  .slc-row-icon { font-size: 22px; flex-shrink: 0; }
-
-  .slc-row div { flex: 1; }
-
-  .slc-row-title {
-    font-size: 13px;
-    font-weight: 700;
-    color: var(--white);
-    margin-bottom: 2px;
-  }
-
-  .slc-row-sub {
-    font-size: 12px;
-    color: var(--muted);
-  }
-
-  .slc-badge {
-    font-size: 10px;
-    font-weight: 800;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    padding: 4px 10px;
-    border-radius: 100px;
-    flex-shrink: 0;
-  }
-
-  .slc-badge.bad     { background: rgba(239,68,68,0.15);  color: #EF4444; }
-  .slc-badge.good    { background: rgba(34,197,94,0.15);  color: var(--green); }
-  .slc-badge.neutral { background: rgba(255,255,255,0.1); color: var(--white); }
-
-  .slc-action {
-    background: rgba(91,79,232,0.1);
-    border: 1px solid rgba(91,79,232,0.25);
-    border-radius: 14px;
-    padding: 14px 16px;
-    font-size: 13.5px;
-    color: var(--white);
-    line-height: 1.5;
-  }
-
-  @media (max-width: 768px) {
-    .lessons-scroll-section {
-      grid-template-columns: 1fr;
-      padding: 60px 20px 80px;
-    }
-    .lessons-sticky-label {
-      position: static;
-      padding-right: 0;
-      margin-bottom: 40px;
-    }
-    .scroll-lesson-card { opacity: 1; transform: none; }
-  }
-
-  /* ── RESPONSIVE ──────────────────────────────────────────────────── */
-  @media (max-width: 640px) {
-    nav { padding: 16px 20px; }
-    .hero { padding: 100px 20px 60px; }
-    .waitlist-form { flex-direction: column; }
-    .stats { grid-template-columns: 1fr; padding: 0 20px 60px; }
-    .section { padding: 60px 20px; }
-    .steps { grid-template-columns: 1fr; }
-    .diff-grid { grid-template-columns: 1fr; }
-    .bottom-cta { margin: 0 20px 60px; padding: 48px 24px; }
-    .bottom-form { flex-direction: column; }
-    footer { flex-direction: column; gap: 12px; text-align: center; }
-  }
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --navy:   #0F172A;
+  --card:   #1E293B;
+  --purple: #3730A3;
+  --violet: #5B4FE8;
+  --cyan:   #A5F3FC;
+  --white:  #F8FAFC;
+  --muted:  #64748B;
+  --border: rgba(255,255,255,0.08);
+  --green:  #22C55E;
+  --red:    #EF4444;
+  --orange: #F59E0B;
+  --max:    860px;
+}
+
+html { scroll-behavior: smooth; }
+body {
+  background: var(--navy);
+  color: var(--white);
+  font-family: 'Inter', -apple-system, sans-serif;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* ── NAV ─────────────────────────────────────── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  padding: 18px 40px;
+  display: flex; align-items: center; justify-content: space-between;
+  background: rgba(15,23,42,0.9);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+}
+.logo { display: flex; align-items: center; gap: 10px; font-size: 18px; font-weight: 800; color: var(--white); text-decoration: none; }
+.logo svg { width: 32px; height: 32px; }
+.nav-btn {
+  background: var(--violet); color: #fff; border: none;
+  border-radius: 10px; padding: 10px 22px; font-size: 14px; font-weight: 600;
+  cursor: pointer; font-family: inherit; transition: opacity .2s;
+}
+.nav-btn:hover { opacity: .85; }
+
+/* ── SHARED ──────────────────────────────────── */
+.wrap { max-width: var(--max); margin: 0 auto; padding: 0 24px; }
+.section { padding: 80px 0; }
+.section-label { font-size: 11px; font-weight: 700; color: var(--violet); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 12px; }
+.section-title { font-size: clamp(28px, 4vw, 40px); font-weight: 900; letter-spacing: -1px; line-height: 1.1; margin-bottom: 14px; }
+.section-sub { font-size: 16px; color: var(--muted); line-height: 1.7; max-width: 540px; margin-bottom: 48px; }
+.divider { border: none; border-top: 1px solid var(--border); margin: 0; }
+
+/* ── HERO ────────────────────────────────────── */
+.hero {
+  min-height: 100vh; display: flex; align-items: center; justify-content: center;
+  padding: 120px 24px 80px; text-align: center;
+  position: relative; overflow: hidden;
+}
+.hero::before {
+  content: ''; position: absolute; top: -200px; right: -200px;
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(91,79,232,.2) 0%, transparent 70%);
+  border-radius: 50%; pointer-events: none;
+}
+.hero::after {
+  content: ''; position: absolute; bottom: -200px; left: -100px;
+  width: 500px; height: 500px;
+  background: radial-gradient(circle, rgba(165,243,252,.06) 0%, transparent 70%);
+  border-radius: 50%; pointer-events: none;
+}
+.hero-inner { max-width: 640px; position: relative; z-index: 1; }
+.gator-wrap { margin-bottom: 28px; display: flex; justify-content: center; }
+.gator-svg { width: 100px; height: 100px; animation: float 3s ease-in-out infinite; }
+@keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
+
+.eyebrow {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(91,79,232,.15); border: 1px solid rgba(91,79,232,.3);
+  border-radius: 100px; padding: 6px 16px;
+  font-size: 13px; font-weight: 600; color: var(--cyan); margin-bottom: 24px;
+}
+.eyebrow-dot { width: 6px; height: 6px; background: var(--cyan); border-radius: 50%; animation: pulse 2s infinite; }
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.3} }
+
+h1 { font-size: clamp(38px, 6vw, 68px); font-weight: 900; line-height: 1.05; letter-spacing: -2px; margin-bottom: 20px; }
+h1 span { background: linear-gradient(135deg, var(--violet), var(--cyan)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.hero-sub { font-size: 18px; color: var(--muted); max-width: 500px; margin: 0 auto 40px; line-height: 1.65; }
+
+/* QUIZ */
+.quiz-wrap { max-width: 480px; margin: 0 auto; text-align: left; }
+.quiz-q { font-size: 15px; font-weight: 700; color: var(--white); text-align: center; margin-bottom: 12px; }
+.quiz-opts { display: flex; flex-direction: column; gap: 8px; }
+.quiz-opt {
+  background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.1);
+  border-radius: 14px; padding: 14px 18px; font-size: 14px; font-weight: 500;
+  color: var(--white); cursor: pointer; transition: all .2s; text-align: left;
+}
+.quiz-opt:hover { background: rgba(91,79,232,.15); border-color: rgba(91,79,232,.4); transform: translateX(4px); }
+.quiz-opt.selected { background: rgba(91,79,232,.2); border-color: var(--violet); }
+
+.quiz-result {
+  display: none; margin-top: 16px; padding: 12px 16px;
+  background: rgba(165,243,252,.08); border: 1px solid rgba(165,243,252,.15);
+  border-radius: 12px; font-size: 14px; font-weight: 600; color: var(--cyan);
+  text-align: center; animation: fadeup .4s ease;
+}
+.quiz-result.show { display: block; }
+@keyframes fadeup { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }
+
+.email-wrap { display: none; margin-top: 20px; animation: fadeup .4s ease; }
+.email-wrap.show { display: block; }
+.email-row { display: flex; gap: 8px; }
+.email-input {
+  flex: 1; background: var(--card); border: 1px solid var(--border);
+  border-radius: 12px; padding: 14px 18px; font-size: 15px; color: var(--white);
+  font-family: inherit; outline: none; transition: border-color .2s;
+}
+.email-input::placeholder { color: var(--muted); }
+.email-input:focus { border-color: var(--violet); }
+.email-btn {
+  background: linear-gradient(135deg, var(--purple), var(--violet));
+  color: #fff; border: none; border-radius: 12px; padding: 14px 22px;
+  font-size: 15px; font-weight: 700; cursor: pointer; font-family: inherit; white-space: nowrap;
+  transition: opacity .2s;
+}
+.email-btn:hover { opacity: .9; }
+.email-note { font-size: 13px; color: var(--muted); text-align: center; margin-top: 10px; }
+.email-note span { color: var(--green); font-weight: 600; }
+
+/* ── STATS ───────────────────────────────────── */
+.stats-grid {
+  display: grid; grid-template-columns: repeat(3,1fr); gap: 12px;
+  max-width: var(--max); margin: 0 auto; padding: 0 24px 80px;
+}
+.stat-card { background: var(--card); border: 1px solid var(--border); border-radius: 20px; padding: 28px 20px; text-align: center; }
+.stat-val { font-size: 38px; font-weight: 900; letter-spacing: -1px; margin-bottom: 8px; }
+.stat-val.purple { color: var(--violet); }
+.stat-val.cyan { color: var(--cyan); }
+.stat-val.green { color: var(--green); }
+.stat-lbl { font-size: 13px; color: var(--muted); line-height: 1.5; }
+
+/* ── HOW IT WORKS ────────────────────────────── */
+.steps-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; }
+.step-card {
+  background: var(--card); border: 1px solid var(--border); border-radius: 20px;
+  padding: 28px 22px; transition: border-color .2s;
+}
+.step-card:hover { border-color: rgba(91,79,232,.4); }
+.step-emoji { font-size: 32px; margin-bottom: 14px; display: block; }
+.step-title { font-size: 16px; font-weight: 700; margin-bottom: 8px; }
+.step-desc { font-size: 14px; color: var(--muted); line-height: 1.6; }
+
+/* ── DIFF ────────────────────────────────────── */
+.diff-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.diff-card { background: var(--card); border: 1px solid var(--border); border-radius: 20px; padding: 28px; }
+.diff-card.hl { background: linear-gradient(135deg, #1E1B4B, #2D2A6E); border-color: rgba(91,79,232,.4); }
+.diff-tag { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; padding: 5px 12px; border-radius: 100px; display: inline-block; margin-bottom: 20px; }
+.diff-tag.others { color: var(--muted); background: rgba(255,255,255,.05); }
+.diff-tag.us { color: var(--cyan); background: rgba(165,243,252,.1); }
+.diff-row { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 14px; }
+.diff-icon { width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 10px; flex-shrink: 0; margin-top: 2px; }
+.diff-icon.no { background: rgba(239,68,68,.15); color: var(--red); }
+.diff-icon.yes { background: rgba(34,197,94,.15); color: var(--green); }
+.diff-text { font-size: 14px; color: var(--muted); line-height: 1.5; }
+.diff-card.hl .diff-text { color: rgba(255,255,255,.8); }
+
+/* ── LESSONS ─────────────────────────────────── */
+.lessons-section {
+  display: grid; grid-template-columns: 280px 1fr; gap: 48px; align-items: start;
+  max-width: var(--max); margin: 0 auto; padding: 80px 24px 100px;
+}
+.lessons-sticky { position: sticky; top: 100px; }
+.lessons-title { font-size: clamp(26px,3.5vw,38px); font-weight: 900; letter-spacing: -1px; line-height: 1.15; margin: 10px 0 14px; }
+.lessons-sub { font-size: 14px; color: var(--muted); line-height: 1.7; margin-bottom: 32px; }
+.lnav { display: flex; flex-direction: column; gap: 2px; }
+.lnav-item {
+  display: flex; align-items: center; gap: 10px; padding: 10px 12px;
+  border-radius: 10px; cursor: pointer; font-size: 14px; color: var(--muted); transition: all .2s;
+}
+.lnav-item:hover { color: var(--white); background: rgba(255,255,255,.04); }
+.lnav-item.active { color: var(--white); background: rgba(91,79,232,.12); font-weight: 600; }
+.lnav-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--muted); flex-shrink: 0; transition: all .3s; }
+.lnav-item.active .lnav-dot { background: var(--violet); box-shadow: 0 0 8px var(--violet); }
+
+.lessons-col { display: flex; flex-direction: column; gap: 28px; }
+.lcard { opacity: .3; transform: scale(.97) translateY(16px); transition: opacity .5s, transform .5s; }
+.lcard.vis { opacity: 1; transform: scale(1) translateY(0); }
+
+/* phone card */
+.phone { background: var(--card); border-radius: 24px; overflow: hidden; border: 1px solid var(--border); box-shadow: 0 20px 50px rgba(0,0,0,.4); }
+.phone-hdr { padding: 18px 18px 14px; }
+.phone-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
+.phone-tag { font-size: 12px; font-weight: 700; color: rgba(255,255,255,.9); background: rgba(255,255,255,.15); padding: 5px 12px; border-radius: 100px; border: 1px solid rgba(255,255,255,.2); }
+.phone-streak { font-size: 13px; font-weight: 700; color: #FCD34D; }
+.phone-bar { height: 3px; background: rgba(255,255,255,.15); border-radius: 2px; overflow: hidden; }
+.phone-bar-fill { height: 100%; background: rgba(255,255,255,.8); border-radius: 2px; transition: width 1.5s ease; width: 0%; }
+.phone-body { padding: 18px; }
+
+/* step indicator */
+.lsteps { display: flex; align-items: center; gap: 0; margin-bottom: 16px; padding: 8px 12px; background: rgba(255,255,255,.04); border-radius: 10px; border: 1px solid var(--border); }
+.lstep { font-size: 12px; font-weight: 600; color: var(--muted); padding: 3px 8px; border-radius: 6px; transition: all .3s; white-space: nowrap; }
+.lstep.active { color: var(--white); background: rgba(91,79,232,.25); }
+.lstep.done { color: var(--green); }
+.lstep-line { flex: 1; height: 1px; background: rgba(255,255,255,.1); margin: 0 4px; }
+
+.trigger { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--muted); font-style: italic; margin-bottom: 12px; }
+.trigger-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--cyan); flex-shrink: 0; animation: pulse 2s infinite; }
+.lesson-title { font-size: 17px; font-weight: 800; color: var(--white); line-height: 1.3; letter-spacing: -.2px; margin-bottom: 12px; }
+.lesson-explain { font-size: 13px; color: #94A3B8; line-height: 1.65; margin-bottom: 12px; }
+.lesson-rule { font-size: 13px; color: var(--cyan); font-weight: 600; line-height: 1.5; margin-bottom: 14px; padding: 10px 14px; background: rgba(165,243,252,.07); border-radius: 10px; border-left: 3px solid var(--cyan); }
+
+.cmp-rows { display: flex; flex-direction: column; gap: 8px; margin-bottom: 14px; }
+.cmp-row { display: flex; align-items: center; gap: 10px; padding: 11px 14px; border-radius: 12px; }
+.cmp-row.bad  { background: rgba(239,68,68,.08);  border: 1px solid rgba(239,68,68,.15); }
+.cmp-row.good { background: rgba(34,197,94,.08);  border: 1px solid rgba(34,197,94,.15); }
+.cmp-row.ntrl { background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.08); }
+.cmp-icon { font-size: 20px; flex-shrink: 0; }
+.cmp-info { flex: 1; }
+.cmp-title { font-size: 13px; font-weight: 700; color: var(--white); margin-bottom: 2px; }
+.cmp-sub   { font-size: 12px; color: var(--muted); }
+.cmp-badge { font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: .5px; padding: 4px 9px; border-radius: 100px; flex-shrink: 0; }
+.cmp-badge.bad  { background: rgba(239,68,68,.15); color: var(--red); }
+.cmp-badge.good { background: rgba(34,197,94,.15); color: var(--green); }
+.cmp-badge.ntrl { background: rgba(255,255,255,.1); color: var(--white); }
+
+.big-btn {
+  width: 100%; margin-top: 14px; padding: 14px;
+  background: linear-gradient(135deg, var(--purple), var(--violet));
+  color: #fff; border: none; border-radius: 12px; font-size: 14px; font-weight: 700;
+  cursor: pointer; font-family: inherit; transition: opacity .2s, transform .1s;
+}
+.big-btn:hover { opacity: .9; transform: translateY(-1px); }
+
+/* quiz options */
+.q-opts { display: flex; flex-direction: column; gap: 8px; margin-top: 12px; }
+.q-opt {
+  background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.1);
+  border-radius: 11px; padding: 12px 16px; font-size: 13px; color: var(--white);
+  cursor: pointer; transition: all .2s; line-height: 1.4;
+}
+.q-opt:hover { background: rgba(91,79,232,.15); border-color: rgba(91,79,232,.4); }
+.q-opt.correct-ans { background: rgba(34,197,94,.12); border-color: rgba(34,197,94,.5); color: var(--green); font-weight: 600; }
+.q-opt.wrong-ans   { background: rgba(239,68,68,.06); border-color: rgba(239,68,68,.2); color: var(--muted); text-decoration: line-through; opacity: .6; }
+.q-opt.off { pointer-events: none; }
+
+/* sub list */
+.sub-list { display: flex; flex-direction: column; gap: 6px; margin: 10px 0; }
+.sub-item {
+  background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.08);
+  border-radius: 10px; padding: 10px 14px; font-size: 13px; color: var(--muted);
+  cursor: pointer; transition: all .2s;
+}
+.sub-item:hover { border-color: rgba(255,255,255,.2); color: var(--white); }
+.sub-item.sel { background: rgba(34,197,94,.1); border-color: rgba(34,197,94,.4); color: var(--white); font-weight: 600; }
+.sub-item.sel::before { content: '✓ '; color: var(--green); }
+
+/* result */
+.result-box { border-radius: 14px; padding: 16px; text-align: center; background: rgba(34,197,94,.08); border: 1px solid rgba(34,197,94,.2); }
+.result-emoji { font-size: 30px; margin-bottom: 8px; }
+.result-title { font-size: 15px; font-weight: 700; color: var(--white); margin-bottom: 5px; }
+.result-sub   { font-size: 13px; color: #94A3B8; line-height: 1.5; }
+
+.action-box { background: rgba(91,79,232,.1); border: 1px solid rgba(91,79,232,.25); border-radius: 12px; padding: 14px 16px; font-size: 13.5px; color: var(--white); line-height: 1.5; margin-top: 12px; }
+.lesson-done { text-align: center; font-size: 12px; color: var(--muted); font-style: italic; margin-top: 12px; }
+
+.hidden { display: none !important; }
+
+/* ── GOALS ───────────────────────────────────── */
+.goals-list { display: flex; flex-direction: column; gap: 12px; margin-bottom: 20px; }
+.goal-card { background: var(--card); border: 1px solid var(--border); border-radius: 18px; padding: 20px; }
+.goal-top { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+.goal-icon { font-size: 26px; flex-shrink: 0; }
+.goal-name { font-size: 15px; font-weight: 700; color: var(--white); margin-bottom: 3px; }
+.goal-meta { font-size: 12px; color: var(--muted); }
+.goal-pct  { font-size: 22px; font-weight: 900; color: var(--white); margin-left: auto; flex-shrink: 0; }
+.goal-bar  { height: 8px; background: rgba(255,255,255,.08); border-radius: 4px; overflow: hidden; margin-bottom: 10px; }
+.goal-fill { height: 100%; border-radius: 4px; }
+.goal-note { font-size: 12px; color: var(--muted); font-style: italic; }
+.goals-streak { text-align: center; font-size: 14px; font-weight: 600; color: var(--cyan); padding: 14px; background: rgba(165,243,252,.06); border: 1px solid rgba(165,243,252,.12); border-radius: 14px; }
+
+/* ── QUOTE ───────────────────────────────────── */
+.quote-wrap { text-align: center; padding: 60px 24px; max-width: 680px; margin: 0 auto; }
+.quote-text { font-size: clamp(18px,2.5vw,24px); font-weight: 700; line-height: 1.45; letter-spacing: -.3px; margin-bottom: 18px; }
+.quote-author { font-size: 14px; color: var(--muted); }
+.quote-author strong { color: var(--white); }
+
+/* ── BOTTOM CTA ──────────────────────────────── */
+.cta-block {
+  margin: 0 24px 80px; max-width: calc(var(--max) - 48px); margin-left: auto; margin-right: auto;
+  background: linear-gradient(135deg, #1E1B4B, #3730A3, #5B4FE8);
+  border-radius: 24px; padding: 64px 48px; text-align: center;
+  position: relative; overflow: hidden;
+}
+.cta-block::before { content:''; position:absolute; top:-50px; right:-50px; width:180px; height:180px; background:rgba(255,255,255,.05); border-radius:50%; }
+.cta-block::after  { content:''; position:absolute; bottom:-70px; left:-40px; width:220px; height:220px; background:rgba(255,255,255,.03); border-radius:50%; }
+.cta-block h2 { font-size: clamp(26px,4vw,42px); font-weight: 900; letter-spacing: -1px; margin-bottom: 14px; position:relative; z-index:1; }
+.cta-block p  { font-size: 16px; color: rgba(255,255,255,.65); margin-bottom: 36px; position:relative; z-index:1; }
+.cta-row { display: flex; gap: 8px; max-width: 440px; margin: 0 auto; position:relative; z-index:1; }
+.cta-input { flex:1; background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.2); border-radius: 12px; padding: 14px 18px; font-size: 15px; color:#fff; font-family:inherit; outline:none; }
+.cta-input::placeholder { color: rgba(255,255,255,.45); }
+.cta-input:focus { border-color: rgba(255,255,255,.5); }
+.cta-btn { background:#fff; color:var(--purple); border:none; border-radius:12px; padding:14px 22px; font-size:15px; font-weight:700; cursor:pointer; font-family:inherit; white-space:nowrap; transition:opacity .2s; }
+.cta-btn:hover { opacity:.9; }
+
+/* ── FOOTER ──────────────────────────────────── */
+footer { border-top: 1px solid var(--border); padding: 28px 40px; display: flex; align-items: center; justify-content: space-between; max-width: 100%; }
+.foot-logo { display:flex; align-items:center; gap:8px; font-size:15px; font-weight:700; color:var(--white); text-decoration:none; }
+.foot-right { font-size:13px; color:var(--muted); }
+
+/* ── RESPONSIVE ──────────────────────────────── */
+@media (max-width: 700px) {
+  nav { padding: 14px 20px; }
+  .stats-grid { grid-template-columns: 1fr; }
+  .steps-grid { grid-template-columns: 1fr; }
+  .diff-grid { grid-template-columns: 1fr; }
+  .lessons-section { grid-template-columns: 1fr; padding: 60px 20px 80px; }
+  .lessons-sticky { position: static; margin-bottom: 32px; }
+  .lcard { opacity: 1; transform: none; }
+  .cta-block { padding: 48px 24px; margin: 0 16px 60px; }
+  .cta-row { flex-direction: column; }
+  .email-row { flex-direction: column; }
+  footer { flex-direction: column; gap: 10px; text-align: center; }
+}
 </style>
 </head>
 <body>
@@ -1436,646 +339,406 @@
 <!-- NAV -->
 <nav>
   <a href="#" class="logo">
-    <svg class="logo-gator" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <rect width="36" height="36" rx="10" fill="#1E293B"/>
-      <!-- Gator body -->
-      <ellipse cx="18" cy="22" rx="11" ry="7" fill="#22C55E"/>
-      <!-- Gator head -->
-      <ellipse cx="27" cy="19" rx="5" ry="4" fill="#22C55E"/>
-      <!-- Eye -->
-      <circle cx="29" cy="17" r="1.5" fill="white"/>
-      <circle cx="29.5" cy="16.5" r="0.6" fill="#0F172A"/>
-      <!-- Teeth -->
-      <rect x="25" y="22" width="2" height="2" rx="0.5" fill="white"/>
-      <rect x="28" y="22" width="2" height="2" rx="0.5" fill="white"/>
-      <!-- Coin -->
-      <circle cx="15" cy="15" r="6" fill="#F59E0B"/>
-      <circle cx="15" cy="15" r="4.5" fill="#FCD34D"/>
-      <text x="15" y="18" font-size="6" font-weight="bold" fill="#92400E" text-anchor="middle">$</text>
-      <!-- Tail -->
-      <path d="M7 24 Q3 22 4 18 Q5 15 7 17" stroke="#22C55E" stroke-width="3" stroke-linecap="round" fill="none"/>
-    </svg>
+    <svg viewBox="0 0 36 36" fill="none"><rect width="36" height="36" rx="10" fill="#1E293B"/><ellipse cx="18" cy="22" rx="11" ry="7" fill="#22C55E"/><ellipse cx="27" cy="19" rx="5" ry="4" fill="#22C55E"/><circle cx="29" cy="17" r="1.5" fill="white"/><circle cx="29.5" cy="16.5" r=".6" fill="#0F172A"/><circle cx="15" cy="15" r="6" fill="#F59E0B"/><circle cx="15" cy="15" r="4.5" fill="#FCD34D"/><text x="15" y="18" font-size="6" font-weight="bold" fill="#92400E" text-anchor="middle">$</text><path d="M7 24 Q3 22 4 18 Q5 15 7 17" stroke="#22C55E" stroke-width="3" stroke-linecap="round" fill="none"/></svg>
     MoneyGator
   </a>
-  <button class="nav-cta" onclick="document.getElementById('email-top').focus()">Join waitlist</button>
+  <button class="nav-btn" onclick="document.getElementById('email-top').focus()">Join waitlist</button>
 </nav>
 
 <!-- HERO -->
 <section class="hero">
   <div class="hero-inner">
     <div class="gator-wrap">
-      <svg class="gator-main" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <!-- Glow -->
-        <circle cx="60" cy="70" r="40" fill="rgba(91,79,232,0.12)"/>
-        <!-- Body -->
-        <ellipse cx="58" cy="80" rx="34" ry="22" fill="#16A34A"/>
-        <ellipse cx="58" cy="80" rx="30" ry="18" fill="#22C55E"/>
-        <!-- Head -->
-        <ellipse cx="90" cy="70" rx="18" ry="14" fill="#22C55E"/>
-        <!-- Mouth line -->
-        <path d="M76 73 Q90 78 104 73" stroke="#16A34A" stroke-width="1.5" fill="none"/>
-        <!-- Teeth top -->
-        <rect x="80" y="74" width="3.5" height="4" rx="1" fill="white"/>
-        <rect x="87" y="74" width="3.5" height="4" rx="1" fill="white"/>
-        <rect x="94" y="74" width="3.5" height="4" rx="1" fill="white"/>
-        <!-- Eye -->
-        <circle cx="96" cy="62" r="6" fill="white"/>
-        <circle cx="97" cy="61" r="2.5" fill="#0F172A"/>
-        <circle cx="98" cy="60" r="0.8" fill="white"/>
-        <!-- Nostril -->
-        <circle cx="100" cy="67" r="1.2" fill="#16A34A"/>
-        <!-- Tail -->
-        <path d="M24 82 Q8 78 10 64 Q12 54 22 60" stroke="#22C55E" stroke-width="7" stroke-linecap="round" fill="none"/>
-        <path d="M10 64 Q6 56 14 52" stroke="#16A34A" stroke-width="4" stroke-linecap="round" fill="none"/>
-        <!-- Legs -->
-        <ellipse cx="42" cy="98" rx="8" ry="5" fill="#16A34A"/>
-        <ellipse cx="72" cy="98" rx="8" ry="5" fill="#16A34A"/>
-        <!-- Big coin -->
-        <circle cx="52" cy="55" r="22" fill="#F59E0B"/>
-        <circle cx="52" cy="55" r="18" fill="#FCD34D"/>
-        <circle cx="52" cy="55" r="14" fill="#FDE68A" opacity="0.5"/>
-        <text x="52" y="61" font-size="18" font-weight="900" fill="#92400E" text-anchor="middle" font-family="Inter, sans-serif">$</text>
-        <!-- Small coins -->
-        <circle cx="30" cy="42" r="8" fill="#F59E0B"/>
-        <circle cx="30" cy="42" r="6" fill="#FCD34D"/>
-        <text x="30" y="46" font-size="7" font-weight="900" fill="#92400E" text-anchor="middle" font-family="Inter, sans-serif">$</text>
-        <circle cx="73" cy="38" r="6" fill="#F59E0B"/>
-        <circle cx="73" cy="38" r="4.5" fill="#FCD34D"/>
-        <text x="73" y="41.5" font-size="5" font-weight="900" fill="#92400E" text-anchor="middle" font-family="Inter, sans-serif">$</text>
-        <!-- Sparkles -->
-        <path d="M20 30 L21.5 26 L23 30 L27 31.5 L23 33 L21.5 37 L20 33 L16 31.5 Z" fill="var(--cyan)" opacity="0.7"/>
-        <path d="M88 30 L89 27.5 L90 30 L92.5 31 L90 32 L89 34.5 L88 32 L85.5 31 Z" fill="var(--cyan)" opacity="0.5"/>
-      </svg>
+      <svg class="gator-svg" viewBox="0 0 120 120" fill="none"><circle cx="60" cy="70" r="40" fill="rgba(91,79,232,.12)"/><ellipse cx="58" cy="80" rx="34" ry="22" fill="#16A34A"/><ellipse cx="58" cy="80" rx="30" ry="18" fill="#22C55E"/><ellipse cx="90" cy="70" rx="18" ry="14" fill="#22C55E"/><path d="M76 73 Q90 78 104 73" stroke="#16A34A" stroke-width="1.5" fill="none"/><rect x="80" y="74" width="3.5" height="4" rx="1" fill="white"/><rect x="87" y="74" width="3.5" height="4" rx="1" fill="white"/><rect x="94" y="74" width="3.5" height="4" rx="1" fill="white"/><circle cx="96" cy="62" r="6" fill="white"/><circle cx="97" cy="61" r="2.5" fill="#0F172A"/><circle cx="98" cy="60" r=".8" fill="white"/><circle cx="100" cy="67" r="1.2" fill="#16A34A"/><path d="M24 82 Q8 78 10 64 Q12 54 22 60" stroke="#22C55E" stroke-width="7" stroke-linecap="round" fill="none"/><path d="M10 64 Q6 56 14 52" stroke="#16A34A" stroke-width="4" stroke-linecap="round" fill="none"/><ellipse cx="42" cy="98" rx="8" ry="5" fill="#16A34A"/><ellipse cx="72" cy="98" rx="8" ry="5" fill="#16A34A"/><circle cx="52" cy="55" r="22" fill="#F59E0B"/><circle cx="52" cy="55" r="18" fill="#FCD34D"/><text x="52" y="61" font-size="18" font-weight="900" fill="#92400E" text-anchor="middle" font-family="Inter,sans-serif">$</text><circle cx="30" cy="42" r="8" fill="#F59E0B"/><circle cx="30" cy="42" r="6" fill="#FCD34D"/><text x="30" y="46" font-size="7" font-weight="900" fill="#92400E" text-anchor="middle" font-family="Inter,sans-serif">$</text><path d="M20 30 L21.5 26 L23 30 L27 31.5 L23 33 L21.5 37 L20 33 L16 31.5 Z" fill="#A5F3FC" opacity=".7"/><path d="M88 30 L89 27.5 L90 30 L92.5 31 L90 32 L89 34.5 L88 32 L85.5 31 Z" fill="#A5F3FC" opacity=".5"/></svg>
     </div>
-
-    <div class="eyebrow">
-      <span class="eyebrow-dot"></span>
-      Free · iOS app coming soon
-    </div>
-
+    <div class="eyebrow"><span class="eyebrow-dot"></span>Free · iOS app coming soon</div>
     <h1>One money lesson<br>a day. Based on<br><span>your real spending.</span></h1>
-
     <p class="hero-sub">MoneyGator teaches you exactly what to do with your money. Based on what's actually happening in your accounts. No generic tips. No overwhelm. Just one clear lesson every day.</p>
 
-    <!-- QUIZ -->
-    <div class="quiz-wrap" id="quizWrap">
-      <div class="quiz-question">What's your biggest money problem right now?</div>
-      <div class="quiz-options">
-        <div class="quiz-option" onclick="selectQuiz(this)">😰 I have no idea where my money goes</div>
-        <div class="quiz-option" onclick="selectQuiz(this)">💳 Credit card debt is stressing me out</div>
-        <div class="quiz-option" onclick="selectQuiz(this)">🔄 I'm paying too much for subscriptions</div>
-        <div class="quiz-option" onclick="selectQuiz(this)">😕 I want to save but don't know how to start</div>
+    <div class="quiz-wrap">
+      <div class="quiz-q">What's your biggest money problem right now?</div>
+      <div class="quiz-opts">
+        <div class="quiz-opt" onclick="pickQuiz(this,0)">😰 I have no idea where my money goes</div>
+        <div class="quiz-opt" onclick="pickQuiz(this,1)">💳 Credit card debt is stressing me out</div>
+        <div class="quiz-opt" onclick="pickQuiz(this,2)">🔄 I'm paying too much for subscriptions</div>
+        <div class="quiz-opt" onclick="pickQuiz(this,3)">😕 I want to save but don't know how to start</div>
       </div>
-      <div class="quiz-email-wrap" id="quizEmailWrap">
-        <div class="quiz-result-line" id="quizResultLine"></div>
-        <div class="waitlist-form" style="margin-top:16px">
-          <input id="email-top" class="waitlist-input" type="email" placeholder="your@email.com">
-          <button class="waitlist-btn" onclick="handleWaitlist('top')">Get early access</button>
+      <div class="quiz-result" id="quiz-result"></div>
+      <div class="email-wrap" id="email-wrap">
+        <div class="email-row">
+          <input id="email-top" class="email-input" type="email" placeholder="your@email.com">
+          <button class="email-btn" onclick="signUp('top')">Get early access</button>
         </div>
-        <p class="waitlist-note" style="margin-top:10px"><span>Join 200+ people</span> already on the waitlist. Free forever for early users.</p>
+        <p class="email-note"><span>Join 200+ people</span> on the waitlist. Free for early users.</p>
       </div>
     </div>
   </div>
 </section>
 
+<hr class="divider">
+
 <!-- STATS -->
-<div class="stats">
+<div class="stats-grid">
   <div class="stat-card">
-    <div class="stat-value purple">$286</div>
-    <div class="stat-label">Average monthly subscriptions people don't know they're paying. MoneyGator teaches you to spot them.</div>
+    <div class="stat-val purple">$286</div>
+    <div class="stat-lbl">Average monthly subscriptions people don't know they're paying. MoneyGator teaches you to spot them.</div>
   </div>
   <div class="stat-card">
-    <div class="stat-value cyan">1 in 3</div>
-    <div class="stat-label">Americans can't explain where their money went last month. MoneyGator changes that.</div>
+    <div class="stat-val cyan">1 in 3</div>
+    <div class="stat-lbl">Americans can't explain where their money went last month. MoneyGator changes that.</div>
   </div>
   <div class="stat-card">
-    <div class="stat-value green">$200+</div>
-    <div class="stat-label">More saved per month by people who understand their spending habits. Not just track them.</div>
+    <div class="stat-val green">$200+</div>
+    <div class="stat-lbl">More saved per month by people who understand their spending — not just track it.</div>
   </div>
 </div>
 
+<hr class="divider">
+
 <!-- HOW IT WORKS -->
-<section class="section">
+<div class="wrap section">
   <div class="section-label">How it works</div>
   <h2 class="section-title">Data in. Understanding out.</h2>
   <p class="section-sub">Other apps stop at showing you numbers. MoneyGator turns those numbers into things you actually learn and do.</p>
-
-  <div class="steps">
+  <div class="steps-grid">
     <div class="step-card">
       <span class="step-emoji">🏦</span>
       <div class="step-title">Connect your accounts</div>
-      <div class="step-desc">Link your bank securely via Plaid so your lessons are about your real money — not some made-up example. We read. We never touch.</div>
+      <div class="step-desc">Link your bank via Plaid so lessons are about your real money — not made-up examples. We read. We never touch.</div>
     </div>
     <div class="step-card">
       <span class="step-emoji">🧠</span>
-      <div class="step-title">We figure out what you need to learn</div>
-      <div class="step-desc">MoneyGator reads your transactions and finds what's actually costing you — subscriptions you forgot, credit traps, spending patterns you can't see.</div>
+      <div class="step-title">We find what you need to learn</div>
+      <div class="step-desc">MoneyGator reads your transactions and finds what's actually costing you — subscriptions you forgot, credit traps, spending you can't see.</div>
     </div>
     <div class="step-card">
       <span class="step-emoji">🎯</span>
-      <div class="step-title">You get one lesson. You know what to do.</div>
-      <div class="step-desc">Every morning, one short lesson based on your situation. You finish it knowing exactly what to do today. Not someday. Today.</div>
+      <div class="step-title">One lesson. You know what to do.</div>
+      <div class="step-desc">Every day, one short lesson based on your situation. You finish knowing exactly what to do today. Not someday. Today.</div>
     </div>
   </div>
-</section>
+</div>
 
-<!-- DIFFERENCE -->
-<section class="section" style="padding-top: 0;">
+<hr class="divider">
+
+<!-- WHY MONEYGATOR -->
+<div class="wrap section">
   <div class="section-label">Why MoneyGator</div>
   <h2 class="section-title">Tracking is not the same as understanding.</h2>
-  <p class="section-sub">Most apps are mirrors. They show you what happened. MoneyGator is a teacher. It shows you what to do next.</p>
-
+  <p class="section-sub">Most apps are mirrors — they show you what happened. MoneyGator is a teacher — it shows you what to do next.</p>
   <div class="diff-grid">
     <div class="diff-card">
       <span class="diff-tag others">Other apps</span>
-      <div class="diff-row">
-        <div class="diff-icon no">✕</div>
-        <div class="diff-text">Show you a dashboard. Leave you to figure out what it means.</div>
-      </div>
-      <div class="diff-row">
-        <div class="diff-icon no">✕</div>
-        <div class="diff-text">Generic tips that have nothing to do with your actual accounts.</div>
-      </div>
-      <div class="diff-row">
-        <div class="diff-icon no">✕</div>
-        <div class="diff-text">A credit score with no explanation of how to improve it.</div>
-      </div>
-      <div class="diff-row">
-        <div class="diff-icon no">✕</div>
-        <div class="diff-text">More data. More anxiety. No clarity on what to actually do.</div>
-      </div>
+      <div class="diff-row"><div class="diff-icon no">✕</div><div class="diff-text">Show you a dashboard. Leave you to figure out what it means.</div></div>
+      <div class="diff-row"><div class="diff-icon no">✕</div><div class="diff-text">Generic tips that have nothing to do with your actual accounts.</div></div>
+      <div class="diff-row"><div class="diff-icon no">✕</div><div class="diff-text">A credit score with no explanation of how to improve it.</div></div>
+      <div class="diff-row"><div class="diff-icon no">✕</div><div class="diff-text">More data. More anxiety. No clarity on what to actually do.</div></div>
     </div>
-    <div class="diff-card highlight">
+    <div class="diff-card hl">
       <span class="diff-tag us">MoneyGator</span>
-      <div class="diff-row">
-        <div class="diff-icon yes">✓</div>
-        <div class="diff-text">You finish every lesson knowing exactly what to do today.</div>
-      </div>
-      <div class="diff-row">
-        <div class="diff-icon yes">✓</div>
-        <div class="diff-text">Credit payment due in 2 days? You learn why it matters and what to pay.</div>
-      </div>
-      <div class="diff-row">
-        <div class="diff-icon yes">✓</div>
-        <div class="diff-text">Spending up 49%? You understand why — and how to stop it.</div>
-      </div>
-      <div class="diff-row">
-        <div class="diff-icon yes">✓</div>
-        <div class="diff-text">One lesson. One action. Every day. That's how habits actually form.</div>
-      </div>
+      <div class="diff-row"><div class="diff-icon yes">✓</div><div class="diff-text">You finish every lesson knowing exactly what to do today.</div></div>
+      <div class="diff-row"><div class="diff-icon yes">✓</div><div class="diff-text">Credit payment due in 2 days? You learn why it matters and what to pay.</div></div>
+      <div class="diff-row"><div class="diff-icon yes">✓</div><div class="diff-text">Spending up 49%? You understand why — and how to stop it.</div></div>
+      <div class="diff-row"><div class="diff-icon yes">✓</div><div class="diff-text">One lesson. One action. Every day. That's how habits actually form.</div></div>
     </div>
   </div>
-</section>
-
-<!-- LESSONS -->
-<section class="lessons-scroll-section">
-  <div class="lessons-sticky-label">
-    <div class="section-label">Real lessons</div>
-    <h2 class="lessons-big-title">This is what you actually learn.</h2>
-    <p class="lessons-big-sub">Three real MoneyGator lessons. Each one triggered by a real financial signal. Each one ends with one clear action you can take today.</p>
-    <div class="lessons-nav" id="lessonsNav">
-      <div class="lnav-item active" onclick="scrollToLesson(0)">
-        <span class="lnav-dot"></span>
-        <span>Credit card trap</span>
-      </div>
-      <div class="lnav-item" onclick="scrollToLesson(1)">
-        <span class="lnav-dot"></span>
-        <span>Ghost subscriptions</span>
-      </div>
-      <div class="lnav-item" onclick="scrollToLesson(2)">
-        <span class="lnav-dot"></span>
-        <span>Daily spend trick</span>
-      </div>
-    </div>
-  </div>
-
-  <div class="lessons-cards-col">
-
-    <!-- Lesson 1 -->
-    <div class="scroll-lesson-card" id="scard-0">
-      <div class="slc-phone">
-        <div class="slc-phone-header" style="background:linear-gradient(135deg,#7C1D1D,#DC2626,#EF4444)">
-          <div class="slc-top-row">
-            <span class="slc-tag">💳 Credit · 2 min</span>
-            <span class="slc-streak">🔥 Day 3</span>
-          </div>
-          <div class="slc-bar"><div class="slc-bar-fill" style="width:0%" id="bar-0"></div></div>
-        </div>
-        <div class="slc-body">
-
-          <!-- Step indicator -->
-          <div class="lesson-steps" id="steps-0">
-            <div class="lstep active" id="lstep-0-0">📖 Learn</div>
-            <div class="lstep-line"></div>
-            <div class="lstep" id="lstep-0-1">🧠 Quiz</div>
-            <div class="lstep-line"></div>
-            <div class="lstep" id="lstep-0-2">✅ Act</div>
-          </div>
-
-          <!-- STEP 1: Theory -->
-          <div class="lesson-step-content" id="step-0-theory">
-            <div class="slc-trigger"><span class="slc-dot"></span>Chase Sapphire payment due in 2 days</div>
-            <div class="slc-title">Your minimum payment is $47. But the bank hopes you only pay that.</div>
-            <p class="slc-explain">You owe $1,200. The bank asks for just $47. Sounds fine, right? But if you only pay $47 every month — you will still be paying this off in 2029. And you'll pay way more than $1,200 in the end. The bank designed it that way.</p>
-            <p class="slc-explain" style="color:var(--cyan);font-weight:600">💡 The rule: always pay more than the minimum. Ideally — pay the full balance. Even $20 extra a month makes a real difference.</p>
-            <div class="slc-rows">
-              <div class="slc-row bad"><span class="slc-row-icon">🐢</span><div><div class="slc-row-title">Pay $47/mo minimum</div><div class="slc-row-sub">Still paying in 2029. The bank wins.</div></div><span class="slc-badge bad">Trap</span></div>
-              <div class="slc-row good"><span class="slc-row-icon">🚀</span><div><div class="slc-row-title">Pay more than $47</div><div class="slc-row-sub">Done sooner. You keep the difference.</div></div><span class="slc-badge good">Smart</span></div>
-            </div>
-            <button class="lesson-btn" onclick="showQuiz(0)">I got it — quiz me 🧠</button>
-          </div>
-
-          <!-- STEP 2: Quiz -->
-          <div class="lesson-step-content hidden" id="step-0-quiz">
-            <div class="slc-title" style="font-size:16px">Quick check: You have a $1,200 credit card balance. The minimum payment is $47/mo. What's the smartest move?</div>
-            <div class="lq-options">
-              <div class="lq-opt" onclick="answerQuiz(0, this, false)">Pay the $47 minimum so you have cash for other things</div>
-              <div class="lq-opt" onclick="answerQuiz(0, this, false)">Skip this month, pay double next month</div>
-              <div class="lq-opt correct" onclick="answerQuiz(0, this, true)">Pay as much above $47 as you can afford this month</div>
-              <div class="lq-opt" onclick="answerQuiz(0, this, false)">Wait until the full $1,200 is available before paying anything extra</div>
-            </div>
-          </div>
-
-          <!-- STEP 3: Action -->
-          <div class="lesson-step-content hidden" id="step-0-action">
-            <div class="lesson-result correct-result">
-              <div class="result-icon">🎉</div>
-              <div class="result-title">Correct! Every dollar above the minimum saves you real money.</div>
-              <div class="result-text">Even paying $80 instead of $47 gets you out of debt much faster. More than minimum = you win.</div>
-            </div>
-            <div class="slc-action" style="margin-top:14px">
-              🎯 <strong>Your action:</strong> Open your Chase app right now. Pay more than $47. Even $80 makes a difference.
-            </div>
-            <div class="lesson-done-note">This is one of 365 lessons waiting for you in MoneyGator.</div>
-          </div>
-
-        </div>
-      </div>
-    </div>
-
-    <!-- Lesson 2 -->
-    <div class="scroll-lesson-card" id="scard-1">
-      <div class="slc-phone">
-        <div class="slc-phone-header" style="background:linear-gradient(135deg,#78350F,#D97706,#FCD34D)">
-          <div class="slc-top-row">
-            <span class="slc-tag">🔄 Subscriptions · 2 min</span>
-            <span class="slc-streak">🔥 Day 3</span>
-          </div>
-          <div class="slc-bar"><div class="slc-bar-fill" style="width:0%" id="bar-1"></div></div>
-        </div>
-        <div class="slc-body">
-
-          <div class="lesson-steps">
-            <div class="lstep active" id="lstep-1-0">📖 Learn</div>
-            <div class="lstep-line"></div>
-            <div class="lstep" id="lstep-1-1">🧠 Quiz</div>
-            <div class="lstep-line"></div>
-            <div class="lstep" id="lstep-1-2">✅ Act</div>
-          </div>
-
-          <!-- STEP 1: Theory -->
-          <div class="lesson-step-content" id="step-1-theory">
-            <div class="slc-trigger"><span class="slc-dot"></span>16 recurring charges detected this month</div>
-            <div class="slc-title">Most people have no idea how many subscriptions they're actually paying for.</div>
-            <p class="slc-explain">Subscriptions are designed to be invisible. Small amount. Automatic charge. Random day of the month. Companies know that if you don't notice it — you won't cancel it. That's the business model.</p>
-            <p class="slc-explain" style="color:var(--cyan);font-weight:600">💡 The rule: if you can't remember signing up for it — you probably don't need it.</p>
-            <button class="lesson-btn" style="background:linear-gradient(135deg,#D97706,#F59E0B)" onclick="showQuiz(1)">Got it — now test me 🧠</button>
-          </div>
-
-          <!-- STEP 2: Quiz -->
-          <div class="lesson-step-content hidden" id="step-1-quiz">
-            <div class="slc-title" style="font-size:15px">These 8 subscriptions were found in your accounts. Tap the ones you actually knew about 👇</div>
-            <div class="lq-subs" id="subsList">
-              <div class="lq-sub" onclick="toggleSub(this)" data-known="true">🎬 Netflix — $15.99/mo</div>
-              <div class="lq-sub" onclick="toggleSub(this)" data-known="true">🎵 Spotify — $10.99/mo</div>
-              <div class="lq-sub" onclick="toggleSub(this)" data-known="false">💪 Planet Fitness — $24.99/mo</div>
-              <div class="lq-sub" onclick="toggleSub(this)" data-known="false">☁️ iCloud — $2.99/mo</div>
-              <div class="lq-sub" onclick="toggleSub(this)" data-known="false">📰 NY Times — $17.00/mo</div>
-              <div class="lq-sub" onclick="toggleSub(this)" data-known="false">🎮 Xbox Game Pass — $14.99/mo</div>
-              <div class="lq-sub" onclick="toggleSub(this)" data-known="false">🧘 Calm — $6.99/mo</div>
-              <div class="lq-sub" onclick="toggleSub(this)" data-known="false">📦 Amazon Prime — $14.99/mo</div>
-            </div>
-            <button class="lesson-btn" style="background:linear-gradient(135deg,#D97706,#F59E0B);margin-top:14px" onclick="showSubResult()">That's all I recognize →</button>
-          </div>
-
-          <!-- STEP 3: Action -->
-          <div class="lesson-step-content hidden" id="step-1-action">
-            <div class="lesson-result correct-result">
-              <div class="result-icon">👻</div>
-              <div class="result-title">The ones you didn't tap — those are your ghost subscriptions.</div>
-              <div class="result-text">You're paying for them every single month. But they're not top of mind. That's money leaving silently.</div>
-            </div>
-            <div class="slc-action" style="margin-top:14px">
-              ✂️ <strong>Your action:</strong> Open your bank app right now. Find one charge you didn't recognize above. Cancel it today.
-            </div>
-            <div class="lesson-done-note">This is one of 365 lessons waiting for you in MoneyGator.</div>
-          </div>
-
-        </div>
-      </div>
-    </div>
-
-    <!-- Lesson 3 -->
-    <div class="scroll-lesson-card" id="scard-2">
-      <div class="slc-phone">
-        <div class="slc-phone-header" style="background:linear-gradient(135deg,#1E1B4B,#3730A3,#5B4FE8)">
-          <div class="slc-top-row">
-            <span class="slc-tag">💰 Spending · 1 min</span>
-            <span class="slc-streak">🔥 Day 3</span>
-          </div>
-          <div class="slc-bar"><div class="slc-bar-fill" style="width:0%" id="bar-2"></div></div>
-        </div>
-        <div class="slc-body">
-
-          <div class="lesson-steps">
-            <div class="lstep active" id="lstep-2-0">📖 Learn</div>
-            <div class="lstep-line"></div>
-            <div class="lstep" id="lstep-2-1">🧠 Quiz</div>
-            <div class="lstep-line"></div>
-            <div class="lstep" id="lstep-2-2">✅ Act</div>
-          </div>
-
-          <!-- STEP 1: Theory -->
-          <div class="lesson-step-content" id="step-2-theory">
-            <div class="slc-trigger"><span class="slc-dot"></span>Your spending is up 49% vs last month</div>
-            <div class="slc-title">Overspending isn't laziness. It's a bunch of small decisions you made without thinking.</div>
-            <p class="slc-explain">That $961 didn't happen all at once. It was a coffee here, a delivery there, something from Amazon you don't remember ordering. Each felt fine in the moment. None of them felt like "overspending."</p>
-            <p class="slc-explain" style="color:var(--cyan);font-weight:600">💡 The trick: before any non-essential purchase, ask yourself — "Will I remember this in a week?" If the answer is no, wait 10 minutes. Most impulse buys disappear on their own.</p>
-            <button class="lesson-btn" onclick="showQuiz(2)">Got it — test me 🧠</button>
-          </div>
-
-          <!-- STEP 2: Quiz -->
-          <div class="lesson-step-content hidden" id="step-2-quiz">
-            <div class="slc-title" style="font-size:15px">Here are 6 purchases from your account last week. Tap the ones you actually remember making 👇</div>
-            <div class="lq-subs">
-              <div class="lq-sub" onclick="toggleSub(this)">☕ Blue Bottle Coffee — $7.50</div>
-              <div class="lq-sub" onclick="toggleSub(this)">🛒 Whole Foods — $94.20</div>
-              <div class="lq-sub" onclick="toggleSub(this)">📦 Amazon — $23.99</div>
-              <div class="lq-sub" onclick="toggleSub(this)">🍕 DoorDash — $38.40</div>
-              <div class="lq-sub" onclick="toggleSub(this)">⛽ Shell Gas — $61.00</div>
-              <div class="lq-sub" onclick="toggleSub(this)">🛍️ Target — $47.80</div>
-            </div>
-            <button class="lesson-btn" style="margin-top:14px" onclick="showSpendResult()">That's all I remember →</button>
-          </div>
-
-          <!-- STEP 3: Action -->
-          <div class="lesson-step-content hidden" id="step-2-action">
-            <div class="lesson-result correct-result">
-              <div class="result-icon">🤯</div>
-              <div class="result-title">The ones you forgot — that's where the money goes.</div>
-              <div class="result-text">Not one big splurge. Lots of small things you didn't even register. That's completely normal — and completely fixable.</div>
-            </div>
-            <div class="slc-action" style="margin-top:14px">
-              ⏱️ <strong>Your rule starting now:</strong> Before any non-essential purchase — wait 10 minutes. If you still want it, buy it. Most of the time you won't.
-            </div>
-            <div class="lesson-done-note">This is one of 365 lessons waiting for you in MoneyGator.</div>
-          </div>
-
-        </div>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<!-- QUOTE -->
-<div class="quote-section">
-  <div class="quote-text">"Most people know they should manage their money better. They just don't know how. MoneyGator is the first app that actually teaches you — using your own money as the classroom."</div>
-  <div class="quote-author"><strong>Pavel Volkov</strong>, Founder of MoneyGator. Author of First Steps to Financial Independence.</div>
 </div>
 
+<hr class="divider">
+
+<!-- LESSONS -->
+<div class="lessons-section">
+  <div class="lessons-sticky">
+    <div class="section-label">Real lessons</div>
+    <h2 class="lessons-title">This is what you actually learn.</h2>
+    <p class="lessons-sub">Three real MoneyGator lessons. Each triggered by a real financial signal. Each ends with one clear action.</p>
+    <div class="lnav" id="lnav">
+      <div class="lnav-item active" onclick="jumpTo(0)"><span class="lnav-dot"></span>Credit card trap</div>
+      <div class="lnav-item" onclick="jumpTo(1)"><span class="lnav-dot"></span>Ghost subscriptions</div>
+      <div class="lnav-item" onclick="jumpTo(2)"><span class="lnav-dot"></span>Impulse spending</div>
+    </div>
+  </div>
+
+  <div class="lessons-col">
+
+    <!-- LESSON 1 -->
+    <div class="lcard" id="lc0">
+      <div class="phone">
+        <div class="phone-hdr" style="background:linear-gradient(135deg,#7C1D1D,#DC2626,#EF4444)">
+          <div class="phone-top"><span class="phone-tag">💳 Credit · 2 min</span><span class="phone-streak">🔥 Day 3</span></div>
+          <div class="phone-bar"><div class="phone-bar-fill" id="pb0"></div></div>
+        </div>
+        <div class="phone-body">
+          <div class="lsteps"><div class="lstep active" id="ls0-0">📖 Learn</div><div class="lstep-line"></div><div class="lstep" id="ls0-1">🧠 Quiz</div><div class="lstep-line"></div><div class="lstep" id="ls0-2">✅ Act</div></div>
+
+          <!-- Theory -->
+          <div id="l0-theory">
+            <div class="trigger"><span class="trigger-dot"></span>Chase Sapphire payment due in 2 days</div>
+            <div class="lesson-title">Your minimum payment is $47. But the bank hopes you only pay that.</div>
+            <p class="lesson-explain">You owe $1,200. The bank asks for just $47. Sounds fine, right? But if you only pay $47 every month — you will still be paying this off in 2029. And you'll pay way more than $1,200 in the end. The bank designed it that way.</p>
+            <div class="lesson-rule">💡 The rule: always pay more than the minimum. Ideally — pay the full balance. Even $20 extra a month makes a real difference.</div>
+            <div class="cmp-rows">
+              <div class="cmp-row bad"><span class="cmp-icon">🐢</span><div class="cmp-info"><div class="cmp-title">Pay $47/mo minimum</div><div class="cmp-sub">Still paying in 2029. The bank wins.</div></div><span class="cmp-badge bad">Trap</span></div>
+              <div class="cmp-row good"><span class="cmp-icon">🚀</span><div class="cmp-info"><div class="cmp-title">Pay more than $47</div><div class="cmp-sub">Done sooner. You keep the difference.</div></div><span class="cmp-badge good">Smart</span></div>
+            </div>
+            <button class="big-btn" onclick="goQuiz(0)">I got it — quiz me 🧠</button>
+          </div>
+
+          <!-- Quiz -->
+          <div id="l0-quiz" class="hidden">
+            <div class="lesson-title" style="font-size:15px">Quick check: You owe $1,200. Minimum payment is $47. What's the smartest move?</div>
+            <div class="q-opts">
+              <div class="q-opt" onclick="answer(0,this,false)">Pay $47 so I have cash for other things</div>
+              <div class="q-opt" onclick="answer(0,this,false)">Skip this month, pay double next month</div>
+              <div class="q-opt correct" onclick="answer(0,this,true)">Pay as much above $47 as I can afford</div>
+              <div class="q-opt" onclick="answer(0,this,false)">Wait until I have the full $1,200 before paying extra</div>
+            </div>
+          </div>
+
+          <!-- Action -->
+          <div id="l0-action" class="hidden">
+            <div class="result-box"><div class="result-emoji">🎉</div><div class="result-title">Correct! Every dollar above the minimum saves you real money.</div><div class="result-sub">Even $80 instead of $47 gets you out much faster. More than minimum = you win.</div></div>
+            <div class="action-box">🎯 <strong>Your action:</strong> Open your Chase app right now. Pay more than $47. Even $80 helps.</div>
+            <p class="lesson-done">This is one of 365 lessons waiting in MoneyGator.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- LESSON 2 -->
+    <div class="lcard" id="lc1">
+      <div class="phone">
+        <div class="phone-hdr" style="background:linear-gradient(135deg,#78350F,#D97706,#FCD34D)">
+          <div class="phone-top"><span class="phone-tag">🔄 Subscriptions · 2 min</span><span class="phone-streak">🔥 Day 3</span></div>
+          <div class="phone-bar"><div class="phone-bar-fill" id="pb1"></div></div>
+        </div>
+        <div class="phone-body">
+          <div class="lsteps"><div class="lstep active" id="ls1-0">📖 Learn</div><div class="lstep-line"></div><div class="lstep" id="ls1-1">🧠 Quiz</div><div class="lstep-line"></div><div class="lstep" id="ls1-2">✅ Act</div></div>
+
+          <!-- Theory -->
+          <div id="l1-theory">
+            <div class="trigger"><span class="trigger-dot"></span>16 recurring charges detected this month</div>
+            <div class="lesson-title">Most people have no idea how many subscriptions they're actually paying for.</div>
+            <p class="lesson-explain">Subscriptions are designed to be invisible. Small amount. Automatic charge. Random day of the month. Companies know that if you don't notice it — you won't cancel it. That's the business model.</p>
+            <div class="lesson-rule">💡 The rule: if you can't remember signing up for it — you probably don't need it.</div>
+            <button class="big-btn" style="background:linear-gradient(135deg,#D97706,#F59E0B)" onclick="goQuiz(1)">Got it — test me 🧠</button>
+          </div>
+
+          <!-- Quiz -->
+          <div id="l1-quiz" class="hidden">
+            <div class="lesson-title" style="font-size:15px">These 8 subscriptions were found in your accounts. Tap the ones you actually knew about 👇</div>
+            <div class="sub-list">
+              <div class="sub-item" onclick="this.classList.toggle('sel')">🎬 Netflix — $15.99/mo</div>
+              <div class="sub-item" onclick="this.classList.toggle('sel')">🎵 Spotify — $10.99/mo</div>
+              <div class="sub-item" onclick="this.classList.toggle('sel')">💪 Planet Fitness — $24.99/mo</div>
+              <div class="sub-item" onclick="this.classList.toggle('sel')">☁️ iCloud — $2.99/mo</div>
+              <div class="sub-item" onclick="this.classList.toggle('sel')">📰 NY Times — $17.00/mo</div>
+              <div class="sub-item" onclick="this.classList.toggle('sel')">🎮 Xbox Game Pass — $14.99/mo</div>
+              <div class="sub-item" onclick="this.classList.toggle('sel')">🧘 Calm — $6.99/mo</div>
+              <div class="sub-item" onclick="this.classList.toggle('sel')">📦 Amazon Prime — $14.99/mo</div>
+            </div>
+            <button class="big-btn" style="background:linear-gradient(135deg,#D97706,#F59E0B);margin-top:10px" onclick="goAction(1)">That's all I recognize →</button>
+          </div>
+
+          <!-- Action -->
+          <div id="l1-action" class="hidden">
+            <div class="result-box"><div class="result-emoji">👻</div><div class="result-title">The ones you didn't tap — those are your ghost subscriptions.</div><div class="result-sub">You're paying for them every month. They're not top of mind. That's money leaving silently.</div></div>
+            <div class="action-box">✂️ <strong>Your action:</strong> Open your bank app right now. Find one charge you didn't recognize. Cancel it today.</div>
+            <p class="lesson-done">This is one of 365 lessons waiting in MoneyGator.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- LESSON 3 -->
+    <div class="lcard" id="lc2">
+      <div class="phone">
+        <div class="phone-hdr" style="background:linear-gradient(135deg,#1E1B4B,#3730A3,#5B4FE8)">
+          <div class="phone-top"><span class="phone-tag">💰 Spending · 1 min</span><span class="phone-streak">🔥 Day 3</span></div>
+          <div class="phone-bar"><div class="phone-bar-fill" id="pb2"></div></div>
+        </div>
+        <div class="phone-body">
+          <div class="lsteps"><div class="lstep active" id="ls2-0">📖 Learn</div><div class="lstep-line"></div><div class="lstep" id="ls2-1">🧠 Quiz</div><div class="lstep-line"></div><div class="lstep" id="ls2-2">✅ Act</div></div>
+
+          <!-- Theory -->
+          <div id="l2-theory">
+            <div class="trigger"><span class="trigger-dot"></span>Your spending is up 49% vs last month</div>
+            <div class="lesson-title">Overspending isn't laziness. It's lots of small decisions you made without thinking.</div>
+            <p class="lesson-explain">That $961 didn't happen all at once. It was a coffee here, a delivery there, something from Amazon you don't remember ordering. Each felt fine in the moment. None of them felt like "overspending."</p>
+            <div class="lesson-rule">💡 The trick: before any non-essential purchase, ask — "Will I remember this in a week?" If no — wait 10 minutes. Most impulse buys disappear on their own.</div>
+            <button class="big-btn" onclick="goQuiz(2)">Got it — test me 🧠</button>
+          </div>
+
+          <!-- Quiz -->
+          <div id="l2-quiz" class="hidden">
+            <div class="lesson-title" style="font-size:15px">Here are 6 purchases from last week. Tap the ones you actually remember making 👇</div>
+            <div class="sub-list">
+              <div class="sub-item" onclick="this.classList.toggle('sel')">☕ Blue Bottle Coffee — $7.50</div>
+              <div class="sub-item" onclick="this.classList.toggle('sel')">🛒 Whole Foods — $94.20</div>
+              <div class="sub-item" onclick="this.classList.toggle('sel')">📦 Amazon — $23.99</div>
+              <div class="sub-item" onclick="this.classList.toggle('sel')">🍕 DoorDash — $38.40</div>
+              <div class="sub-item" onclick="this.classList.toggle('sel')">⛽ Shell Gas — $61.00</div>
+              <div class="sub-item" onclick="this.classList.toggle('sel')">🛍️ Target — $47.80</div>
+            </div>
+            <button class="big-btn" style="margin-top:10px" onclick="goAction(2)">That's all I remember →</button>
+          </div>
+
+          <!-- Action -->
+          <div id="l2-action" class="hidden">
+            <div class="result-box"><div class="result-emoji">🤯</div><div class="result-title">The ones you forgot — that's where the money goes.</div><div class="result-sub">Not one big splurge. Lots of small things you didn't even register. Completely normal — and fixable.</div></div>
+            <div class="action-box">⏱️ <strong>Your rule starting now:</strong> Before any non-essential purchase — wait 10 minutes. If you still want it, buy it. Most of the time you won't.</div>
+            <p class="lesson-done">This is one of 365 lessons waiting in MoneyGator.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<hr class="divider">
+
 <!-- GOALS -->
-<section class="goals-section">
+<div class="wrap section">
   <div class="section-label">Your progress</div>
   <h2 class="section-title">Every lesson moves you closer.</h2>
   <p class="section-sub">Set your goals in MoneyGator. Each lesson you complete nudges the bar forward.</p>
-
   <div class="goals-list">
-
     <div class="goal-card">
       <div class="goal-top">
         <div class="goal-icon">💳</div>
-        <div class="goal-info">
-          <div class="goal-name">Pay off Chase Sapphire</div>
-          <div class="goal-meta">$1,200 remaining · started 3 weeks ago</div>
-        </div>
+        <div><div class="goal-name">Pay off Chase Sapphire</div><div class="goal-meta">$1,200 remaining · started 3 weeks ago</div></div>
         <div class="goal-pct">34%</div>
       </div>
-      <div class="goal-bar-wrap">
-        <div class="goal-bar-fill" style="width:34%;background:linear-gradient(90deg,#DC2626,#EF4444)"></div>
-      </div>
-      <div class="goal-lesson-note">📖 Today's lesson contributed to this goal</div>
+      <div class="goal-bar"><div class="goal-fill" style="width:34%;background:linear-gradient(90deg,#DC2626,#EF4444)"></div></div>
+      <div class="goal-note">📖 Today's lesson contributed to this goal</div>
     </div>
-
     <div class="goal-card">
       <div class="goal-top">
         <div class="goal-icon">🏦</div>
-        <div class="goal-info">
-          <div class="goal-name">Build $1,000 emergency fund</div>
-          <div class="goal-meta">$340 saved so far · on track</div>
-        </div>
+        <div><div class="goal-name">Build $1,000 emergency fund</div><div class="goal-meta">$340 saved so far · on track</div></div>
         <div class="goal-pct">34%</div>
       </div>
-      <div class="goal-bar-wrap">
-        <div class="goal-bar-fill" style="width:34%;background:linear-gradient(90deg,#0F766E,#14B8A6)"></div>
-      </div>
-      <div class="goal-lesson-note">🔒 Unlocks after Savings path lesson 2</div>
+      <div class="goal-bar"><div class="goal-fill" style="width:34%;background:linear-gradient(90deg,#0F766E,#14B8A6)"></div></div>
+      <div class="goal-note">🔒 Unlocks after Savings path lesson 2</div>
     </div>
-
     <div class="goal-card">
       <div class="goal-top">
         <div class="goal-icon">✂️</div>
-        <div class="goal-info">
-          <div class="goal-name">Cut subscriptions to under $100/mo</div>
-          <div class="goal-meta">Currently $286/mo · 3 cancelled so far</div>
-        </div>
+        <div><div class="goal-name">Cut subscriptions to under $100/mo</div><div class="goal-meta">Currently $286/mo · 3 cancelled so far</div></div>
         <div class="goal-pct">12%</div>
       </div>
-      <div class="goal-bar-wrap">
-        <div class="goal-bar-fill" style="width:12%;background:linear-gradient(90deg,#D97706,#F59E0B)"></div>
-      </div>
-      <div class="goal-lesson-note">🎯 Complete today's lesson to move this forward</div>
+      <div class="goal-bar"><div class="goal-fill" style="width:12%;background:linear-gradient(90deg,#D97706,#F59E0B)"></div></div>
+      <div class="goal-note">🎯 Complete today's lesson to move this forward</div>
     </div>
-
   </div>
+  <div class="goals-streak">🔥 3 day streak · 3 lessons completed · your goals are moving</div>
+</div>
 
-  <div class="goals-note">
-    🔥 3 day streak · 3 lessons completed · your goals are moving
-  </div>
-</section>
+<hr class="divider">
+
+<!-- QUOTE -->
+<div class="quote-wrap">
+  <div class="quote-text">"Most people know they should manage their money better. They just don't know how. MoneyGator is the first app that actually teaches you — using your own money as the classroom."</div>
+  <div class="quote-author"><strong>Pavel Volkov</strong>, Founder of MoneyGator · Author of First Steps to Financial Independence</div>
+</div>
 
 <!-- BOTTOM CTA -->
-<div class="bottom-cta">
+<div class="cta-block">
   <h2>Start learning.<br>Start knowing.</h2>
   <p>Join the waitlist. Free for early users. iOS app launching soon.</p>
-  <div class="bottom-form">
-    <input id="email-bottom" class="bottom-input" type="email" placeholder="your@email.com">
-    <button class="bottom-btn" onclick="handleWaitlist('bottom')">Join waitlist</button>
+  <div class="cta-row">
+    <input id="email-bottom" class="cta-input" type="email" placeholder="your@email.com">
+    <button class="cta-btn" onclick="signUp('bottom')">Join waitlist</button>
   </div>
 </div>
 
 <!-- FOOTER -->
 <footer>
-  <a href="#" class="footer-logo">
-    <svg width="24" height="24" viewBox="0 0 36 36" fill="none">
-      <rect width="36" height="36" rx="10" fill="#1E293B"/>
-      <ellipse cx="18" cy="22" rx="11" ry="7" fill="#22C55E"/>
-      <ellipse cx="27" cy="19" rx="5" ry="4" fill="#22C55E"/>
-      <circle cx="29" cy="17" r="1.5" fill="white"/>
-      <circle cx="29.5" cy="16.5" r="0.6" fill="#0F172A"/>
-      <circle cx="15" cy="15" r="6" fill="#F59E0B"/>
-      <circle cx="15" cy="15" r="4.5" fill="#FCD34D"/>
-      <text x="15" y="18" font-size="6" font-weight="bold" fill="#92400E" text-anchor="middle">$</text>
-    </svg>
+  <a href="#" class="foot-logo">
+    <svg width="24" height="24" viewBox="0 0 36 36" fill="none"><rect width="36" height="36" rx="10" fill="#1E293B"/><ellipse cx="18" cy="22" rx="11" ry="7" fill="#22C55E"/><ellipse cx="27" cy="19" rx="5" ry="4" fill="#22C55E"/><circle cx="29" cy="17" r="1.5" fill="white"/><circle cx="15" cy="15" r="6" fill="#F59E0B"/><circle cx="15" cy="15" r="4.5" fill="#FCD34D"/><text x="15" y="18" font-size="6" font-weight="bold" fill="#92400E" text-anchor="middle">$</text></svg>
     MoneyGator
   </a>
-  <div class="footer-right">moneygator.app &nbsp;·&nbsp; 2026 Artifiqa Inc. &nbsp;·&nbsp; All rights reserved.</div>
+  <div class="foot-right">moneygator.app · 2026 Artifiqa Inc.</div>
 </footer>
 
 <script>
-  // Quiz
-  const quizMessages = [
-    'MoneyGator will show you exactly where it went — and why.',
-    'MoneyGator will teach you how to pay it off faster, step by step.',
-    'MoneyGator finds every recurring charge and helps you cut the ones you forgot.',
-    'MoneyGator builds your savings habit one small lesson at a time.',
-  ];
+// ── QUIZ ────────────────────────────────────────
+const quizMsgs = [
+  'MoneyGator will show you exactly where it went — and why.',
+  'MoneyGator will teach you how to pay it off faster, step by step.',
+  'MoneyGator finds every recurring charge and helps you cut what you forgot.',
+  'MoneyGator builds your savings habit one small lesson at a time.',
+];
+function pickQuiz(el, idx) {
+  document.querySelectorAll('.quiz-opt').forEach(o => o.classList.remove('selected'));
+  el.classList.add('selected');
+  const r = document.getElementById('quiz-result');
+  r.textContent = '👉 ' + quizMsgs[idx];
+  r.classList.add('show');
+  const w = document.getElementById('email-wrap');
+  w.classList.add('show');
+  setTimeout(() => w.scrollIntoView({behavior:'smooth',block:'nearest'}), 150);
+}
 
-  function selectQuiz(el) {
-    const options = document.querySelectorAll('.quiz-option');
-    options.forEach(o => o.classList.remove('selected'));
-    el.classList.add('selected');
-    const idx = Array.from(options).indexOf(el);
-    const msg = quizMessages[idx] || 'MoneyGator will help you take control, one lesson at a time.';
-    document.getElementById('quizResultLine').textContent = '👉 ' + msg;
-    const wrap = document.getElementById('quizEmailWrap');
-    wrap.classList.add('visible');
-    setTimeout(() => wrap.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 100);
-  }
+// ── SIGNUP ───────────────────────────────────────
+function signUp(src) {
+  const el = document.getElementById('email-' + src);
+  if (!el.value.includes('@')) { el.style.borderColor = '#EF4444'; setTimeout(()=>el.style.borderColor='',1500); return; }
+  el.style.borderColor = '#22C55E';
+  el.placeholder = 'You\'re on the list! 🎉';
+  el.value = '';
+  setTimeout(() => { el.style.borderColor = ''; el.placeholder = 'your@email.com'; }, 3500);
+}
+document.querySelectorAll('.email-input,.cta-input').forEach(i => i.addEventListener('keydown', e => { if (e.key==='Enter') signUp(i.id.replace('email-','')); }));
 
-  function toggleSub(el) {
-    el.classList.toggle('selected');
-  }
+// ── LESSONS ──────────────────────────────────────
+function goQuiz(n) {
+  document.getElementById('l'+n+'-theory').classList.add('hidden');
+  document.getElementById('l'+n+'-quiz').classList.remove('hidden');
+  document.getElementById('ls'+n+'-0').classList.remove('active');
+  document.getElementById('ls'+n+'-0').classList.add('done');
+  document.getElementById('ls'+n+'-1').classList.add('active');
+  document.getElementById('pb'+n).style.width = '50%';
+}
+function goAction(n) {
+  document.getElementById('l'+n+'-quiz').classList.add('hidden');
+  document.getElementById('l'+n+'-action').classList.remove('hidden');
+  document.getElementById('ls'+n+'-1').classList.remove('active');
+  document.getElementById('ls'+n+'-1').classList.add('done');
+  document.getElementById('ls'+n+'-2').classList.add('active');
+  document.getElementById('pb'+n).style.width = '100%';
+}
+function answer(n, el, correct) {
+  el.parentElement.querySelectorAll('.q-opt').forEach(o => {
+    o.classList.add('off');
+    if (o === el) o.classList.add(correct ? 'correct-ans' : 'wrong-ans');
+    else if (o.classList.contains('correct')) o.classList.add('correct-ans');
+    else o.classList.add('wrong-ans');
+  });
+  setTimeout(() => goAction(n), 1200);
+}
+function jumpTo(n) {
+  document.getElementById('lc'+n).scrollIntoView({behavior:'smooth', block:'center'});
+}
 
-  function showSubResult() {
-    document.getElementById('step-1-quiz').classList.add('hidden');
-    document.getElementById('step-1-action').classList.remove('hidden');
-    document.getElementById('lstep-1-1').classList.remove('active');
-    document.getElementById('lstep-1-1').classList.add('done');
-    document.getElementById('lstep-1-2').classList.add('active');
-    const bar = document.getElementById('bar-1');
-    if (bar) bar.style.width = '100%';
-  }
-
-  function showSpendResult() {
-    document.getElementById('step-2-quiz').classList.add('hidden');
-    document.getElementById('step-2-action').classList.remove('hidden');
-    document.getElementById('lstep-2-1').classList.remove('active');
-    document.getElementById('lstep-2-1').classList.add('done');
-    document.getElementById('lstep-2-2').classList.add('active');
-    const bar = document.getElementById('bar-2');
-    if (bar) bar.style.width = '100%';
-  }
-
-  // Interactive lessons
-  function showQuiz(lessonIdx) {
-    document.getElementById('step-' + lessonIdx + '-theory').classList.add('hidden');
-    document.getElementById('step-' + lessonIdx + '-quiz').classList.remove('hidden');
-    document.getElementById('lstep-' + lessonIdx + '-0').classList.remove('active');
-    document.getElementById('lstep-' + lessonIdx + '-0').classList.add('done');
-    document.getElementById('lstep-' + lessonIdx + '-1').classList.add('active');
-    // Animate bar to 50%
-    const bar = document.getElementById('bar-' + lessonIdx);
-    if (bar) bar.style.width = '50%';
-  }
-
-  function answerQuiz(lessonIdx, el, isCorrect) {
-    const opts = el.parentElement.querySelectorAll('.lq-opt');
-    opts.forEach(o => {
-      o.classList.add('disabled');
-      if (o === el) {
-        o.classList.add(isCorrect ? 'correct-answer' : 'wrong-answer');
-      } else if (o.classList.contains('correct')) {
-        o.classList.add('correct-answer');
-      } else {
-        o.classList.add('wrong-answer');
-      }
-    });
-    setTimeout(() => {
-      document.getElementById('step-' + lessonIdx + '-quiz').classList.add('hidden');
-      document.getElementById('step-' + lessonIdx + '-action').classList.remove('hidden');
-      document.getElementById('lstep-' + lessonIdx + '-1').classList.remove('active');
-      document.getElementById('lstep-' + lessonIdx + '-1').classList.add('done');
-      document.getElementById('lstep-' + lessonIdx + '-2').classList.add('active');
-      const bar = document.getElementById('bar-' + lessonIdx);
-      if (bar) bar.style.width = '100%';
-    }, 1200);
-  }
-
-  // Sticky scroll lessons
-  function scrollToLesson(i) {
-    document.getElementById('scard-' + i).scrollIntoView({ behavior: 'smooth', block: 'center' });
-  }
-
-  function initLessonsScroll() {
-    const cards = document.querySelectorAll('.scroll-lesson-card');
-    const navItems = document.querySelectorAll('.lnav-item');
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          const idx = entry.target.id.split('-')[1];
-          // Animate progress bar
-          setTimeout(() => {
-            const bar = document.getElementById('bar-' + idx);
-            if (bar) bar.style.width = '100%';
-          }, 200);
-          // Update nav
-          navItems.forEach(n => n.classList.remove('active'));
-          if (navItems[idx]) navItems[idx].classList.add('active');
-        }
-      });
-    }, { threshold: 0.4 });
-
-    cards.forEach(card => observer.observe(card));
-  }
-
-  window.addEventListener('load', initLessonsScroll);
-
-  function handleWaitlist(source) {
-    const input = document.getElementById('email-' + source);
-    const email = input.value.trim();
-    if (!email || !email.includes('@')) {
-      input.style.borderColor = '#EF4444';
-      setTimeout(() => input.style.borderColor = '', 1500);
-      return;
+// scroll observer
+const lcards = document.querySelectorAll('.lcard');
+const navItems = document.querySelectorAll('.lnav-item');
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('vis');
+      const idx = e.target.id.replace('lc','');
+      navItems.forEach(n => n.classList.remove('active'));
+      if (navItems[idx]) navItems[idx].classList.add('active');
+      // animate bar on entry
+      const pb = document.getElementById('pb'+idx);
+      if (pb && pb.style.width === '0%') setTimeout(()=>{ pb.style.width='100%'; },300);
     }
-    // In production: POST to your backend
-    input.value = '';
-    input.style.borderColor = '#22C55E';
-    input.placeholder = 'You are on the list!';
-    setTimeout(() => {
-      input.style.borderColor = '';
-      input.placeholder = source === 'top' ? 'your@email.com' : 'your@email.com';
-    }, 3000);
-    console.log('Waitlist signup:', email, 'from:', source);
-  }
-
-  // Enter key support
-  document.getElementById('email-top').addEventListener('keydown', e => {
-    if (e.key === 'Enter') handleWaitlist('top');
   });
-  document.getElementById('email-bottom').addEventListener('keydown', e => {
-    if (e.key === 'Enter') handleWaitlist('bottom');
-  });
-
-  // Subtle parallax on hero blobs
-  document.addEventListener('mousemove', e => {
-    const x = (e.clientX / window.innerWidth - 0.5) * 20;
-    const y = (e.clientY / window.innerHeight - 0.5) * 20;
-    document.querySelector('.hero::before');
-  });
+}, {threshold:0.35});
+lcards.forEach(c => obs.observe(c));
 </script>
 </body>
 </html>
