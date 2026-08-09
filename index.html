@@ -348,8 +348,11 @@ footer { border-top: 1px solid var(--border); padding: 28px 40px; display: flex;
   .blog-read-more:hover { color:var(--white); border-color:var(--violet); }
 
   /* ── CONTACT ─────────────────────────────────────────────── */
-  .contact-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-bottom:28px; }
+  .contact-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:16px; margin-bottom:28px; }
   .contact-card { background:var(--card); border:1px solid var(--border); border-radius:20px; padding:28px; display:flex; flex-direction:column; gap:6px; }
+  .contact-avatar { width:52px; height:52px; border-radius:50%; background:linear-gradient(135deg,var(--purple),var(--violet)); display:flex; align-items:center; justify-content:center; font-size:20px; font-weight:800; color:#fff; margin-bottom:4px; flex-shrink:0; }
+  .contact-bio { font-size:12px; color:var(--muted); line-height:1.5; }
+  .contact-bio span { display:block; }
   .contact-icon { font-size:28px; margin-bottom:4px; }
   .contact-label { font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:1px; color:var(--muted); }
   .contact-name { font-size:17px; font-weight:800; color:var(--white); }
@@ -808,30 +811,31 @@ footer { border-top: 1px solid var(--border); padding: 28px 40px; display: flex;
 <!-- CONTACT -->
 <hr class="divider">
 <div id="contact" class="wrap section">
-  <div class="section-label">Contact</div>
+  <div class="section-label">Team</div>
   <h2 class="section-title">Get in touch.</h2>
   <p class="section-sub">Questions, press, investor inquiries, or just want to say hello.</p>
   <div class="contact-grid">
     <div class="contact-card">
-      <div class="contact-icon">👤</div>
-      <div class="contact-label">Founder</div>
+      <div class="contact-avatar">PV</div>
+      <div class="contact-label">Co-Founder & CEO</div>
       <div class="contact-name">Pavel Volkov</div>
-      <div class="contact-role">Founder & CEO, MoneyGator</div>
+      <div class="contact-bio">
+        <span>Author, First Steps to Financial Independence (Barnes & Noble)</span>
+        <span>Full-stack developer, built MoneyGator end-to-end</span>
+        <span>San Mateo, CA</span>
+      </div>
       <a href="mailto:pavel.volkov@moneygator.app" class="contact-link">pavel.volkov@moneygator.app</a>
     </div>
     <div class="contact-card">
-      <div class="contact-icon">📰</div>
-      <div class="contact-label">Press & Media</div>
-      <div class="contact-name">Media Inquiries</div>
-      <div class="contact-role">Interviews, coverage, and press kit requests</div>
-      <a href="mailto:pavel.volkov@moneygator.app" class="contact-link">pavel.volkov@moneygator.app</a>
-    </div>
-    <div class="contact-card">
-      <div class="contact-icon">💼</div>
-      <div class="contact-label">Investors</div>
-      <div class="contact-name">Investment Inquiries</div>
-      <div class="contact-role">We are raising a $200K pre-seed round on a SAFE note</div>
-      <a href="mailto:pavel.volkov@moneygator.app" class="contact-link">pavel.volkov@moneygator.app</a>
+      <div class="contact-avatar">TS</div>
+      <div class="contact-label">Co-Founder</div>
+      <div class="contact-name">Tatiana Simonchik</div>
+      <div class="contact-bio">
+        <span>Harvard Business School, Financial Accounting</span>
+        <span>Master's degree in Economics</span>
+        <span>Finance Manager, Amazon</span>
+      </div>
+      <a href="mailto:tatiana.simonchik@moneygator.app" class="contact-link">tatiana.simonchik@moneygator.app</a>
     </div>
   </div>
   <div class="contact-book">
