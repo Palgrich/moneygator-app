@@ -1,0 +1,15 @@
+{
+  "applinks": {
+    "details": [
+      {
+        "appIDs": ["348J94PPGC.com.artifiqa.moneygator"],
+        "components": [
+          {
+            "/": "/quiltt/callback*",
+            "comment": "Bank connection return page: opens the Moneygator app"
+          }
+        ]
+      }
+    ]
+  }
+}

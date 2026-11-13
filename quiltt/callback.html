@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Return to Moneygator</title>
+<meta name="description" content="Return to the Moneygator app to finish connecting your bank.">
+<meta name="robots" content="noindex, nofollow">
+<meta name="referrer" content="no-referrer">
+<meta name="theme-color" content="#0A5C36">
+<link rel="icon" type="image/png" href="/assets/favicon.png">
+<link rel="apple-touch-icon" href="/assets/apple_touch_icon.png">
+<!--
+  Bank return page.
+
+  After signing in at their bank, the user is sent to
+  https://moneygator.app/quiltt/callback?... On an iPhone with the app installed the
+  universal link (/.well-known/apple-app-site-association) normally opens the app before
+  this page is ever shown. When it does not, this page hands the user back to the app
+  through the app's own link, moneygator://quiltt/callback, with the query string it
+  received passed through unchanged.
+
+  Deliberately self-contained: no analytics, no external scripts, no third-party
+  requests of any kind (the address of this page can carry bank-connection parameters).
+-->
+<style>
+:root{
+  --forest:#0A5C36; --emerald:#124E3F; --gold:#F4B41A; --gold-deep:#D99A06;
+  --oat:#FDFBF7; --ink:#1E252B; --slate:#4B565F; --muted:#69747D; --line:#E8E3D7;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{height:100%;-webkit-text-size-adjust:100%}
+body{
+  min-height:100%;display:flex;flex-direction:column;
+  font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  background:var(--oat);color:var(--ink);line-height:1.5;-webkit-font-smoothing:antialiased;
+}
+main{
+  flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;padding:48px 24px 32px;
+}
+.logo{display:flex;align-items:center;gap:10px;margin-bottom:36px;text-decoration:none;color:var(--forest)}
+.logo img{width:40px;height:40px;display:block}
+.logo span{font-size:24px;font-weight:800;letter-spacing:-0.02em}
+.bar{width:56px;height:5px;border-radius:999px;background:var(--gold);margin-bottom:24px}
+h1{font-size:28px;line-height:34px;font-weight:800;letter-spacing:-0.02em;max-width:18ch}
+p.lead{margin-top:12px;font-size:16px;color:var(--slate);max-width:34ch}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;
+  margin-top:32px;min-height:56px;width:100%;max-width:340px;padding:16px 28px;
+  border-radius:14px;background:var(--forest);color:var(--oat);
+  font:inherit;font-size:17px;font-weight:700;text-decoration:none;
+  box-shadow:0 2px 0 var(--emerald);
+  -webkit-tap-highlight-color:transparent;
+}
+.btn:active{background:var(--emerald)}
+:focus-visible{outline:3px solid var(--gold);outline-offset:3px;border-radius:14px}
+p.help{margin-top:20px;font-size:14px;color:var(--muted);max-width:36ch}
+footer{
+  border-top:1px solid var(--line);padding:20px 24px 28px;text-align:center;
+  font-size:13px;color:var(--muted);
+}
+footer a{color:inherit}
+</style>
+</head>
+<body>
+
+<main>
+  <a class="logo" href="/" aria-label="Moneygator home">
+    <img src="/assets/logo_icon.webp" alt="" width="40" height="40">
+    <span>Moneygator</span>
+  </a>
+
+  <div class="bar" aria-hidden="true"></div>
+  <h1>Head back to the app</h1>
+  <p class="lead">Your bank has finished its part. Return to Moneygator to complete the connection.</p>
+
+  <!-- The link is completed by the script below (it adds the query string). -->
+  <a class="btn" id="return" href="moneygator://quiltt/callback" rel="nofollow">Return to Moneygator</a>
+
+  <p class="help">Nothing happening? Make sure the Moneygator app is installed on this phone, then tap the button again.</p>
+</main>
+
+<footer>
+  Moneygator is a product of Artifiqa, Inc. · <a href="/privacy">Privacy</a>
+</footer>
+
+<script>
+(function () {
+  // Where the app listens. The query string (and fragment, if any) is appended exactly
+  // as received: not parsed, decoded or re-encoded.
+  var target = 'moneygator://quiltt/callback' + window.location.search + window.location.hash;
+
+  var button = document.getElementById('return');
+  button.setAttribute('href', target);
+
+  // Try once to open the app without waiting for a tap. A reload or a trip back to this
+  // page does not try again, so the user is never bounced in a loop; the button always works.
+  var tried = false;
+  try {
+    tried = window.sessionStorage.getItem('mg-return-tried') === '1';
+    window.sessionStorage.setItem('mg-return-tried', '1');
+  } catch (e) {
+    // Storage unavailable (private browsing): fall through and try.
+  }
+  if (!tried) {
+    window.setTimeout(function () { window.location.href = target; }, 350);
+  }
+})();
+</script>
+
+</body>
+</html>
