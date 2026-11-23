@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Moneygator | Personalized money education</title>
-<meta name="description" content="Personalized money education, based on your actual accounts. Moneygator explains what is happening in your finances and teaches you what it means, in two minutes a day.">
+<meta name="description" content="Personalized money education, based on your actual accounts. Moneygator explains what is happening in your finances and teaches you what it means, in a few short lessons a week.">
 <meta name="theme-color" content="#0A5C36">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Moneygator | Personalized money education">
@@ -100,6 +100,7 @@ h1{font-size:clamp(38px,4.3vw,58px);font-weight:800;letter-spacing:-.04em;line-h
 .row{border-radius:14px;padding:12px 14px;margin-top:10px;position:relative}
 .row b{display:block;font-size:14px}.row small{font-size:13px;color:var(--slate)}
 .row em{position:absolute;right:14px;top:12px;font-style:normal;font-weight:800;font-size:11px}
+.opt{background:#fff;border:1px solid var(--line)}
 .trap{background:var(--danger-tint);border:1px solid var(--danger-line)}.trap em{color:var(--danger)}
 .smart{background:var(--mint);border:1px solid var(--mint-line)}.smart em{color:var(--forest)}
 .fake-btn{margin-top:16px;height:50px;border-radius:999px;background:var(--forest);color:var(--oat);font-weight:700;display:flex;align-items:center;justify-content:center}
@@ -310,7 +311,7 @@ footer small{font-size:13px}
   .phone .row em{display:none}
   .chip.c3{bottom:20px;right:10px}
   .chip.c2{top:20px;left:12px}
-  .chip.c1{top:92px;right:6px}
+  .chip.c1{top:30px;right:6px}
   .cta .coin{display:none}
 }
 </style>
@@ -335,30 +336,31 @@ footer small{font-size:13px}
     <div>
       <div class="eyebrow">iOS app coming soon</div>
       <h1>Personalized money education, based on your <span class="hl">actual accounts.</span></h1>
-      <p class="hero-sub">Moneygator reads what is happening in your accounts and teaches you what it means. One short lesson and one clear next step, every day.</p>
+      <p class="hero-sub">Moneygator reads what is happening in your accounts and teaches you what it means. A few short lessons a week, each ending with one clear next step.</p>
       <div class="email-row">
         <input id="email-hero" class="hero-input" type="email" placeholder="your@email.com" aria-label="Your email" autocomplete="email">
         <button class="btn btn-primary" onclick="signUp('hero')">Get early access</button>
       </div>
-      <div class="trust-row"><span><i></i>Read only connection</span><span><i></i>Lessons in two minutes</span><span><i></i>Education, not advice</span></div>
+      <div class="trust-row"><span><i></i>Read only connection</span><span><i></i>Short lessons</span><span><i></i>Education, not advice</span></div>
     </div>
     <div class="stage">
       <div class="panel"></div>
       <div class="phone">
         <div class="phone-in">
           <div class="phone-notch"></div>
-          <div class="lh"><span class="tag">Credit, 2 min</span><div class="bar"><i style="width:65%"></i></div></div>
+          <div class="lh"><span class="tag">Spending</span><div class="bar"><i style="width:40%"></i></div></div>
           <div class="lb">
-            <div class="trigger">Your credit card is due in 2 days</div>
-            <div class="q">Your $47 minimum keeps the bank happy. Not you.</div>
-            <div class="row trap"><em>TRAP</em><b>Pay the $47 minimum</b><small>Still paying in 2029</small></div>
-            <div class="row smart"><em>SMART</em><b>Pay more than $47</b><small>Done sooner. You win.</small></div>
-            <div class="fake-btn">Start quiz</div>
+            <div class="trigger">Your dining spending is up this month</div>
+            <div class="q">Take a guess: how much more than last month?</div>
+            <div class="row opt"><b>About 10% more</b></div>
+            <div class="row opt"><b>About 25% more</b></div>
+            <div class="row smart"><b>About 50% more</b></div>
+            <div class="fake-btn">See the answer</div>
           </div>
         </div>
       </div>
-      <div class="chip gold c1"><span class="dot"></span>3 day streak</div>
-      <div class="chip c2">Due in 2 days</div>
+      <div class="chip gold c1"><span class="dot"></span>2 week streak</div>
+      <div class="chip c2">Dining up this month</div>
       <div class="chip c3">+1 lesson done</div>
       <img class="mascot-hero" src="assets/mascot_welcome_hd.webp" width="865" height="1000" fetchpriority="high" alt="The Moneygator crocodile waving hello">
     </div>
@@ -367,8 +369,8 @@ footer small{font-size:13px}
 
 <div class="strip">
   <div class="wrap">
-    <div class="rv"><b>2 min</b><span>per lesson</span></div>
-    <div class="rv d1"><b>1 action</b><span>to take every day</span></div>
+    <div class="rv"><b>Short</b><span>lessons, a few each week</span></div>
+    <div class="rv d1"><b>1 action</b><span>at the end of each lesson</span></div>
     <div class="rv d2"><b>Your data</b><span>lessons built from your accounts</span></div>
     <div class="rv d3"><b>Read only</b><span>we never move your money</span></div>
   </div>
@@ -379,7 +381,7 @@ footer small{font-size:13px}
     <div class="center">
       <div class="eyebrow">How it works</div>
       <h2 class="title">Your money, finally explained.</h2>
-      <p class="lead">Most apps show you a dashboard and stop there. Moneygator notices what changed, teaches you why it matters, and gives you one thing to do today.</p>
+      <p class="lead">Most apps show you a dashboard and stop there. Moneygator notices what changed, teaches you why it matters, and gives you one small thing to do next.</p>
     </div>
     <div class="story">
       <div class="sticky-phone" aria-hidden="true">
@@ -393,39 +395,38 @@ footer small{font-size:13px}
           <div class="screen" data-screen="0">
             <div class="mini-list">
               <h4>We noticed</h4><p class="s">From your accounts, today</p>
-              <div class="note"><img src="assets/icon_due.webp" alt="" width="44" height="44" loading="lazy"><div><b>Card payment due in 2 days</b><small>2 minute lesson</small></div></div>
-              <div class="note"><img src="assets/icon_subs.webp" alt="" width="44" height="44" loading="lazy"><div><b>16 recurring charges found</b><small>2 minute lesson</small></div></div>
-              <div class="note"><img src="assets/icon_spike.webp" alt="" width="44" height="44" loading="lazy"><div><b>Dining up 49 percent</b><small>1 minute lesson</small></div></div>
-              <div class="note"><img src="assets/badge_piggy.webp" alt="" width="44" height="44" loading="lazy"><div><b>Room to start a safety fund</b><small>3 minute lesson</small></div></div>
+              <div class="note"><img src="assets/icon_subs.webp" alt="" width="44" height="44" loading="lazy"><div><b>16 recurring charges found</b><small>Short lesson</small></div></div>
+              <div class="note"><img src="assets/icon_spike.webp" alt="" width="44" height="44" loading="lazy"><div><b>Dining up 49 percent</b><small>Short lesson</small></div></div>
+              <div class="note"><img src="assets/badge_piggy.webp" alt="" width="44" height="44" loading="lazy"><div><b>Room to start a $100 cushion</b><small>Short lesson</small></div></div>
             </div>
           </div>
         </div>
         <div class="step" data-i="1">
           <div class="num">2</div>
-          <h3>You learn it in two minutes.</h3>
-          <p>A short lesson explains what is happening and why, using your real numbers. No jargon. No math homework. A quick quiz makes it stick.</p>
+          <h3>You learn it in a few short cards.</h3>
+          <p>A short lesson explains what is happening and why, using your real numbers. No jargon. No math homework. A quick question first, so it sticks.</p>
           <div class="screen" data-screen="1">
-            <div class="lh"><span class="tag">Credit, 2 min</span><div class="bar"><i style="width:65%"></i></div></div>
+            <div class="lh"><span class="tag">Spending</span><div class="bar"><i style="width:40%"></i></div></div>
             <div class="lb">
-              <div class="trigger">Your credit card is due in 2 days</div>
-              <div class="q">Your $47 minimum keeps the bank happy. Not you.</div>
-              <div class="row trap"><em>TRAP</em><b>Pay the $47 minimum</b><small>Still paying in 2029</small></div>
-              <div class="row smart"><em>SMART</em><b>Pay more than $47</b><small>Done sooner. You win.</small></div>
-              <div class="fake-btn">Check my answer</div>
+              <div class="trigger">Your dining spending is up this month</div>
+              <div class="q">Take a guess: how much more than last month?</div>
+              <div class="row opt"><b>About 10% more</b></div>
+              <div class="row opt"><b>About 25% more</b></div>
+              <div class="row smart"><b>About 50% more</b></div>
+              <div class="fake-btn">See the answer</div>
             </div>
           </div>
         </div>
         <div class="step" data-i="2">
           <div class="num">3</div>
           <h3>You finish with one action.</h3>
-          <p>Every lesson ends with something concrete to do today. Your goals move forward, your streak grows, and the habit builds itself.</p>
+          <p>Every lesson ends with one small action you can do now. Your goal bar moves, your streak grows week by week, and the habit builds itself.</p>
           <div class="screen" data-screen="2">
             <div class="act">
               <h4>Today's action</h4>
-              <div class="done"><div class="ck">&#10003;</div><div><b>Pay more than the minimum</b><small>Goal: pay off your card</small></div></div>
-              <div class="goal-top">Pay off your card<span>34%</span></div><div class="bar"><i style="width:34%"></i></div>
-              <div class="goal-top">Emergency fund<span>34%</span></div><div class="bar"><i style="width:34%"></i></div>
-              <div class="streak">3 day streak</div>
+              <div class="done"><div class="ck">&#10003;</div><div><b>Set aside $20 when payday lands</b><small>Goal: your cushion</small></div></div>
+              <div class="goal-top">Cushion, first $100<span>34%</span></div><div class="bar"><i style="width:34%"></i></div>
+              <div class="streak">2 week streak</div>
             </div>
           </div>
         </div>
@@ -444,13 +445,13 @@ footer small{font-size:13px}
     <div class="bento">
       <div class="tile t-big rv">
         <h3>The credit card trap</h3>
-        <p>Why the minimum payment keeps you in debt for years, and what a slightly bigger payment changes. Shown the day before your payment is due.</p>
-        <span class="meta">2 minute lesson</span>
+        <p>Why the minimum payment keeps you in debt for years, and what a slightly bigger payment changes.</p>
+        <span class="meta">Short lesson</span>
         <img class="ic" src="assets/icon_card.webp" width="590" height="480" loading="lazy" alt="">
       </div>
       <div class="tile t-mint rv d1">
         <h3>Ghost subscriptions</h3>
-        <p>Find the charges you forgot about.</p>
+        <p>See your recurring charges, then decide for yourself.</p>
         <img class="ic" src="assets/icon_subs.webp" width="505" height="480" loading="lazy" alt="">
       </div>
       <div class="tile t-gold rv d2">
@@ -459,20 +460,18 @@ footer small{font-size:13px}
         <img class="ic" src="assets/icon_spike.webp" width="388" height="480" loading="lazy" alt="">
       </div>
       <div class="tile t-wide rv d1">
-        <h3>Due dates, handled</h3>
-        <p>Know what is coming and what it means before it lands.</p>
+        <h3>Due dates, explained</h3>
+        <p>Learn what bills, statements, and payment dates mean, so none of them surprise you.</p>
         <img class="ic" src="assets/icon_due.webp" width="475" height="480" loading="lazy" alt="">
       </div>
       <div class="tile t-goals rv">
         <div class="goals">
           <h3>Every lesson moves you closer.</h3>
-          <p>Set goals in Moneygator. Each lesson you finish moves the bar, tied to what is actually in your accounts.</p>
-          <div class="goal"><div class="goal-top">Pay off your card<span>34%</span></div><div class="bar"><i style="width:34%"></i></div></div>
-          <div class="goal"><div class="goal-top">Emergency fund, $1,000<span>34%</span></div><div class="bar"><i style="width:34%"></i></div></div>
-          <div class="goal"><div class="goal-top">Subscriptions under $100<span>12%</span></div><div class="bar"><i style="width:12%"></i></div></div>
+          <p>Pick one goal. Each lesson you finish moves the bar, tied to what is actually in your accounts.</p>
+          <div class="goal"><div class="goal-top">Cushion, first $100<span>34%</span></div><div class="bar"><i style="width:34%"></i></div></div>
           <div class="badge-row">
             <div><img src="assets/badge_openbook.webp" width="44" height="44" loading="lazy" alt="First lesson"></div>
-            <div><img src="assets/badge_medal.webp" width="44" height="44" loading="lazy" alt="3 day streak"></div>
+            <div><img src="assets/badge_medal.webp" width="44" height="44" loading="lazy" alt="Streak badge"></div>
             <div><img src="assets/badge_piggy.webp" width="44" height="44" loading="lazy" alt="Savings started"></div>
             <div><img src="assets/badge_shield.webp" width="44" height="44" loading="lazy" alt="Protected"></div>
           </div>
@@ -493,10 +492,10 @@ footer small{font-size:13px}
         <li>Show a credit score with no explanation of how to improve it.</li>
         <li>Bring more data, more anxiety, no clarity on what to do.</li></ul></div>
       <div class="ours rv d1"><h3>Moneygator</h3><ul>
-        <li>You finish every lesson knowing what to do today.</li>
-        <li>Credit payment due? You learn why it matters and what a bigger payment changes.</li>
+        <li>You finish every lesson with one small action.</li>
+        <li>Credit card on your mind? You learn why the minimum payment costs more over time.</li>
         <li>Spending up 49 percent? You understand why, and how to bring it back.</li>
-        <li>One explanation, one action, every day. That is how habits change.</li></ul></div>
+        <li>One explanation, one action, a few times a week. That is how habits change.</li></ul></div>
     </div>
   </div>
 </section>
@@ -530,7 +529,7 @@ footer small{font-size:13px}
     <h2 class="title">Built to be trusted with your accounts.</h2>
     <div class="trust">
       <div class="rv"><img src="assets/badge_shield.webp" width="64" height="64" loading="lazy" alt=""><h3>Read only access</h3><p>Moneygator sees transactions and balances. We never move your money.</p></div>
-      <div class="rv d1"><img src="assets/badge_chest.webp" width="64" height="64" loading="lazy" alt=""><h3>Your login stays with your bank</h3><p>Your username and password go directly to your bank. Moneygator never sees them.</p></div>
+      <div class="rv d1"><img src="assets/badge_chest.webp" width="64" height="64" loading="lazy" alt=""><h3>Your login stays with your bank</h3><p>Moneygator never sees or stores your bank username or password. Your login stays with your bank.</p></div>
       <div class="rv d2"><img src="assets/badge_medal.webp" width="64" height="64" loading="lazy" alt=""><h3>Never sold</h3><p>We do not sell your data to third parties. Your data is used to teach you, nothing else.</p></div>
     </div>
   </div>
@@ -545,13 +544,13 @@ footer small{font-size:13px}
       <div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">How does Moneygator access my bank data? <span class="faq-arrow">&#8595;</span></button>
       <div class="faq-a">We connect through Quiltt and MX, secure connection providers. Access is read only: we see your balances and transactions. We never see or store your bank password, and we cannot move your money.</div></div>
       <div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">What makes Moneygator different from Credit Karma or Rocket Money? <span class="faq-arrow">&#8595;</span></button>
-      <div class="faq-a">Those apps show you your data and stop there. Moneygator uses your data as the starting point for education. When we detect a subscription you forgot, you get a lesson on why subscriptions are designed to be invisible, and one clear thing to do today. We do not just report. We teach.</div></div>
+      <div class="faq-a">Those apps show you your data and stop there. Moneygator uses your data as the starting point for education. When we spot a recurring charge, you get a lesson on how subscriptions work, and one small thing to review. We do not just report. We teach.</div></div>
       <div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">When is the iOS app launching? <span class="faq-arrow">&#8595;</span></button>
       <div class="faq-a">We are in active development. The app is built and running on a physical iPhone, and bank connection is our final milestone before public launch. Join the waitlist to be first in line.</div></div>
       <div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">Is my financial data safe? <span class="faq-arrow">&#8595;</span></button>
-      <div class="faq-a">We take it seriously. The connection is encrypted over HTTPS, your data is stored in the United States, and your login goes directly to your bank, so Moneygator never sees your username or password. Access is read only, and we do not sell your data to third parties.</div></div>
+      <div class="faq-a">We take it seriously. The connection is encrypted over HTTPS, your data is stored in the United States, and Moneygator never sees or stores your bank username or password. Access is read only, and we do not sell your data to third parties.</div></div>
       <div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">I have no idea about finance. Is Moneygator for me? <span class="faq-arrow">&#8595;</span></button>
-      <div class="faq-a">Especially for you. Moneygator is built for people who feel anxious about money but do not know where to start. Every lesson is designed to be understood in about two minutes, without any prior financial knowledge. No jargon. No math. Just one clear thing to do today.</div></div>
+      <div class="faq-a">Especially for you. Moneygator is built for people who feel anxious about money but do not know where to start. Lessons are short and written to be understood without any prior financial knowledge. No jargon. No math. Just one small action at the end.</div></div>
     </div>
   </div>
 </section>
@@ -568,7 +567,7 @@ footer small{font-size:13px}
           <p>Most people learn about money by trial and error, because school rarely teaches interest rates, inflation, or how credit cards really work.</p>
           <p>The consequences are real. Credit card debt grows quietly when the minimum payment looks harmless, and money stress follows people to work and home.</p>
           <h4>Why this is getting worse, not better</h4>
-          <p>Financial products have gotten more complex while financial education has stayed the same. Subscription services are designed to be forgotten. Credit card rewards programs are engineered to maximize spending.</p>
+          <p>Financial products have gotten more complex while financial education has stayed the same. Subscriptions are easy to forget. Credit card rewards can nudge us to spend more.</p>
           <h4>What actually works</h4>
           <p>We believe financial education works best when it is specific, timely, and actionable. A lesson that arrives the day before your credit card payment is due, and explains what is at stake, is easier to act on. That's what Moneygator is built to do.</p>
         </div>
@@ -579,9 +578,9 @@ footer small{font-size:13px}
         <h3 class="blog-title">The Real Benefit of Tracking Your Finances: It's Not What You Think</h3>
         <p class="blog-excerpt">Most people track their spending hoping to feel more in control. What actually changes behavior is the gap between what you think you spend and what you actually spend.</p>
         <div class="blog-body hidden" id="blog-2">
-          <p>Budgeting apps have been around for decades. Yet the average American's financial health hasn't improved. If tracking worked the way we think it does, we'd have seen results by now.</p>
+          <p>Budgeting apps have been around for decades. Yet many people still feel unsure about their money. Tracking alone does not always change that.</p>
           <h4>The awareness gap is the real problem</h4>
-          <p>Studies show that people underestimate their discretionary spending by 40% on average. This isn't dishonesty, it's just how memory works. We remember the big purchases and forget the small ones.</p>
+          <p>People often underestimate their small, everyday spending. This isn't dishonesty, it's just how memory works. We remember the big purchases and forget the small ones.</p>
           <h4>Tracking without understanding is just noise</h4>
           <p>A pie chart showing you spent $400 on food last month doesn't tell you what to change. The most valuable financial habit isn't tracking. It's understanding. That's what Moneygator builds.</p>
         </div>
@@ -596,7 +595,7 @@ footer small{font-size:13px}
           <h4>What most apps get right, and wrong</h4>
           <p>Apps like Credit Karma and Rocket Money are genuinely useful. They connect to your bank, show you your transactions, and alert you when something unusual happens. But they stop there. They don't teach you what it means.</p>
           <h4>One explanation a day, built from your real life</h4>
-          <p>Moneygator doesn't give you a dashboard to stare at. It analyzes what's actually happening in your accounts and explains it in about two minutes, ending with one specific thing to do today. That's how financial habits actually form.</p>
+          <p>Moneygator doesn't give you a dashboard to stare at. It analyzes what's actually happening in your accounts and explains it in a short lesson, ending with one small action. That's how financial habits actually form.</p>
         </div>
         <button class="blog-read-more" aria-expanded="false" onclick="toggleBlog('blog-3',this)">Read more &#8595;</button>
       </article>
@@ -695,10 +694,10 @@ addEventListener('scroll',function(){nav.classList.toggle('scrolled',scrollY>10)
 
 // quiz
 var quizMsgs=[
-  'Moneygator will show you exactly where it went, and why.',
+  'Moneygator will help you see where it goes, and why.',
   'Moneygator will teach you how to pay it off faster, step by step.',
-  'Moneygator finds every recurring charge and helps you cut what you forgot.',
-  'Moneygator builds your savings habit one small step at a time.'
+  'Moneygator shows your recurring charges and teaches you how to review them.',
+  'Moneygator helps you build a savings habit, one small step at a time.'
 ];
 function pickQuiz(el,idx){
   document.querySelectorAll('.quiz-opt').forEach(function(o){o.classList.remove('sel')});
