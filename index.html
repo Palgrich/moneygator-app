@@ -193,6 +193,60 @@ h1{font-size:clamp(38px,4.3vw,58px);font-weight:800;letter-spacing:-.04em;line-h
 .vs .others li::before{content:"\00D7";color:#98A2AA}
 .vs .ours li::before{content:"\2713";color:var(--gold)}
 
+
+/* paths, mirror, start here */
+.paths-label{font-size:13px;font-weight:700;color:var(--muted);margin:26px 0 10px}
+.paths{display:grid;grid-template-columns:1fr 1fr;gap:12px;max-width:540px}
+.path{display:block;text-decoration:none;background:#fff;border:1.5px solid var(--line);border-radius:18px;padding:14px 16px;transition:border-color .15s,transform .15s,box-shadow .15s}
+.path:hover{border-color:var(--forest);transform:translateY(-2px);box-shadow:0 12px 26px rgba(30,37,43,.08)}
+.path b{display:block;font-size:15px;line-height:1.3}
+.path span{display:block;font-size:13px;color:var(--slate);margin-top:4px}
+.trust-row{margin-top:22px}
+.mirror-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
+.mirror-points{list-style:none;display:grid;gap:14px;margin-top:28px}
+.mirror-points li{display:flex;gap:14px;align-items:flex-start;font-size:17px;color:var(--slate)}
+.mirror-points b{color:var(--ink);display:block;font-size:17px}
+.mirror-points .n{flex-shrink:0;width:32px;height:32px;border-radius:50%;background:var(--gold);color:var(--ink);font-weight:800;font-size:14px;display:flex;align-items:center;justify-content:center}
+.mirror-card{background:#fff;border:1px solid var(--line);border-radius:var(--r-xl);overflow:hidden;box-shadow:0 30px 60px rgba(30,37,43,.12);max-width:460px;width:100%;justify-self:center}
+.mh{background:linear-gradient(135deg,var(--forest),var(--emerald));color:var(--oat);padding:20px 22px;display:flex;gap:14px;align-items:center}
+.mh img{height:92px;width:auto;flex-shrink:0;filter:drop-shadow(0 8px 10px rgba(8,30,20,.3))}
+.mh h4{font-size:20px;font-weight:800;letter-spacing:-.02em;line-height:1.2}
+.mh p{font-size:13px;color:#D7E6DC;margin-top:4px}
+.mb{padding:8px 18px 20px;background:var(--oat)}
+.fact{background:#fff;border:1px solid var(--line);border-radius:16px;padding:14px 16px;margin-top:10px}
+.fact b{display:block;font-size:15px;line-height:1.35}
+.fact span{display:block;font-size:14px;color:var(--slate);margin-top:2px}
+.fact i{display:block;font-style:normal;font-size:12px;color:var(--muted);margin-top:6px}
+.bridge{margin-top:16px;font-size:14px;color:var(--slate)}
+.cap{margin-top:6px;font-size:12px;color:var(--muted)}
+.sh-top{display:grid;grid-template-columns:1.25fr .75fr;gap:40px;align-items:end}
+.sh-art{display:flex;justify-content:flex-end}
+.sh-art img{height:340px;width:auto;filter:drop-shadow(0 18px 20px rgba(30,37,43,.16))}
+.mods{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:40px;text-align:left}
+.mod{background:#fff;border:1px solid var(--mint-line);border-radius:var(--r-lg);padding:20px;display:flex;flex-direction:column;gap:8px;position:relative;transition:transform .25s,box-shadow .25s}
+.mod:hover{transform:translateY(-4px);box-shadow:0 18px 34px rgba(30,37,43,.08)}
+.mod img{height:76px;width:auto;max-width:100%;align-self:flex-start;object-fit:contain;margin-bottom:4px}
+.mod .n{font-size:12px;font-weight:700;color:var(--muted)}
+.mod h3{font-size:17px;font-weight:800;letter-spacing:-.015em;line-height:1.2}
+.mod p{font-size:14px;color:var(--slate)}
+.mod .free{position:absolute;top:16px;right:16px;font-size:12px;font-weight:800;background:var(--gold);color:var(--ink);padding:3px 10px;border-radius:999px}
+.sh-foot{margin-top:28px;display:flex;flex-wrap:wrap;gap:16px 24px;align-items:center;justify-content:space-between}
+.sh-note{font-size:14px;color:var(--slate);max-width:44em;text-align:left}
+@media (max-width:980px){
+  .mirror-grid,.sh-top{grid-template-columns:1fr;gap:36px}
+  .mods{grid-template-columns:repeat(2,1fr)}
+  .sh-art{display:none}
+}
+@media (max-width:560px){
+  .paths{grid-template-columns:1fr}
+  .mods{grid-template-columns:1fr 1fr;gap:10px}
+  .mod{padding:14px}
+  .mod img{height:56px}
+  .mod h3{font-size:15px}
+  .mod p{font-size:13px}
+  .mod .free{top:10px;right:10px}
+  .mh img{height:76px}
+}
 /* quiz */
 .quiz{max-width:660px;margin:0 auto;text-align:center}
 .quiz img{height:190px;width:auto;margin:0 auto 6px;filter:drop-shadow(0 14px 14px rgba(30,37,43,.14))}
@@ -323,6 +377,7 @@ footer small{font-size:13px}
   <a href="#" class="logo" aria-label="Moneygator home"><img src="assets/logo_icon.webp" alt="" width="36" height="36"><span class="wordmark">Moneygator</span></a>
   <div class="nav-links">
     <a href="#how-it-works">How it works</a>
+    <a href="#start-here">Start here</a>
     <a href="#learn">What you learn</a>
     <a href="#faq">FAQ</a>
     <a href="#blog">Blog</a>
@@ -340,6 +395,11 @@ footer small{font-size:13px}
       <div class="email-row">
         <input id="email-hero" class="hero-input" type="email" placeholder="your@email.com" aria-label="Your email" autocomplete="email">
         <button class="btn btn-primary" onclick="signUp('hero')">Get early access</button>
+      </div>
+      <div class="paths-label">Where are you starting?</div>
+      <div class="paths">
+        <a class="path" href="#start-here"><b>New to money in the US?</b><span>Begin with the free first module.</span></a>
+        <a class="path" href="#mirror"><b>Want to understand your own spending?</b><span>See how Moneygator reads your accounts.</span></a>
       </div>
       <div class="trust-row"><span><i></i>Read only connection</span><span><i></i>Short lessons</span><span><i></i>Education, not advice</span></div>
     </div>
@@ -482,6 +542,61 @@ footer small{font-size:13px}
   </div>
 </section>
 
+<section id="mirror" class="band">
+  <div class="wrap mirror-grid">
+    <div class="rv">
+      <div class="eyebrow">After you connect your bank</div>
+      <h2 class="title">First, a mirror.</h2>
+      <p class="lead">Before any lesson, Moneygator shows you three true things from your own accounts. No scores, no verdicts, just what the data shows.</p>
+      <ul class="mirror-points">
+        <li><span class="n">1</span><div><b>Where it went</b>Your biggest spending category from the last 30 days.</div></li>
+        <li><span class="n">2</span><div><b>What is next</b>The next dated payment we can see in your accounts.</div></li>
+        <li><span class="n">3</span><div><b>Your week</b>The day of the week you spend the most.</div></li>
+      </ul>
+    </div>
+    <div class="mirror-card rv d1">
+      <div class="mh">
+        <img src="assets/mascot_teach_hd.webp" width="676" height="1000" alt="">
+        <div><h4>Three things your accounts show</h4><p>From the last 30 days.</p></div>
+      </div>
+      <div class="mb">
+        <div class="fact"><b>Most of your spending went to groceries.</b><span>$412 in the last 30 days.</span><i>Because: 23 purchases since Oct 23.</i></div>
+        <div class="fact"><b>Your gym membership charges again around Dec 4.</b><span>Estimate.</span><i>Because: it charged near the same day for the last 6 months.</i></div>
+        <div class="fact"><b>You spend the most on Fridays.</b><span>About $38 on an average Friday.</span><i>Because: your purchases over the last 30 days.</i></div>
+        <p class="bridge">Moneygator turns numbers like these into short lessons and one goal.</p>
+        <p class="cap">Example with sample numbers.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="start-here" class="band mint">
+  <div class="wrap center">
+    <div class="sh-top">
+      <div style="text-align:left">
+        <div class="eyebrow">Start here</div>
+        <h2 class="title" style="margin-left:0">New to money in the US? Begin here.</h2>
+        <p class="lead" style="margin-left:0">A course on how money works here, from your first bank account to your first tax return. The first module is free, with no payment details needed.</p>
+      </div>
+      <div class="sh-art rv"><img src="assets/mascot_newcomer.webp" width="756" height="1000" loading="lazy" alt="The Moneygator crocodile holding a suitcase and welcoming a newcomer"></div>
+    </div>
+    <div class="mods">
+      <div class="mod rv"><span class="free">Free</span><img src="assets/start_first.webp" width="405" height="480" loading="lazy" alt=""><span class="n">Module 1</span><h3>Your first weeks</h3><p>Tax numbers, opening an account, and what to know about cash.</p></div>
+      <div class="mod rv d1"><img src="assets/start_bank.webp" width="503" height="480" loading="lazy" alt=""><span class="n">Module 2</span><h3>Your bank account</h3><p>Checking, savings, debit cards, and overdraft.</p></div>
+      <div class="mod rv d2"><img src="assets/badge_shield.webp" width="64" height="64" loading="lazy" alt=""><span class="n">Module 3</span><h3>Stay safe</h3><p>Common scams, payment apps, and fast loans.</p></div>
+      <div class="mod rv d3"><img src="assets/start_paycheck.webp" width="508" height="480" loading="lazy" alt=""><span class="n">Module 4</span><h3>Your paycheck</h3><p>Pay stubs, overtime, and what comes out of a paycheck.</p></div>
+      <div class="mod rv"><img src="assets/icon_card.webp" width="590" height="480" loading="lazy" alt=""><span class="n">Module 5</span><h3>Your credit card</h3><p>Statements, due dates, and the grace period.</p></div>
+      <div class="mod rv d1"><img src="assets/badge_growth.webp" width="64" height="64" loading="lazy" alt=""><span class="n">Module 6</span><h3>Your credit history</h3><p>How a credit score works and how to start from zero.</p></div>
+      <div class="mod rv d2"><img src="assets/start_home.webp" width="528" height="480" loading="lazy" alt=""><span class="n">Module 7</span><h3>Your home and safety net</h3><p>Rent, health insurance words, and sending money abroad.</p></div>
+      <div class="mod rv d3"><img src="assets/start_taxes.webp" width="372" height="480" loading="lazy" alt=""><span class="n">Module 8</span><h3>Your taxes</h3><p>Who files, free filing, and why it happens every year.</p></div>
+    </div>
+    <div class="sh-foot">
+      <p class="sh-note">Eight modules, plus one for California. Moneygator explains how the system works. It does not ask about your immigration status, and it does not give legal, tax, or financial advice.</p>
+      <a class="btn btn-primary" href="#join">Get early access</a>
+    </div>
+  </div>
+</section>
+
 <section class="band dark">
   <div class="wrap center">
     <h2 class="title">Tracking is not the same as understanding.</h2>
@@ -503,7 +618,7 @@ footer small{font-size:13px}
 <section class="band mint">
   <div class="wrap">
     <div class="quiz">
-      <img src="assets/mascot_teach_hd.webp" width="676" height="1000" loading="lazy" alt="">
+      <img src="assets/mascot_teach_hd.webp" width="676" height="1000" alt="">
       <h2>What is your biggest money problem right now?</h2>
       <div class="quiz-opts">
         <button class="quiz-opt" onclick="pickQuiz(this,0)">I have no idea where my money goes</button>
@@ -528,9 +643,9 @@ footer small{font-size:13px}
     <div class="eyebrow">Your data</div>
     <h2 class="title">Built to be trusted with your accounts.</h2>
     <div class="trust">
-      <div class="rv"><img src="assets/badge_shield.webp" width="64" height="64" loading="lazy" alt=""><h3>Read only access</h3><p>Moneygator sees transactions and balances. We never move your money.</p></div>
+      <div class="rv"><img src="assets/badge_shield.webp" width="64" height="64" loading="lazy" alt=""><h3>Read only access</h3><p>Moneygator sees balances and transactions. It cannot move your money. The connection is encrypted over HTTPS.</p></div>
       <div class="rv d1"><img src="assets/badge_chest.webp" width="64" height="64" loading="lazy" alt=""><h3>Your login stays with your bank</h3><p>Moneygator never sees or stores your bank username or password. Your login stays with your bank.</p></div>
-      <div class="rv d2"><img src="assets/badge_medal.webp" width="64" height="64" loading="lazy" alt=""><h3>Never sold</h3><p>We do not sell your data to third parties. Your data is used to teach you, nothing else.</p></div>
+      <div class="rv d2"><img src="assets/badge_medal.webp" width="64" height="64" loading="lazy" alt=""><h3>Stored in the US, never sold</h3><p>Your data is stored in the United States. We do not sell it to third parties. It is used to teach you, nothing else.</p></div>
     </div>
   </div>
 </section>
